@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useSpring } from 'motion/react';
-import { ThemeMode } from './Navigation';
+import { ThemeMode } from '../types/portfolio';
 
 interface ScrollProgressProps {
   theme: ThemeMode;

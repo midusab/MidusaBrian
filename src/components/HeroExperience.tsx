@@ -9,8 +9,8 @@ import {
   useSpring,
   useTransform,
 } from 'motion/react';
+import { ThemeMode } from '../types/portfolio';
 import { GrainOverlay } from './GrainOverlay';
-import { ThemeMode } from './Navigation';
 
 interface HeroExperienceProps {
   theme: ThemeMode;
@@ -46,6 +46,9 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
 
   useEffect(() => {
     if (shouldReduceMotion) return;
+    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+    if (!isFinePointer) return;
+
     const handlePointerMove = (e: PointerEvent) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
@@ -65,20 +68,19 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       id="chapter-opening"
       ref={containerRef}
       aria-labelledby="hero-headline"
-      className={`relative min-h-[100svh] flex flex-col justify-between overflow-hidden pt-28 pb-12 px-6 sm:px-10 lg:px-16 transition-colors duration-300 ${
+      className={`relative min-h-[100svh] flex flex-col justify-between overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-12 px-4 sm:px-8 md:px-12 lg:px-16 transition-colors duration-300 ${
         isDark ? 'bg-[#0B0D10] text-[#F5F5F5]' : 'bg-white text-[#0B0D10]'
       }`}
     >
       {isDark && <GrainOverlay />}
 
-      {/* Fluid GPU-smoothed cursor-reactive DodgerBlue point of light */}
       <motion.div
         aria-hidden="true"
         style={shouldReduceMotion ? undefined : { scale: orbScale }}
         className="pointer-events-none absolute inset-0 origin-center"
       >
         <motion.div
-          className="absolute -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] rounded-full will-change-[left,top]"
+          className="absolute -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[440px] sm:h-[440px] lg:w-[560px] lg:h-[560px] rounded-full will-change-[left,top]"
           style={{
             left: orbLeft,
             top: orbTop,
@@ -97,15 +99,13 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
         />
       </motion.div>
 
-      {/* Top breathing space */}
       <div className="relative z-10 mx-auto w-full max-w-[1440px]" />
 
-      {/* Centerpiece Opening */}
       <motion.div
         style={shouldReduceMotion ? undefined : { y: headlineY, opacity: headlineOpacity }}
-        className="relative z-10 mx-auto w-full max-w-[1440px] my-auto py-12"
+        className="relative z-10 mx-auto w-full max-w-[1440px] my-auto py-8 sm:py-12"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-end">
           <div className="lg:col-span-8">
             <motion.h1
               id="hero-headline"
@@ -129,13 +129,13 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             <p className={`editorial-body ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`}>
               I&apos;m Midusa. A Computer Science student exploring how ideas become software.
             </p>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
               <motion.button
                 type="button"
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onScrollNext}
-                className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] transition-colors duration-150 whitespace-nowrap"
+                className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] transition-colors duration-150 whitespace-nowrap"
               >
                 <span>Begin the story</span>
                 <ArrowDown className="w-4 h-4 transition-transform duration-200 group-hover:translate-y-0.5" />
@@ -145,7 +145,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onJumpToProjects}
-                className={`group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
+                className={`group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
                   isDark
                     ? 'border-white/15 text-[#F5F5F5]'
                     : 'border-black/15 text-[#0B0D10]'
@@ -159,7 +159,6 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
         </div>
       </motion.div>
 
-      {/* Bottom breathing space */}
       <div className="relative z-10 mx-auto w-full max-w-[1440px]" />
     </section>
   );

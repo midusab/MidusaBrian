@@ -1,53 +1,31 @@
-export interface TimelineMilestone {
-  id: string;
-  index: string;
-  title: string;
-  reflection: string;
-}
+import {
+  ChapterLink,
+  Project,
+  TimelineMilestone,
+  ToolGroup,
+} from '../types/portfolio';
 
-export interface ProjectArchitectureStep {
-  layer: string;
-  component: string;
-  role: string;
-}
-
-export interface Project {
-  id: string;
-  title: string;
-  subtitle: string;
-  category: 'Platform' | 'Brand & Studio' | 'Client & Demo';
-  featured: boolean;
-  image: string;
-  imageAlt: string;
-  summary: string;
-  narrative: string;
-  stack: string[];
-  problem: string;
-  idea: string;
-  approach: string;
-  challenges: string[];
-  learned: string;
-  outcome: string;
-  architecture?: ProjectArchitectureStep[];
-  liveUrl?: string;
-  repoUrl?: string;
-}
-
-export interface ToolGroup {
-  label: string;
-  items: { name: string; status: 'used' | 'learning'; note: string }[];
-}
+export type {
+  ChapterLink,
+  Project,
+  ProjectArchitectureStep,
+  ProjectCategory,
+  ThemeMode,
+  TimelineMilestone,
+  ToolGroup,
+  ToolItem,
+} from '../types/portfolio';
 
 export const PROFILE = {
   name: 'Midusa',
-  role: 'Junior Software Engineer & Computer Science Student',
+  role: 'Junior software engineer & computer science student',
   location: 'Kenya',
   email: 'midusab@gmail.com',
   github: 'https://github.com/midusab',
   linkedin: 'https://www.linkedin.com/in/midusab',
 };
 
-export const CHAPTERS = [
+export const CHAPTERS: ChapterLink[] = [
   { id: 'chapter-opening', index: '01', label: 'Home' },
   { id: 'chapter-beginning', index: '02', label: 'About' },
   { id: 'chapter-learning', index: '03', label: 'Journey' },
@@ -141,10 +119,10 @@ export const PROJECTS: Project[] = [
     outcome:
       'Delivered a complete end-to-end digital commerce architecture capable of cataloging ebooks, initiating M-Pesa Daraja STK Push requests, recording verified transactions in PostgreSQL, and gating digital delivery.',
     architecture: [
-      { layer: 'Storefront', component: 'React Client', role: 'Catalog browsing, cart state, checkout initiation, and download access' },
-      { layer: 'API Layer', component: 'Node.js & Express', role: 'Order orchestration, Daraja token signing, and webhook verification' },
+      { layer: 'Storefront', component: 'React client', role: 'Catalog browsing, cart state, checkout initiation, and download access' },
+      { layer: 'API layer', component: 'Node.js & Express', role: 'Order orchestration, Daraja token signing, and webhook verification' },
       { layer: 'Persistence', component: 'PostgreSQL & Prisma', role: 'Relational integrity across titles, orders, and M-Pesa receipts' },
-      { layer: 'Storage & Auth', component: 'Supabase & Daraja', role: 'Protected ebook asset storage and real-time STK Push payments' },
+      { layer: 'Storage & auth', component: 'Supabase & Daraja', role: 'Protected ebook asset storage and real-time STK Push payments' },
     ],
     liveUrl: 'https://www.midusaelibary.co.ke',
     repoUrl: 'https://github.com/midusab',
@@ -179,7 +157,7 @@ export const PROJECTS: Project[] = [
     outcome:
       'Created a structured engineering workflow and design system approach for delivering responsive, business-oriented websites.',
     architecture: [
-      { layer: 'Discovery', component: 'Information Architecture', role: 'Clarifying services, audience questions, and conversion paths' },
+      { layer: 'Discovery', component: 'Information architecture', role: 'Clarifying services, audience questions, and conversion paths' },
       { layer: 'Interface', component: 'React & Tailwind CSS', role: 'Component-driven responsive layouts across phone, tablet, and desktop' },
       { layer: 'Delivery', component: 'Git & Vercel', role: 'Version-controlled builds, previews, and fast edge deployment' },
     ],
@@ -187,8 +165,8 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'business-web-architecture',
-    title: 'Service Web Prototype',
-    subtitle: 'Client & Demo Architecture',
+    title: 'Service web prototype',
+    subtitle: 'Client & demo architecture',
     category: 'Client & Demo',
     featured: false,
     image: '/src/assets/images/client_architecture_scene_1795718115376.jpg',
@@ -217,8 +195,8 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'daraja-checkout-engine',
-    title: 'M-Pesa Daraja Integration Pattern',
-    subtitle: 'Backend Payment Architecture',
+    title: 'M-Pesa Daraja integration pattern',
+    subtitle: 'Backend payment architecture',
     category: 'Client & Demo',
     featured: false,
     image: '/src/assets/images/engineering_craft_scene_1795718115538.jpg',

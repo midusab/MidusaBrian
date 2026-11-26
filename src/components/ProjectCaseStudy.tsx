@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { ArrowLeft, ArrowRight, ExternalLink, X } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
-import { Project, PROJECTS } from '../data/portfolioData';
+import { PROJECTS } from '../data/portfolioData';
+import { useModalEscapeAndScrollLock } from '../hooks/useModalEscapeAndScrollLock';
+import { Project, ThemeMode } from '../types/portfolio';
 import { GrainOverlay } from './GrainOverlay';
 import { LazyImage } from './LazyImage';
-import { ThemeMode } from './Navigation';
 
 interface ProjectCaseStudyProps {
   theme: ThemeMode;
@@ -26,22 +27,18 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
   const prevProject = PROJECTS[(currentIdx - 1 + PROJECTS.length) % PROJECTS.length];
   const nextProject = PROJECTS[(currentIdx + 1) % PROJECTS.length];
 
-  useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+  const handleKeyDownExtra = useCallback(
+    (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') onSelectProject(nextProject);
       if (e.key === 'ArrowLeft') onSelectProject(prevProject);
-    };
+    },
+    [onSelectProject, nextProject, prevProject]
+  );
 
-    window.addEventListener('keydown', onKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', onKeyDown);
-    };
-  }, [onClose, onSelectProject, prevProject, nextProject]);
+  useModalEscapeAndScrollLock({
+    onClose,
+    onKeyDownExtra: handleKeyDownExtra,
+  });
 
   return (
     <div
@@ -64,18 +61,15 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 min-h-screen flex flex-col"
       >
-        {/* Minimal Editorial Top Bar */}
         <div
-          className={`sticky top-0 z-20 backdrop-blur-md border-b px-6 md:px-14 h-16 flex items-center justify-between gap-4 ${
+          className={`sticky top-0 z-20 backdrop-blur-md border-b px-4 sm:px-8 lg:px-14 h-16 flex items-center justify-between gap-4 ${
             isDark
               ? 'bg-[#0B0D10]/90 border-white/[0.08]'
               : 'bg-white/90 border-black/[0.08]'
           }`}
         >
-          <div className="flex items-center gap-3 tech-meta min-w-0">
-            <span className="uppercase tracking-[0.14em] text-[#1E90FF] shrink-0">
-              Case Study
-            </span>
+          <div className="flex items-center gap-2.5 sm:gap-3 tech-meta min-w-0">
+            <span className="text-[#1E90FF] shrink-0">Case study</span>
             <span aria-hidden="true" className={isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}>
               /
             </span>
@@ -92,7 +86,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             type="button"
             onClick={onClose}
             aria-label="Close case study"
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border tech-meta uppercase tracking-[0.12em] hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors whitespace-nowrap shrink-0 ${
+            className={`inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-lg border text-xs font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors whitespace-nowrap shrink-0 ${
               isDark
                 ? 'border-white/15 text-[#9297A1]'
                 : 'border-black/15 text-[#525866]'
@@ -103,9 +97,8 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
           </button>
         </div>
 
-        {/* Case Study Content */}
-        <div className="mx-auto w-full max-w-[1200px] px-6 sm:px-10 lg:px-16 py-14 md:py-20 space-y-16 flex-1">
-          <header className="space-y-8">
+        <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-8 md:px-12 lg:px-16 py-10 sm:py-14 md:py-20 space-y-12 sm:space-y-16 flex-1">
+          <header className="space-y-6 sm:space-y-8">
             <div className="space-y-4">
               <h1
                 id="case-study-title"
@@ -119,7 +112,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </div>
 
             <div
-              className={`overflow-hidden rounded-2xl aspect-[16/9] ${
+              className={`overflow-hidden rounded-2xl aspect-[4/3] sm:aspect-[16/9] ${
                 isDark ? 'bg-[#111419]' : 'bg-slate-200'
               }`}
             >
@@ -135,7 +128,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </div>
 
             <div
-              className={`flex flex-wrap items-center justify-between gap-4 py-5 border-y ${
+              className={`flex flex-col sm:flex-row sm:flex-wrap sm:items-center justify-between gap-4 py-5 border-y ${
                 isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
               }`}
             >
@@ -143,17 +136,17 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                 {project.stack.join(' · ')}
               </p>
 
-              <div className="flex flex-wrap items-center gap-6 shrink-0">
+              <div className="flex flex-wrap items-center gap-5 sm:gap-6 shrink-0">
                 {project.liveUrl && (
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] hover:text-[#1E90FF] transition-colors whitespace-nowrap ${
+                    className={`inline-flex items-center gap-2 text-xs font-medium hover:text-[#1E90FF] transition-colors whitespace-nowrap ${
                       isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
                     }`}
                   >
-                    <span>Visit Live Site</span>
+                    <span>Visit live site</span>
                     <ExternalLink className="w-3.5 h-3.5 text-[#1E90FF]" />
                   </a>
                 )}
@@ -163,7 +156,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-[#1E90FF] hover:opacity-80 transition-opacity whitespace-nowrap"
+                    className="inline-flex items-center gap-2 text-xs font-medium text-[#1E90FF] hover:opacity-80 transition-opacity whitespace-nowrap"
                   >
                     <span>View on GitHub</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -173,33 +166,31 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </div>
           </header>
 
-          {/* Problem / Idea / Approach */}
-          <section aria-label="Project narrative" className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <section aria-label="Project narrative" className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
             <div className="space-y-3">
-              <p className="chapter-label text-[#1E90FF]">The Problem</p>
+              <p className="chapter-label text-[#1E90FF]">The problem</p>
               <p className={`text-base leading-[1.7] ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                 {project.problem}
               </p>
             </div>
             <div className="space-y-3">
-              <p className="chapter-label text-[#1E90FF]">The Idea</p>
+              <p className="chapter-label text-[#1E90FF]">The idea</p>
               <p className={`text-base leading-[1.7] ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                 {project.idea}
               </p>
             </div>
             <div className="space-y-3">
-              <p className="chapter-label text-[#1E90FF]">My Approach</p>
+              <p className="chapter-label text-[#1E90FF]">My approach</p>
               <p className={`text-base leading-[1.7] ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                 {project.approach}
               </p>
             </div>
           </section>
 
-          {/* System Architecture Flow */}
           {project.architecture && project.architecture.length > 0 && (
             <section
               aria-label="System architecture"
-              className={`pt-12 border-t space-y-8 ${
+              className={`pt-10 sm:pt-12 border-t space-y-6 sm:space-y-8 ${
                 isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
               }`}
             >
@@ -208,10 +199,10 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                   isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
                 }`}
               >
-                Architecture &amp; Data Flow
+                Architecture &amp; data flow
               </h2>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 {project.architecture.map((step) => (
                   <div
                     key={step.layer}
@@ -240,9 +231,8 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </section>
           )}
 
-          {/* Challenges & Learnings */}
           <section
-            className={`pt-12 border-t grid grid-cols-1 md:grid-cols-2 gap-12 ${
+            className={`pt-10 sm:pt-12 border-t grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 ${
               isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
             }`}
           >
@@ -252,7 +242,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                   isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
                 }`}
               >
-                Challenges Encountered
+                Challenges encountered
               </h2>
               <ul
                 className={`space-y-4 text-sm md:text-base leading-relaxed ${
@@ -278,7 +268,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                     isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
                   }`}
                 >
-                  What I Learned
+                  What I learned
                 </h2>
                 <p className={`editorial-body ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                   {project.learned}
@@ -290,7 +280,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                   isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
                 }`}
               >
-                <p className="chapter-label text-[#1E90FF]">Verified Outcome</p>
+                <p className="chapter-label text-[#1E90FF]">Verified outcome</p>
                 <p className={`editorial-body ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
                   {project.outcome}
                 </p>
@@ -298,10 +288,9 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </div>
           </section>
 
-          {/* Editorial Prev/Next Navigation */}
           <nav
             aria-label="Navigate between project stories"
-            className={`pt-10 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 ${
+            className={`pt-8 sm:pt-10 border-t flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6 ${
               isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
             }`}
           >
@@ -313,16 +302,16 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
               }`}
             >
               <ArrowLeft
-                className={`w-4 h-4 group-hover:text-[#1E90FF] transition-colors ${
+                className={`w-4 h-4 shrink-0 group-hover:text-[#1E90FF] transition-colors ${
                   isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'
                 }`}
               />
-              <div>
+              <div className="min-w-0">
                 <p className={`chapter-label ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
                   Previous
                 </p>
                 <p
-                  className={`text-base font-medium group-hover:text-[#1E90FF] transition-colors ${
+                  className={`text-base font-medium truncate group-hover:text-[#1E90FF] transition-colors ${
                     isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
                   }`}
                 >
@@ -334,16 +323,16 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             <button
               type="button"
               onClick={() => onSelectProject(nextProject)}
-              className={`inline-flex items-center gap-3 px-4 py-3 rounded-xl border hover:border-[#1E90FF]/60 text-right sm:ml-auto group transition-colors ${
+              className={`inline-flex items-center justify-between sm:justify-end gap-3 px-4 py-3 rounded-xl border hover:border-[#1E90FF]/60 text-left sm:text-right sm:ml-auto group transition-colors ${
                 isDark ? 'border-white/10' : 'border-black/10'
               }`}
             >
-              <div>
+              <div className="min-w-0">
                 <p className={`chapter-label ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
                   Next
                 </p>
                 <p
-                  className={`text-base font-medium group-hover:text-[#1E90FF] transition-colors ${
+                  className={`text-base font-medium truncate group-hover:text-[#1E90FF] transition-colors ${
                     isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
                   }`}
                 >
@@ -351,7 +340,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                 </p>
               </div>
               <ArrowRight
-                className={`w-4 h-4 group-hover:text-[#1E90FF] transition-colors ${
+                className={`w-4 h-4 shrink-0 group-hover:text-[#1E90FF] transition-colors ${
                   isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'
                 }`}
               />

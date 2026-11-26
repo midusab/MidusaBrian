@@ -3,12 +3,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { AnimatePresence, MotionConfig } from 'motion/react';
 import { HeroExperience } from './components/HeroExperience';
-import { Navigation, ThemeMode } from './components/Navigation';
+import { Navigation } from './components/Navigation';
 import { ScrollProgress } from './components/ScrollProgress';
-import { Project } from './data/portfolioData';
+import { useTheme } from './hooks/useTheme';
+import { Project } from './types/portfolio';
 
 const StoryDiscovery = lazy(() =>
   import('./components/StoryDiscovery').then((m) => ({ default: m.StoryDiscovery }))
@@ -42,27 +43,7 @@ export default function App() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
-  const [theme, setTheme] = useState<ThemeMode>(() => {
-    if (typeof window === 'undefined') return 'dark';
-    const saved = window.localStorage.getItem('midusa-theme');
-    return saved === 'light' || saved === 'dark' ? saved : 'dark';
-  });
-
-  useEffect(() => {
-    window.localStorage.setItem('midusa-theme', theme);
-    document.documentElement.dataset.theme = theme;
-    if (theme === 'dark') {
-      document.documentElement.style.backgroundColor = '#0B0D10';
-      document.documentElement.style.color = '#F5F5F5';
-    } else {
-      document.documentElement.style.backgroundColor = '#FFFFFF';
-      document.documentElement.style.color = '#0B0D10';
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  const { theme, isDark, toggleTheme } = useTheme();
 
   const jumpToChapter = (id: string) => {
     const target = document.getElementById(id);
@@ -70,8 +51,6 @@ export default function App() {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
-
-  const isDark = theme === 'dark';
 
   return (
     <MotionConfig reducedMotion="user">
@@ -139,7 +118,10 @@ export default function App() {
 
           <AnimatePresence>
             {bookingOpen && (
-              <MeetingBookingModal onClose={() => setBookingOpen(false)} />
+              <MeetingBookingModal
+                key="meeting-booking-modal"
+                onClose={() => setBookingOpen(false)}
+              />
             )}
           </AnimatePresence>
 

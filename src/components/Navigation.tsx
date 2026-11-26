@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Menu, Moon, Sun, X } from 'lucide-react';
 import { CHAPTERS } from '../data/portfolioData';
+import { ThemeMode } from '../types/portfolio';
 
-export type ThemeMode = 'dark' | 'light';
+export type { ThemeMode };
 
 interface NavigationProps {
   theme: ThemeMode;
@@ -56,8 +57,7 @@ export const Navigation: React.FC<NavigationProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-40 border-b backdrop-blur-md transition-colors duration-300 ${navTheme}`}
     >
-      <div className="mx-auto max-w-[1440px] flex items-center justify-between gap-6 px-6 md:px-14 h-16">
-        {/* Zone 1: Wordmark */}
+      <div className="mx-auto max-w-[1440px] flex items-center justify-between gap-4 md:gap-6 px-4 sm:px-8 md:px-12 lg:px-16 h-16">
         <a
           href="#chapter-opening"
           onClick={(e) => handleLinkClick(e, 'chapter-opening')}
@@ -66,10 +66,9 @@ export const Navigation: React.FC<NavigationProps> = ({
           Midusa<span className="text-[#1E90FF]">.</span>
         </a>
 
-        {/* Zone 2: Clear user-friendly navigation links */}
         <nav
           aria-label="Primary navigation"
-          className="hidden md:flex items-center gap-7 lg:gap-9 text-xs font-medium tracking-wide"
+          className="hidden md:flex items-center gap-5 lg:gap-8 xl:gap-10 text-xs font-medium"
         >
           {TOP_LINKS.map((link) => (
             <a
@@ -85,8 +84,7 @@ export const Navigation: React.FC<NavigationProps> = ({
           ))}
         </nav>
 
-        {/* Zone 3: Theme Toggle + Contact + Booking CTA (last) */}
-        <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
           <button
             type="button"
             onClick={onToggleTheme}
@@ -127,7 +125,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            className="md:hidden inline-flex items-center justify-center w-10 h-10 text-current hover:text-[#1E90FF] transition-colors"
+            className="md:hidden inline-flex items-center justify-center w-9 h-9 text-current hover:text-[#1E90FF] transition-colors"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -136,10 +134,10 @@ export const Navigation: React.FC<NavigationProps> = ({
 
       {mobileOpen && (
         <div
-          className={`md:hidden border-t px-6 py-5 ${
+          className={`md:hidden border-t px-4 sm:px-8 py-4 max-h-[calc(100svh-4rem)] overflow-y-auto no-scrollbar ${
             isDark
-              ? 'bg-[#0B0D10] border-white/10 text-[#F5F5F5]'
-              : 'bg-white border-black/10 text-[#0B0D10]'
+              ? 'bg-[#0B0D10]/95 border-white/10 text-[#F5F5F5]'
+              : 'bg-white/95 border-black/10 text-[#0B0D10]'
           }`}
         >
           <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
@@ -148,7 +146,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                 key={chapter.id}
                 href={`#${chapter.id}`}
                 onClick={(e) => handleLinkClick(e, chapter.id)}
-                className="flex items-center justify-between py-3 text-sm font-medium hover:text-[#1E90FF] transition-colors"
+                className="flex items-center justify-between py-3 px-1 text-sm font-medium hover:text-[#1E90FF] transition-colors"
               >
                 <span>{chapter.label}</span>
               </a>

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { ArrowUpRight, Calendar, Check, Copy, FileText, Mail } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import { PROFILE } from '../data/portfolioData';
+import { ThemeMode } from '../types/portfolio';
 import { GrainOverlay } from './GrainOverlay';
 import { LazyImage } from './LazyImage';
-import { ThemeMode } from './Navigation';
 
 interface ContactSectionProps {
   theme: ThemeMode;
@@ -36,22 +36,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     <section
       id="chapter-future"
       aria-labelledby="future-heading"
-      className={`relative min-h-[100svh] flex flex-col justify-between pt-24 pb-0 px-6 sm:px-10 lg:px-16 border-t overflow-hidden transition-colors duration-300 ${
+      className={`relative scroll-mt-16 min-h-[100svh] flex flex-col justify-between pt-16 sm:pt-24 pb-0 px-4 sm:px-8 md:px-12 lg:px-16 border-t overflow-hidden transition-colors duration-300 ${
         isDark
-          ? 'bg-[#0E1217] text-[#F5F5F5] border-white/[0.08]'
+          ? 'bg-[#0B0D10] text-[#F5F5F5] border-white/[0.08]'
           : 'bg-white text-[#0B0D10] border-black/[0.08]'
       }`}
     >
       {isDark && <GrainOverlay />}
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] my-auto py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Narrative & Dynamic Action Bar */}
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] my-auto py-8 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 space-y-8"
+            className="lg:col-span-7 space-y-6 sm:space-y-8"
           >
             <h2
               id="future-heading"
@@ -67,14 +66,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               ambitious people, and continue growing as an engineer.
             </p>
 
-            {/* Primary Dynamic Actions */}
-            <div className="pt-2 flex flex-wrap items-center gap-3">
+            <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
               <motion.button
                 type="button"
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onOpenBooking}
-                className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] transition-colors duration-150 whitespace-nowrap"
+                className="group inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] transition-colors duration-150 whitespace-nowrap"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book a meeting</span>
@@ -84,7 +82,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <motion.a
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 href={`mailto:${PROFILE.email}`}
-                className={`group inline-flex items-center gap-2 px-5 py-3 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
+                className={`group inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
                   isDark
                     ? 'border-white/15 bg-white/[0.03] text-[#F5F5F5]'
                     : 'border-black/15 bg-white text-[#0B0D10]'
@@ -99,20 +97,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onOpenResume}
-                className={`inline-flex items-center gap-2 px-5 py-3 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
+                className={`inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
                   isDark
                     ? 'border-white/15 bg-white/[0.03] text-[#F5F5F5]'
                     : 'border-black/15 bg-white text-[#0B0D10]'
                 }`}
               >
                 <FileText className="w-4 h-4 text-[#1E90FF]" />
-                <span>View &amp; Download Résumé</span>
+                <span>View &amp; download résumé</span>
               </motion.button>
 
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className={`inline-flex items-center gap-2 px-4 py-3 rounded-lg border text-xs font-medium transition-colors whitespace-nowrap ${
+                className={`inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg border text-xs font-medium transition-colors whitespace-nowrap ${
                   isDark
                     ? 'border-white/10 text-[#9297A1] hover:border-white/25 hover:text-[#F5F5F5]'
                     : 'border-black/10 text-[#525866] hover:border-black/25 hover:text-[#0B0D10]'
@@ -132,10 +130,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               </button>
             </div>
 
-            {/* Minimal Editorial Channel Links */}
             <nav
               aria-label="External profiles"
-              className={`pt-4 border-t flex flex-wrap items-center gap-x-10 gap-y-4 text-sm font-medium ${
+              className={`pt-4 border-t flex flex-wrap items-center gap-x-8 sm:gap-x-10 gap-y-3 text-sm font-medium ${
                 isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
               }`}
             >
@@ -169,7 +166,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </nav>
           </motion.div>
 
-          {/* Balanced Editorial Full-Color Portrait — Lazy Loaded */}
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 26 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -177,7 +173,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5"
           >
-            <figure className="space-y-3 max-w-md lg:ml-auto">
+            <figure className="space-y-3 max-w-sm sm:max-w-md mx-auto lg:ml-auto lg:mr-0">
               <div
                 className={`overflow-hidden rounded-2xl aspect-[4/5] ${
                   isDark ? 'bg-[#111419]' : 'bg-slate-100'
@@ -195,8 +191,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         </div>
       </div>
 
-      {/* Animated horizontal DodgerBlue line continuing beyond the visible screen */}
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-6 pb-10">
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-6 pb-8 sm:pb-10">
         <motion.div
           aria-hidden="true"
           initial={shouldReduceMotion ? false : { scaleX: 0 }}

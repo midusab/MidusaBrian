@@ -43,6 +43,11 @@
 }
 
 @layer base {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   html {
     font-family: var(--font-sans);
     font-weight: 400;
@@ -92,8 +97,8 @@
   .editorial-hero-headline {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(2.5rem, 5.4vw + 0.8rem, 5.5rem);
-    line-height: 0.98;
+    font-size: clamp(2.15rem, 5vw + 0.7rem, 5.5rem);
+    line-height: 1;
     letter-spacing: -0.025em;
     font-kerning: normal;
     text-wrap: balance;
@@ -103,8 +108,8 @@
   .editorial-headline {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(2rem, 3.8vw + 0.75rem, 4.25rem);
-    line-height: 1.07;
+    font-size: clamp(1.75rem, 3.6vw + 0.7rem, 4.25rem);
+    line-height: 1.08;
     letter-spacing: -0.022em;
     font-kerning: normal;
     text-wrap: balance;
@@ -113,8 +118,8 @@
   .editorial-subheadline {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(1.625rem, 2.5vw + 0.7rem, 3.125rem);
-    line-height: 1.1;
+    font-size: clamp(1.5rem, 2.3vw + 0.65rem, 3.125rem);
+    line-height: 1.12;
     letter-spacing: -0.018em;
     font-kerning: normal;
     text-wrap: balance;
@@ -123,8 +128,8 @@
   .editorial-statement {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(1.625rem, 2.4vw + 0.7rem, 2.85rem);
-    line-height: 1.14;
+    font-size: clamp(1.45rem, 2.3vw + 0.65rem, 2.85rem);
+    line-height: 1.16;
     letter-spacing: -0.018em;
     font-kerning: normal;
     text-wrap: balance;
@@ -133,7 +138,7 @@
   .editorial-body {
     font-family: var(--font-sans);
     font-weight: 400;
-    font-size: clamp(1rem, 0.28vw + 0.94rem, 1.1875rem);
+    font-size: clamp(0.96875rem, 0.25vw + 0.91rem, 1.1875rem);
     line-height: 1.7;
     max-width: 65ch;
   }
@@ -141,10 +146,9 @@
   .chapter-label {
     font-family: var(--font-mono);
     font-weight: 400;
-    font-size: clamp(0.6875rem, 0.12vw + 0.66rem, 0.78125rem);
-    line-height: 1.4;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font-size: 0.78125rem;
+    line-height: 1.45;
+    letter-spacing: 0.01em;
   }
 
   .tech-meta {
