@@ -104,6 +104,8 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
               <img
                 src="/assets/aistudio/37321_2c38d586.jpg"
                 alt="Portrait of Midusa"
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl object-cover object-top border border-slate-200 shrink-0"
               />

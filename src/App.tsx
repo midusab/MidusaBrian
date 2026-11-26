@@ -5,9 +5,11 @@
 
 import { Suspense, lazy, useState } from 'react';
 import { AnimatePresence, MotionConfig } from 'motion/react';
+import { GlobalPointerLight } from './components/GlobalPointerLight';
 import { HeroExperience } from './components/HeroExperience';
 import { Navigation } from './components/Navigation';
 import { ScrollProgress } from './components/ScrollProgress';
+import { SeoHead } from './components/SeoHead';
 import { useTheme } from './hooks/useTheme';
 import { Project } from './types/portfolio';
 
@@ -54,6 +56,7 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
+      <SeoHead theme={theme} activeProject={activeProject} />
       <div
         className={`min-h-screen transition-colors duration-300 ${
           isDark ? 'bg-[#0B0D10] text-[#F5F5F5]' : 'bg-white text-[#0B0D10]'
@@ -66,6 +69,7 @@ export default function App() {
           onOpenBooking={() => setBookingOpen(true)}
         />
         <ScrollProgress theme={theme} />
+        <GlobalPointerLight theme={theme} />
 
         <main>
           <HeroExperience

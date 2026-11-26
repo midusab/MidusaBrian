@@ -96,6 +96,8 @@ export const MeetingBookingModal: React.FC<MeetingBookingModalProps> = ({ onClos
             <img
               src="/assets/aistudio/37321_2c38d586.jpg"
               alt="Portrait of Midusa"
+              loading="lazy"
+              decoding="async"
               referrerPolicy="no-referrer"
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl object-cover object-top border border-black/10 shrink-0"
             />

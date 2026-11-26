@@ -1,9 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import {
   motion,
-  useMotionTemplate,
-  useMotionValue,
   useReducedMotion,
   useScroll,
   useSpring,
@@ -27,13 +25,6 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
   const shouldReduceMotion = useReducedMotion();
   const isDark = theme === 'dark';
 
-  const pointerX = useMotionValue(58);
-  const pointerY = useMotionValue(44);
-  const smoothX = useSpring(pointerX, { stiffness: 110, damping: 24, mass: 0.6 });
-  const smoothY = useSpring(pointerY, { stiffness: 110, damping: 24, mass: 0.6 });
-  const orbLeft = useMotionTemplate`${smoothX}%`;
-  const orbTop = useMotionTemplate`${smoothY}%`;
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
@@ -42,26 +33,6 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 26 });
   const headlineY = useTransform(smoothProgress, [0, 0.85], [0, -48]);
   const headlineOpacity = useTransform(smoothProgress, [0, 0.72], [1, 0.14]);
-  const orbScale = useTransform(smoothProgress, [0, 0.75], [1, 1.35]);
-
-  useEffect(() => {
-    if (shouldReduceMotion) return;
-    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
-    if (!isFinePointer) return;
-
-    const handlePointerMove = (e: PointerEvent) => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      if (e.clientY > rect.bottom) return;
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      pointerX.set(Math.max(18, Math.min(84, x)));
-      pointerY.set(Math.max(18, Math.min(82, y)));
-    };
-
-    window.addEventListener('pointermove', handlePointerMove, { passive: true });
-    return () => window.removeEventListener('pointermove', handlePointerMove);
-  }, [shouldReduceMotion, pointerX, pointerY]);
 
   return (
     <section
@@ -73,31 +44,6 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       }`}
     >
       {isDark && <GrainOverlay />}
-
-      <motion.div
-        aria-hidden="true"
-        style={shouldReduceMotion ? undefined : { scale: orbScale }}
-        className="pointer-events-none absolute inset-0 origin-center"
-      >
-        <motion.div
-          className="absolute -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[440px] sm:h-[440px] lg:w-[560px] lg:h-[560px] rounded-full will-change-[left,top]"
-          style={{
-            left: orbLeft,
-            top: orbTop,
-            background: isDark
-              ? 'radial-gradient(circle, rgba(30,144,255,0.2) 0%, rgba(30,144,255,0.05) 44%, rgba(11,13,16,0) 74%)'
-              : 'radial-gradient(circle, rgba(30,144,255,0.14) 0%, rgba(30,144,255,0.03) 44%, rgba(255,255,255,0) 74%)',
-          }}
-        />
-        <motion.div
-          className="absolute -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#1E90FF] will-change-[left,top]"
-          style={{
-            left: orbLeft,
-            top: orbTop,
-            boxShadow: '0 0 28px 8px rgba(30, 144, 255, 0.35)',
-          }}
-        />
-      </motion.div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px]" />
 
@@ -116,7 +62,8 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
                 isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
               }`}
             >
-              Every great thing begins with a question.
+              Every great thing begins with
+              <span className="block">a question.</span>
             </motion.h1>
           </div>
 
