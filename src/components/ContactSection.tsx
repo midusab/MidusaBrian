@@ -180,29 +180,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   className="w-full h-full object-cover object-[50%_14%] scale-[1.09] transition-transform duration-700 ease-out hover:scale-[1.12]"
                 />
               </div>
-              <figcaption
-                className={`tech-meta flex items-center justify-between px-1 ${
-                  isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'
-                }`}
-              >
-                <span>Midusa</span>
-                <span>Kenya</span>
-              </figcaption>
             </figure>
           </div>
         </div>
       </div>
 
       {/* Subtle horizontal blue line continuing beyond the visible screen */}
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-10 pb-10">
-        <div
-          className={`w-full flex flex-wrap items-center justify-between gap-4 tech-meta pb-6 ${
-            isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'
-          }`}
-        >
-          <span>Midusa · Junior Software Engineer &amp; Computer Science Student</span>
-          <span>Kenya</span>
-        </div>
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-6 pb-10">
         <div
           aria-hidden="true"
           className="relative h-px w-[120%] bg-gradient-to-r from-[#1E90FF] via-[#1E90FF]/60 to-transparent"

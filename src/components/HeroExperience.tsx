@@ -151,17 +151,8 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
         </div>
       </motion.div>
 
-      {/* Bottom editorial coordinate anchor */}
-      <div
-        className={`relative z-10 mx-auto w-full max-w-[1440px] pt-6 border-t flex flex-wrap items-center justify-between gap-4 tech-meta ${
-          isDark
-            ? 'border-white/[0.08] text-[#9297A1]'
-            : 'border-black/[0.08] text-[#6B7280]'
-        }`}
-      >
-        <span>Midusa · Junior Software Engineer &amp; CS Student</span>
-        <span>Kenya · Full-Stack Web &amp; Practical Systems</span>
-      </div>
+      {/* Bottom breathing space */}
+      <div className="relative z-10 mx-auto w-full max-w-[1440px]" />
     </section>
   );
 };

@@ -122,14 +122,6 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({
                   />
                 )}
               </div>
-              <figcaption
-                className={`flex items-center justify-between tech-meta px-1 ${
-                  isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'
-                }`}
-              >
-                <span>Midusa</span>
-                <span>Computer Science · Kenya</span>
-              </figcaption>
             </figure>
           </motion.div>
         </div>

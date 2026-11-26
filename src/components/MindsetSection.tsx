@@ -88,14 +88,6 @@ export const MindsetSection: React.FC<MindsetSectionProps> = ({ theme }) => {
                   className="w-full h-full object-cover object-top transition-transform duration-700 ease-out hover:scale-[1.03]"
                 />
               </div>
-              <figcaption
-                className={`tech-meta flex items-center justify-between px-1 ${
-                  isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'
-                }`}
-              >
-                <span>Midusa</span>
-                <span>Curious by habit, deliberate by craft</span>
-              </figcaption>
             </figure>
           </div>
         </div>
