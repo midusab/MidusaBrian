@@ -1,12 +1,18 @@
 import {
+  ArchitectureNode,
   ChapterLink,
+  JournalEntry,
+  PaymentFlowStep,
   Project,
   TimelineMilestone,
   ToolGroup,
 } from '../types/portfolio';
 
 export type {
+  ArchitectureNode,
   ChapterLink,
+  JournalEntry,
+  PaymentFlowStep,
   Project,
   ProjectArchitectureStep,
   ProjectCategory,
@@ -32,9 +38,13 @@ export const CHAPTERS: ChapterLink[] = [
   { id: 'chapter-beginning', index: '02', label: 'About' },
   { id: 'chapter-learning', index: '03', label: 'Journey' },
   { id: 'chapter-building', index: '04', label: 'Projects' },
-  { id: 'chapter-mind', index: '05', label: 'Mindset' },
-  { id: 'chapter-tools', index: '06', label: 'Skills' },
-  { id: 'chapter-future', index: '07', label: 'Contact' },
+  { id: 'chapter-architecture', index: '05', label: 'Architecture' },
+  { id: 'chapter-journal', index: '06', label: 'Journal' },
+  { id: 'chapter-playground', index: '07', label: 'Playground' },
+  { id: 'chapter-mind', index: '08', label: 'Mindset' },
+  { id: 'chapter-tools', index: '09', label: 'Skills' },
+  { id: 'chapter-career', index: '10', label: 'Opportunities' },
+  { id: 'chapter-future', index: '11', label: 'Contact' },
 ];
 
 export const EVOLUTION_STAGES: TimelineMilestone[] = [
@@ -78,14 +88,7 @@ export const EVOLUTION_STAGES: TimelineMilestone[] = [
     index: '06',
     title: 'Integrating payments.',
     reflection:
-      'Working with M-Pesa Daraja taught me that real transactions demand careful state machines, asynchronous webhooks, and zero guesswork.',
-  },
-  {
-    id: 'deploying',
-    index: '07',
-    title: 'Deploying real applications.',
-    reflection:
-      'Shipping work out of local environments onto the live web—where environment variables, storage security, and real users put architecture to the test.',
+      'Handling asynchronous mobile money callbacks from M-Pesa Daraja, verifying receipts, and turning transactions into instant digital delivery.',
   },
 ];
 
@@ -110,6 +113,24 @@ export const PROJECTS: Project[] = [
       'Build a dedicated online digital ebook bookstore tailored for accessible local purchasing—where a reader can browse titles, pay directly with M-Pesa, and receive verified digital access immediately.',
     approach:
       'I separated a responsive React storefront from an Express REST API backed by PostgreSQL and Prisma. Supabase handled structured cloud storage and asset delivery, while M-Pesa Daraja powered STK Push checkout and asynchronous payment confirmation.',
+    designProcess:
+      'I started with wireframes prioritizing readability and instant checkout friction reduction. Instead of multi-step carts that lose mobile users, I designed a single-touch checkout overlay: browse title, preview sample, enter M-Pesa number, and tap to pay.',
+    frontendArchitecture:
+      'Built with React and Tailwind CSS, leveraging lightweight client state for quick cart operations and responsive layout across phone, tablet, and desktop viewports. The UI reflects real-time payment states (initiated, waiting for PIN, confirmed, downloading) with optimistic updates and countdown feedback.',
+    backendArchitecture:
+      'Node.js and Express REST API structured in clean controller-service-repository patterns. Handles Daraja OAuth token caching with TTL buffer, input sanitization middleware, and cryptographic payload verification on incoming webhook routes.',
+    databaseDesign:
+      'PostgreSQL managed with Prisma ORM. Key relational models include User, Ebook (price, title, cover, private bucket path), Order (status: PENDING, PAID, FAILED, amount, checkoutRequestId), and PaymentTransaction (MpesaReceiptNumber, phone, transactionDate). Strict foreign-key constraints prevent duplicate download grants.',
+    apiIntegration:
+      'Built RESTful endpoints: /api/checkout/stk-push initiates payment, /api/checkout/callback receives Safaricom webhook events, /api/orders/:id/status polls order resolution, and /api/downloads/:token generates signed Supabase download streams.',
+    paymentIntegration:
+      'Integrated Safaricom Daraja STK Push (Lipa na M-Pesa Online). Implemented secure bearer token generation, timestamped password hashing with BusinessShortCode and PassKey, and asynchronous webhook reconciliation with idempotency protection against duplicate callback deliveries.',
+    futureImprovements: [
+      'Implement a background queue with BullMQ and Redis for high-concurrency webhook ingestion',
+      'Add dynamic PDF buyer watermark stamping to discourage unauthorized file sharing',
+      'Support reader book reviews and recommendation algorithms based on reading history',
+      'Build an automated author payout portal with split-payment disbursement',
+    ],
     challenges: [
       'Reconciling asynchronous M-Pesa Daraja callbacks reliably so paid orders unlock digital downloads without race conditions or duplicate grants.',
       'Designing a clean PostgreSQL schema via Prisma to link users, catalog metadata, order intents, and payment transaction references.',
@@ -226,6 +247,202 @@ export const PROJECTS: Project[] = [
   },
 ];
 
+export const SYSTEM_ARCHITECTURE_NODES: ArchitectureNode[] = [
+  {
+    id: 'frontend',
+    name: 'React Storefront',
+    category: 'Frontend',
+    tech: 'React · Tailwind CSS · Vite',
+    role: 'Client interface handling catalog browsing, search filtering, cart state management, and mobile-friendly payment initiation.',
+    details: 'Implements optimistic UI updates, debounced catalog queries, responsive modal flows, and authenticated token persistence across sessions.',
+    connections: ['backend', 'deployment-vercel'],
+  },
+  {
+    id: 'backend',
+    name: 'Node.js & Express API',
+    category: 'Backend',
+    tech: 'Node.js · Express.js · REST',
+    role: 'Central coordination layer signing Daraja credentials, orchestrating order state machines, and processing asynchronous payment webhooks.',
+    details: 'Houses Daraja OAuth token caching with TTL buffer, input sanitization middleware, and cryptographic payload verification on incoming webhook routes.',
+    connections: ['database', 'storage', 'payments', 'deployment-backend'],
+  },
+  {
+    id: 'database',
+    name: 'PostgreSQL Relational Core',
+    category: 'Database',
+    tech: 'PostgreSQL · Prisma ORM',
+    role: 'Source of truth preserving books, order transactions, users, and audit logs with ACID guarantees.',
+    details: 'Schema enforces strict foreign-key integrity between Orders and PaymentTransactions to prevent double-crediting or duplicate download grants.',
+    connections: ['backend'],
+  },
+  {
+    id: 'storage',
+    name: 'Supabase Cloud Storage',
+    category: 'Storage',
+    tech: 'Supabase Storage · S3 API',
+    role: 'Encrypted object bucket hosting digital ebook files (.pdf, .epub) protected against unauthorized public access.',
+    details: 'Files are kept private; when an order transitions to VERIFIED, the API requests a short-lived time-limited signed URL with download quotas.',
+    connections: ['backend'],
+  },
+  {
+    id: 'payments',
+    name: 'M-Pesa Daraja STK Engine',
+    category: 'Payments',
+    tech: 'Safaricom Daraja API 2.0',
+    role: 'Mobile-money payment gateway triggering SIM toolkit PIN prompts directly on the customer phone.',
+    details: 'Uses timestamped base64 passwords, short-lived bearer tokens, and asynchronous HTTP POST callback confirmation with idempotency keys.',
+    connections: ['backend'],
+  },
+  {
+    id: 'deployment-vercel',
+    name: 'Vercel Edge Platform',
+    category: 'Deployment',
+    tech: 'Vercel CDN · Edge Routing',
+    role: 'Edge-cached global distribution of frontend assets with automated preview deployments and branch environments.',
+    details: 'Delivers static sub-second assets via global CDN with automated HTTPS and cache invalidation on Git pushes.',
+    connections: ['frontend'],
+  },
+  {
+    id: 'deployment-backend',
+    name: 'Cloud API Host',
+    category: 'Deployment',
+    tech: 'Node.js Runtime · HTTPS · SSL/TLS',
+    role: 'Isolated cloud container running Express API instances with persistent environment secrets.',
+    details: 'Configured with CORS origin restrictions, webhook IP filtering, automated health checks, and database connection pooling.',
+    connections: ['backend'],
+  },
+];
+
+export const PAYMENT_FLOW_STEPS: PaymentFlowStep[] = [
+  {
+    id: 'step-customer',
+    step: '01',
+    actor: 'Customer',
+    title: 'Selects Ebook & Enters Phone',
+    action: 'Chooses an ebook title from catalog, proceeds to checkout, and submits Safaricom mobile number (e.g., 07XX... or 01XX...).',
+    technicalDetails: 'Client validates Kenyan phone regex /^(\\+254|0)(7|1)[0-9]{8}$/ and posts checkout intent payload to Express backend.',
+    status: 'client',
+  },
+  {
+    id: 'step-checkout',
+    step: '02',
+    actor: 'Express API',
+    title: 'Generates Daraja Token & Signs Request',
+    action: 'Backend retrieves cached OAuth 2.0 bearer token, encodes timestamped PassKey, and creates a pending Order record in PostgreSQL via Prisma.',
+    technicalDetails: 'PassKey = base64(BusinessShortCode + PassKey + Timestamp); creates order record with status PENDING_PAYMENT.',
+    status: 'network',
+  },
+  {
+    id: 'step-stk',
+    step: '03',
+    actor: 'M-Pesa Daraja',
+    title: 'Triggers STK Push on User Handset',
+    action: 'Safaricom network pushes SIM Toolkit prompt directly onto customer phone requesting M-Pesa PIN for the exact order amount.',
+    technicalDetails: 'Daraja returns CheckoutRequestID immediately; client transitions into polling/listening state with countdown timer.',
+    status: 'network',
+  },
+  {
+    id: 'step-callback',
+    step: '04',
+    actor: 'M-Pesa Webhook',
+    title: 'Asynchronous Webhook Callback',
+    action: 'Upon customer entering PIN, Daraja dispatches secure JSON callback POST to Express webhook endpoint with receipt metadata.',
+    technicalDetails: 'Extracts ResultCode (0 = Success), MpesaReceiptNumber, TransactionDate, and matches CheckoutRequestID in PostgreSQL.',
+    status: 'webhook',
+  },
+  {
+    id: 'step-order-confirm',
+    step: '05',
+    actor: 'Prisma & PostgreSQL',
+    title: 'Reconciles State & Confirms Order',
+    action: 'Atomically updates Order status from PENDING_PAYMENT to PAID, records receipt number, and logs payment transaction audit trail.',
+    technicalDetails: 'Prisma transaction ensures callback idempotency: repeated webhook retries cannot unlock multiple orders or duplicate receipt entries.',
+    status: 'db',
+  },
+  {
+    id: 'step-delivery',
+    step: '06',
+    actor: 'Supabase Storage',
+    title: 'Generates Authorized Download Access',
+    action: 'Backend requests time-limited signed URL from Supabase private storage and emails download credentials directly to the customer.',
+    technicalDetails: 'Signed URL expires in 60 minutes with download quota header, protecting digital author rights while delivering instant access.',
+    status: 'cloud',
+  },
+];
+
+export const JOURNAL_ENTRIES: JournalEntry[] = [
+  {
+    id: 'reconciling-webhooks',
+    date: 'February 2026',
+    title: 'Reconciling Asynchronous Payment Webhooks Under Network Latency',
+    tag: 'Payments & Concurrency',
+    problem:
+      'In mobile money systems like M-Pesa Daraja, payment confirmation is asynchronous. The customer enters their PIN on their phone, but cell tower delays or network drops mean callbacks can arrive seconds or minutes after the client session disconnects—or even fire duplicate retries.',
+    discovery:
+      'Relying on the frontend client to confirm payment is a massive vulnerability. The server must be the single source of truth, and the callback endpoint must be completely idempotent.',
+    solution:
+      'I designed an explicit state machine inside Prisma: orders initiate as PENDING_PAYMENT with unique CheckoutRequestIDs. When the Safaricom webhook posts ResultCode 0, a Prisma $transaction checks if the transaction was already processed. If verified, it atomically updates order status to PAID and attaches the MpesaReceiptNumber.',
+    improvement:
+      'Next time, I will introduce a Redis queue (BullMQ) to decouple webhook ingestion from database writes, ensuring zero callback drops even during high-concurrency traffic spikes.',
+  },
+  {
+    id: 'securing-digital-assets',
+    date: 'January 2026',
+    title: 'Securing Digital Ebook Delivery with Time-Limited Signed URLs',
+    tag: 'Cloud Storage & Security',
+    problem:
+      'Digital book files (.pdf and .epub) stored in public cloud buckets can easily have their static URLs copied and shared across the internet without payment, destroying digital commerce viability.',
+    discovery:
+      'Storage files should never have public read permissions. Instead, the backend must verify database ownership before issuing cryptographically signed, short-lived access tokens.',
+    solution:
+      'I placed all ebook assets into a private Supabase Storage bucket. When a verified user requests their purchased title, an Express endpoint verifies their session and receipt in PostgreSQL, calls Supabase storage.from().createSignedUrl(path, 3600), and returns an expiring 60-minute download link.',
+    improvement:
+      'In a future release, I plan to stamp the buyer’s email dynamically onto the PDF margins at generation time to further discourage unauthorized redistribution.',
+  },
+  {
+    id: 'prisma-relational-design',
+    date: 'December 2025',
+    title: 'Structuring Relational Schemas and Foreign Keys with Prisma',
+    tag: 'Database Architecture',
+    problem:
+      'Early in development, loosely coupled document records caused orphan records: orders existed without catalog references, and payment intents could not be reliably traced back to specific customer sessions.',
+    discovery:
+      'E-commerce requires strict relational integrity. Foreign key constraints at the database engine level protect business invariants far better than ad-hoc application code checks.',
+    solution:
+      'I remodeled the PostgreSQL schema with Prisma: explicit 1-to-many relationships between User and Order, 1-to-1 between Order and PaymentTransaction, and many-to-many through OrderItem to Ebook. Cascade rules and indexation on frequently queried fields (e.g. checkoutRequestId, email) eliminated data corruption.',
+    improvement:
+      'I would introduce database-level soft deletes (deletedAt timestamp) on catalog items so historical orders remain valid even if an author withdraws a published book title.',
+  },
+  {
+    id: 'edge-cors-boundaries',
+    date: 'November 2025',
+    title: 'Bridging Frontend State with Deployed Edge APIs and CORS Boundaries',
+    tag: 'DevOps & Networking',
+    problem:
+      'Deploying a React single-page application on Vercel while running an Express backend on a separate cloud provider led to frustrating CORS errors, preflight OPTIONS failures, and cookie loss across cross-origin requests.',
+    discovery:
+      'CORS is not an error—it is a browser security policy. Hardcoding localhost origins in server headers inevitably breaks production environments unless origins are dynamic and environment-driven.',
+    solution:
+      'I configured Express CORS middleware with an allowed-origin whitelist pulled strictly from environment variables (process.env.CLIENT_URL). I added explicit handling for preflight requests and standardized response headers across all JSON responses.',
+    improvement:
+      'For future builds, I would establish a reverse proxy on a shared apex domain (/api rewrites in vercel.json) to eliminate cross-origin complexity entirely.',
+  },
+  {
+    id: 'vite-bundle-optimization',
+    date: 'October 2025',
+    title: 'Vite Production Bundling & Code-Splitting Heavy Modals',
+    tag: 'Frontend Performance',
+    problem:
+      'As interactive features and modals expanded, the initial JavaScript bundle grew, risking slow First Contentful Paint times on mobile data connections.',
+    discovery:
+      'Components that are hidden on initial load (like full-screen case studies, booking modals, and code visualizers) do not belong in the critical entry bundle.',
+    solution:
+      'I split all heavy secondary components using React.lazy() and dynamic imports with Suspense boundaries. I also tuned Vite chunking in vite.config.ts to isolate third-party libraries into dedicated vendor chunks.',
+    improvement:
+      'I will implement IntersectionObserver prefetching on hover over project cards so lazy chunks load opportunistically milliseconds before the user clicks.',
+  },
+];
+
 export const TOOL_GROUPS: ToolGroup[] = [
   {
     label: 'Frontend',
@@ -273,7 +490,12 @@ export const TOOL_GROUPS: ToolGroup[] = [
       {
         name: 'REST APIs',
         status: 'used',
-        note: 'Predictable client-server contracts and third-party M-Pesa Daraja integrations.',
+        note: 'Clean endpoints coordinating client state with database models and third-party integrations.',
+      },
+      {
+        name: 'M-Pesa Daraja',
+        status: 'used',
+        note: 'Mobile-money STK Push integration connecting local payment flows directly to product delivery.',
       },
     ],
   },
