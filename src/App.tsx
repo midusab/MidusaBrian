@@ -3,21 +3,40 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useState } from 'react';
-import { AnimatePresence } from 'motion/react';
-import { ContactSection } from './components/ContactSection';
+import { Suspense, lazy, useEffect, useState } from 'react';
+import { AnimatePresence, MotionConfig } from 'motion/react';
 import { HeroExperience } from './components/HeroExperience';
-import { JourneyTimeline } from './components/JourneyTimeline';
-import { MeetingBookingModal } from './components/MeetingBookingModal';
-import { MindsetSection } from './components/MindsetSection';
 import { Navigation, ThemeMode } from './components/Navigation';
-import { ProjectCaseStudy } from './components/ProjectCaseStudy';
-import { ProjectShowcase } from './components/ProjectShowcase';
-import { ResumeModal } from './components/ResumeModal';
 import { ScrollProgress } from './components/ScrollProgress';
-import { SkillsEcosystem } from './components/SkillsEcosystem';
-import { StoryDiscovery } from './components/StoryDiscovery';
 import { Project } from './data/portfolioData';
+
+const StoryDiscovery = lazy(() =>
+  import('./components/StoryDiscovery').then((m) => ({ default: m.StoryDiscovery }))
+);
+const JourneyTimeline = lazy(() =>
+  import('./components/JourneyTimeline').then((m) => ({ default: m.JourneyTimeline }))
+);
+const ProjectShowcase = lazy(() =>
+  import('./components/ProjectShowcase').then((m) => ({ default: m.ProjectShowcase }))
+);
+const MindsetSection = lazy(() =>
+  import('./components/MindsetSection').then((m) => ({ default: m.MindsetSection }))
+);
+const SkillsEcosystem = lazy(() =>
+  import('./components/SkillsEcosystem').then((m) => ({ default: m.SkillsEcosystem }))
+);
+const ContactSection = lazy(() =>
+  import('./components/ContactSection').then((m) => ({ default: m.ContactSection }))
+);
+const ProjectCaseStudy = lazy(() =>
+  import('./components/ProjectCaseStudy').then((m) => ({ default: m.ProjectCaseStudy }))
+);
+const MeetingBookingModal = lazy(() =>
+  import('./components/MeetingBookingModal').then((m) => ({ default: m.MeetingBookingModal }))
+);
+const ResumeModal = lazy(() =>
+  import('./components/ResumeModal').then((m) => ({ default: m.ResumeModal }))
+);
 
 export default function App() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
@@ -55,65 +74,78 @@ export default function App() {
   const isDark = theme === 'dark';
 
   return (
-    <div
-      className={`min-h-screen transition-colors duration-300 ${
-        isDark ? 'bg-[#0B0D10] text-[#F5F5F5]' : 'bg-white text-[#0B0D10]'
-      }`}
-    >
-      <Navigation
-        theme={theme}
-        onToggleTheme={toggleTheme}
-        onJumpToChapter={jumpToChapter}
-        onOpenBooking={() => setBookingOpen(true)}
-      />
-      <ScrollProgress theme={theme} />
-
-      <main>
-        <HeroExperience
+    <MotionConfig reducedMotion="user">
+      <div
+        className={`min-h-screen transition-colors duration-300 ${
+          isDark ? 'bg-[#0B0D10] text-[#F5F5F5]' : 'bg-white text-[#0B0D10]'
+        }`}
+      >
+        <Navigation
           theme={theme}
-          onScrollNext={() => jumpToChapter('chapter-beginning')}
-          onJumpToProjects={() => jumpToChapter('chapter-building')}
-        />
-
-        <StoryDiscovery
-          theme={theme}
-          onExploreEvolution={() => jumpToChapter('chapter-learning')}
-        />
-
-        <JourneyTimeline theme={theme} />
-
-        <ProjectShowcase theme={theme} onSelectProject={setActiveProject} />
-
-        <MindsetSection theme={theme} />
-
-        <SkillsEcosystem theme={theme} />
-
-        <ContactSection
-          theme={theme}
-          onOpenResume={() => setResumeOpen(true)}
+          onToggleTheme={toggleTheme}
+          onJumpToChapter={jumpToChapter}
           onOpenBooking={() => setBookingOpen(true)}
         />
-      </main>
+        <ScrollProgress theme={theme} />
 
-      <AnimatePresence>
-        {activeProject && (
-          <ProjectCaseStudy
-            key={activeProject.id}
+        <main>
+          <HeroExperience
             theme={theme}
-            project={activeProject}
-            onClose={() => setActiveProject(null)}
-            onSelectProject={setActiveProject}
+            onScrollNext={() => jumpToChapter('chapter-beginning')}
+            onJumpToProjects={() => jumpToChapter('chapter-building')}
           />
-        )}
-      </AnimatePresence>
 
-      <AnimatePresence>
-        {bookingOpen && (
-          <MeetingBookingModal onClose={() => setBookingOpen(false)} />
-        )}
-      </AnimatePresence>
+          <Suspense
+            fallback={
+              <div
+                aria-hidden="true"
+                className={`min-h-[60vh] ${isDark ? 'bg-[#0B0D10]' : 'bg-white'}`}
+              />
+            }
+          >
+            <StoryDiscovery
+              theme={theme}
+              onExploreEvolution={() => jumpToChapter('chapter-learning')}
+            />
 
-      {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
-    </div>
+            <JourneyTimeline theme={theme} />
+
+            <ProjectShowcase theme={theme} onSelectProject={setActiveProject} />
+
+            <MindsetSection theme={theme} />
+
+            <SkillsEcosystem theme={theme} />
+
+            <ContactSection
+              theme={theme}
+              onOpenResume={() => setResumeOpen(true)}
+              onOpenBooking={() => setBookingOpen(true)}
+            />
+          </Suspense>
+        </main>
+
+        <Suspense fallback={null}>
+          <AnimatePresence>
+            {activeProject && (
+              <ProjectCaseStudy
+                key={activeProject.id}
+                theme={theme}
+                project={activeProject}
+                onClose={() => setActiveProject(null)}
+                onSelectProject={setActiveProject}
+              />
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {bookingOpen && (
+              <MeetingBookingModal onClose={() => setBookingOpen(false)} />
+            )}
+          </AnimatePresence>
+
+          {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
+        </Suspense>
+      </div>
+    </MotionConfig>
   );
 }

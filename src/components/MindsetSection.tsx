@@ -1,6 +1,7 @@
-import React from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import React, { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { GrainOverlay } from './GrainOverlay';
+import { LazyImage } from './LazyImage';
 import { ThemeMode } from './Navigation';
 
 interface MindsetSectionProps {
@@ -8,12 +9,21 @@ interface MindsetSectionProps {
 }
 
 export const MindsetSection: React.FC<MindsetSectionProps> = ({ theme }) => {
+  const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const isDark = theme === 'dark';
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 24 });
+  const portraitY = useTransform(smoothProgress, [0, 1], [16, -16]);
 
   return (
     <section
       id="chapter-mind"
+      ref={sectionRef}
       aria-labelledby="mind-heading"
       className={`relative py-24 md:py-36 px-6 sm:px-10 lg:px-16 border-t overflow-hidden transition-colors duration-300 ${
         isDark
@@ -27,10 +37,9 @@ export const MindsetSection: React.FC<MindsetSectionProps> = ({ theme }) => {
           initial={shouldReduceMotion ? false : { opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-5xl mb-14 md:mb-20"
         >
-          <p className="chapter-label text-[#1E90FF] mb-6">Mindset</p>
           <h2
             id="mind-heading"
             className={`editorial-headline ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}
@@ -42,7 +51,11 @@ export const MindsetSection: React.FC<MindsetSectionProps> = ({ theme }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
           {/* Editorial Paragraphs — Balanced Vertically */}
-          <div
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
             className={`lg:col-span-7 flex flex-col justify-between gap-8 py-2 ${
               isDark ? 'text-[#D1D5DB]' : 'text-[#3B4049]'
             }`}
@@ -71,25 +84,32 @@ export const MindsetSection: React.FC<MindsetSectionProps> = ({ theme }) => {
               I am still early in my engineering career, and I treat that honestly: learning with
               intention, paying attention to details, and building software meant to be useful.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Balanced Unboxed Editorial Portrait with rounded-2xl */}
-          <div className="lg:col-span-5 flex flex-col">
+          {/* Balanced Unboxed Editorial Portrait — Lazy Loaded */}
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.85, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 flex flex-col"
+          >
             <figure className="h-full flex flex-col justify-between gap-3">
               <div
                 className={`flex-1 min-h-[340px] lg:min-h-[420px] overflow-hidden rounded-2xl ${
                   isDark ? 'bg-[#111419]' : 'bg-[#E5E7EB]'
                 }`}
               >
-                <img
+                <LazyImage
                   src="/assets/aistudio/37321_2c38d586.jpg"
                   alt="Portrait of Midusa outdoors"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out hover:scale-[1.03]"
+                  isDark={isDark}
+                  motionStyle={{ y: portraitY, scale: 1.04 }}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out hover:scale-[1.06]"
                 />
               </div>
             </figure>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

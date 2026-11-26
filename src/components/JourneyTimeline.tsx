@@ -25,9 +25,14 @@ export const JourneyTimeline: React.FC<JourneyTimelineProps> = ({ theme }) => {
     >
       {isDark && <GrainOverlay />}
       <div className="relative z-10 mx-auto max-w-[1440px]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-16 md:mb-24">
+        <motion.div
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-16 md:mb-24"
+        >
           <div className="lg:col-span-8">
-            <p className="chapter-label text-[#1E90FF] mb-5">Journey</p>
             <h2
               id="learning-heading"
               className={`editorial-headline ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}
@@ -41,9 +46,9 @@ export const JourneyTimeline: React.FC<JourneyTimelineProps> = ({ theme }) => {
               databases, payment callbacks, and live production deployments.
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Clean Typographic Progression with Dynamic Hover Highlight */}
+        {/* Clean Typographic Progression with Fluid Hover Accent */}
         <ul className={`divide-y ${isDark ? 'divide-white/[0.08]' : 'divide-black/[0.08]'}`}>
           {EVOLUTION_STAGES.map((stage, idx) => {
             const isDimmed = hoveredId !== null && hoveredId !== stage.id;
@@ -53,20 +58,22 @@ export const JourneyTimeline: React.FC<JourneyTimelineProps> = ({ theme }) => {
                 key={stage.id}
                 onMouseEnter={() => setHoveredId(stage.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.25 }}
                 transition={{
-                  duration: 0.6,
-                  delay: shouldReduceMotion ? 0 : Math.min(idx * 0.04, 0.16),
+                  duration: 0.65,
+                  delay: shouldReduceMotion ? 0 : Math.min(idx * 0.05, 0.2),
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className={`py-8 md:py-11 px-4 -mx-4 rounded-xl grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-12 items-baseline transition-all duration-200 ${
+                className={`relative py-8 md:py-11 px-4 -mx-4 rounded-xl grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-12 items-baseline transition-all duration-200 ${
                   isDark ? 'hover:bg-white/[0.03]' : 'hover:bg-[#1E90FF]/[0.04]'
-                } ${isDimmed ? 'opacity-55' : 'opacity-100'}`}
+                } ${isDimmed ? 'opacity-50' : 'opacity-100'}`}
               >
                 <div className="lg:col-span-6">
-                  <h3
+                  <motion.h3
+                    animate={shouldReduceMotion ? undefined : { x: isHovered ? 6 : 0 }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 24 }}
                     className={`text-xl sm:text-2xl lg:text-3xl font-medium tracking-[-0.018em] leading-[1.15] transition-colors duration-150 ${
                       isHovered
                         ? 'text-[#1E90FF]'
@@ -76,7 +83,7 @@ export const JourneyTimeline: React.FC<JourneyTimelineProps> = ({ theme }) => {
                     }`}
                   >
                     {stage.title}
-                  </h3>
+                  </motion.h3>
                 </div>
 
                 <div className="lg:col-span-6 lg:pl-6">

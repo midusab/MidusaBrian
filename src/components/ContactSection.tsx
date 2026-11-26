@@ -3,6 +3,7 @@ import { ArrowUpRight, Calendar, Check, Copy, FileText, Mail } from 'lucide-reac
 import { motion, useReducedMotion } from 'motion/react';
 import { PROFILE } from '../data/portfolioData';
 import { GrainOverlay } from './GrainOverlay';
+import { LazyImage } from './LazyImage';
 import { ThemeMode } from './Navigation';
 
 interface ContactSectionProps {
@@ -46,14 +47,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Narrative & Dynamic Action Bar */}
           <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 space-y-8"
           >
-            <p className="chapter-label text-[#1E90FF]">Contact</p>
-
             <h2
               id="future-heading"
               className={`editorial-headline max-w-[14ch] ${
@@ -70,19 +69,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
             {/* Primary Dynamic Actions */}
             <div className="pt-2 flex flex-wrap items-center gap-3">
-              <button
+              <motion.button
                 type="button"
+                whileHover={shouldReduceMotion ? undefined : { y: -1 }}
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onOpenBooking}
-                className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] active:scale-[0.98] transition-all duration-150 whitespace-nowrap"
+                className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] transition-colors duration-150 whitespace-nowrap"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book a meeting</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
+              </motion.button>
 
-              <a
+              <motion.a
+                whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 href={`mailto:${PROFILE.email}`}
-                className={`group inline-flex items-center gap-2 px-5 py-3 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] active:scale-[0.98] transition-all duration-150 whitespace-nowrap ${
+                className={`group inline-flex items-center gap-2 px-5 py-3 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
                   isDark
                     ? 'border-white/15 bg-white/[0.03] text-[#F5F5F5]'
                     : 'border-black/15 bg-white text-[#0B0D10]'
@@ -90,12 +92,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               >
                 <Mail className="w-4 h-4 text-[#1E90FF]" />
                 <span>Email Midusa</span>
-              </a>
+              </motion.a>
 
-              <button
+              <motion.button
                 type="button"
+                whileHover={shouldReduceMotion ? undefined : { y: -1 }}
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onOpenResume}
-                className={`inline-flex items-center gap-2 px-5 py-3 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] active:scale-[0.98] transition-all duration-150 whitespace-nowrap ${
+                className={`inline-flex items-center gap-2 px-5 py-3 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
                   isDark
                     ? 'border-white/15 bg-white/[0.03] text-[#F5F5F5]'
                     : 'border-black/15 bg-white text-[#0B0D10]'
@@ -103,7 +107,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               >
                 <FileText className="w-4 h-4 text-[#1E90FF]" />
                 <span>View &amp; Download Résumé</span>
-              </button>
+              </motion.button>
 
               <button
                 type="button"
@@ -165,31 +169,41 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </nav>
           </motion.div>
 
-          {/* Balanced Editorial Full-Color Portrait */}
-          <div className="lg:col-span-5">
+          {/* Balanced Editorial Full-Color Portrait — Lazy Loaded */}
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 26 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5"
+          >
             <figure className="space-y-3 max-w-md lg:ml-auto">
               <div
                 className={`overflow-hidden rounded-2xl aspect-[4/5] ${
                   isDark ? 'bg-[#111419]' : 'bg-slate-100'
                 }`}
               >
-                <img
+                <LazyImage
                   src="/assets/aistudio/23474_cc099930.jpg"
                   alt="Studio portrait of Midusa"
-                  referrerPolicy="no-referrer"
+                  isDark={isDark}
                   className="w-full h-full object-cover object-[50%_14%] scale-[1.09] transition-transform duration-700 ease-out hover:scale-[1.12]"
                 />
               </div>
             </figure>
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Subtle horizontal blue line continuing beyond the visible screen */}
+      {/* Animated horizontal DodgerBlue line continuing beyond the visible screen */}
       <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-6 pb-10">
-        <div
+        <motion.div
           aria-hidden="true"
-          className="relative h-px w-[120%] bg-gradient-to-r from-[#1E90FF] via-[#1E90FF]/60 to-transparent"
+          initial={shouldReduceMotion ? false : { scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative h-px w-[120%] origin-left bg-gradient-to-r from-[#1E90FF] via-[#1E90FF]/60 to-transparent"
         />
       </div>
     </section>

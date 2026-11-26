@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { GrainOverlay } from './GrainOverlay';
+import { LazyImage } from './LazyImage';
 import { ThemeMode } from './Navigation';
 
 interface StoryDiscoveryProps {
@@ -22,7 +23,9 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({
     offset: ['start end', 'end start'],
   });
 
-  const imageScale = useTransform(scrollYProgress, [0, 0.6, 1], [1.06, 1.0, 1.03]);
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 24 });
+  const imageScale = useTransform(smoothProgress, [0, 0.55, 1], [1.07, 1.0, 1.03]);
+  const imageY = useTransform(smoothProgress, [0, 1], [18, -18]);
 
   return (
     <section
@@ -38,17 +41,15 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({
       {isDark && <GrainOverlay />}
       <div className="relative z-10 mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
-          {/* Editorial Prose — Balanced Vertically */}
+          {/* Editorial Prose */}
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 flex flex-col justify-between gap-10 py-2"
           >
             <div className="space-y-8">
-              <p className="chapter-label text-[#1E90FF]">About</p>
-
               <h2
                 id="beginning-heading"
                 className={`editorial-statement ${
@@ -79,10 +80,12 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({
                 Every system I build today traces back to wanting to know why things work—and
                 building tools people can actually rely on.
               </p>
-              <button
+              <motion.button
                 type="button"
+                whileHover={shouldReduceMotion ? undefined : { x: 2 }}
+                whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onExploreEvolution}
-                className={`group inline-flex items-center gap-2.5 px-4 py-2 rounded-lg border text-xs font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-all duration-150 whitespace-nowrap ${
+                className={`group inline-flex items-center gap-2.5 px-4 py-2 rounded-lg border text-xs font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
                   isDark
                     ? 'border-white/15 text-[#F5F5F5]'
                     : 'border-black/15 text-[#0B0D10]'
@@ -90,15 +93,15 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({
               >
                 <span>Follow the journey</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#1E90FF] transition-transform duration-200 group-hover:translate-x-0.5" />
-              </button>
+              </motion.button>
             </div>
           </motion.div>
 
-          {/* Editorial Portrait Spread — Balanced Height & Smooth Rounded-2xl Frame */}
+          {/* Editorial Portrait Spread — Lazy Loaded with Spring Parallax */}
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.85, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 flex flex-col justify-between"
           >
@@ -108,11 +111,11 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({
                   isDark ? 'bg-[#111419]' : 'bg-slate-200'
                 }`}
               >
-                <motion.img
-                  style={shouldReduceMotion ? undefined : { scale: imageScale }}
+                <LazyImage
                   src="/assets/aistudio/25122_bbef501b.jpg"
-                  alt="Monochrome studio portrait of Midusa, Junior Software Engineer and Computer Science student"
-                  referrerPolicy="no-referrer"
+                  alt="Monochrome studio portrait of Midusa"
+                  isDark={isDark}
+                  motionStyle={{ scale: imageScale, y: imageY }}
                   className="w-full h-full object-cover object-[50%_14%]"
                 />
                 {isDark && (

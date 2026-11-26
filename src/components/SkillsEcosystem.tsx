@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { TOOL_GROUPS } from '../data/portfolioData';
 import { GrainOverlay } from './GrainOverlay';
 import { ThemeMode } from './Navigation';
@@ -12,8 +13,8 @@ export const SkillsEcosystem: React.FC<SkillsEcosystemProps> = ({ theme }) => {
     name: string;
     status: 'used' | 'learning';
     note: string;
-  }>(TOOL_GROUPS[0].items[1]); // React by default
-
+  }>(TOOL_GROUPS[0].items[1]);
+  const shouldReduceMotion = useReducedMotion();
   const isDark = theme === 'dark';
 
   return (
@@ -29,8 +30,13 @@ export const SkillsEcosystem: React.FC<SkillsEcosystemProps> = ({ theme }) => {
       {isDark && <GrainOverlay />}
       <div className="relative z-10 mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <div className="lg:col-span-4 space-y-5">
-            <p className="chapter-label text-[#1E90FF]">Skills</p>
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 space-y-5"
+          >
             <h2
               id="tools-heading"
               className={`editorial-subheadline ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}
@@ -38,50 +44,69 @@ export const SkillsEcosystem: React.FC<SkillsEcosystemProps> = ({ theme }) => {
               My technical foundation.
             </h2>
 
-            {/* Dynamic Context Readout */}
+            {/* Dynamic Context Readout with Fluid Crossfade */}
             <div
-              className={`pt-4 border-t space-y-2 ${
+              className={`pt-4 border-t min-h-[96px] ${
                 isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
               }`}
             >
-              <div className="flex items-center justify-between gap-2">
-                <span
-                  className={`text-sm font-medium ${
-                    isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
-                  }`}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTool.name}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={shouldReduceMotion ? undefined : { opacity: 0, y: -4 }}
+                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                  className="space-y-2"
                 >
-                  {activeTool.name}
-                </span>
-                <span
-                  className={`tech-meta ${
-                    activeTool.status === 'learning'
-                      ? isDark
-                        ? 'text-[#9297A1] italic'
-                        : 'text-[#525866] italic'
-                      : 'text-[#1E90FF]'
-                  }`}
-                >
-                  {activeTool.status === 'learning' ? 'Currently exploring' : 'Used in projects'}
-                </span>
-              </div>
-              <p
-                className={`text-sm leading-relaxed max-w-[42ch] ${
-                  isDark ? 'text-[#9297A1]' : 'text-[#525866]'
-                }`}
-              >
-                {activeTool.note}
-              </p>
+                  <div className="flex items-center justify-between gap-2">
+                    <span
+                      className={`text-sm font-medium ${
+                        isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
+                      }`}
+                    >
+                      {activeTool.name}
+                    </span>
+                    <span
+                      className={`tech-meta ${
+                        activeTool.status === 'learning'
+                          ? isDark
+                            ? 'text-[#9297A1] italic'
+                            : 'text-[#525866] italic'
+                          : 'text-[#1E90FF]'
+                      }`}
+                    >
+                      {activeTool.status === 'learning' ? 'Currently exploring' : 'Used in projects'}
+                    </span>
+                  </div>
+                  <p
+                    className={`text-sm leading-relaxed max-w-[42ch] ${
+                      isDark ? 'text-[#9297A1]' : 'text-[#525866]'
+                    }`}
+                  >
+                    {activeTool.note}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
 
           <div
             className={`lg:col-span-8 divide-y ${
               isDark ? 'divide-white/[0.08]' : 'divide-black/[0.08]'
             }`}
           >
-            {TOOL_GROUPS.map((group) => (
-              <div
+            {TOOL_GROUPS.map((group, groupIdx) => (
+              <motion.div
                 key={group.label}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{
+                  duration: 0.6,
+                  delay: shouldReduceMotion ? 0 : groupIdx * 0.08,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 className="py-7 first:pt-0 last:pb-0 grid grid-cols-1 sm:grid-cols-12 gap-4 items-baseline"
               >
                 <p
@@ -133,7 +158,7 @@ export const SkillsEcosystem: React.FC<SkillsEcosystemProps> = ({ theme }) => {
                     );
                   })}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

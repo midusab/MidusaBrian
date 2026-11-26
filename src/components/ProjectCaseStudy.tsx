@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft, ArrowRight, ExternalLink, X } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import { Project, PROJECTS } from '../data/portfolioData';
 import { GrainOverlay } from './GrainOverlay';
+import { LazyImage } from './LazyImage';
 import { ThemeMode } from './Navigation';
 
 interface ProjectCaseStudyProps {
@@ -19,16 +20,11 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
   onSelectProject,
 }) => {
   const shouldReduceMotion = useReducedMotion();
-  const [imageFailed, setImageFailed] = useState(false);
   const isDark = theme === 'dark';
 
   const currentIdx = PROJECTS.findIndex((p) => p.id === project.id);
   const prevProject = PROJECTS[(currentIdx - 1 + PROJECTS.length) % PROJECTS.length];
   const nextProject = PROJECTS[(currentIdx + 1) % PROJECTS.length];
-
-  useEffect(() => {
-    setImageFailed(false);
-  }, [project.id]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -111,9 +107,6 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
         <div className="mx-auto w-full max-w-[1200px] px-6 sm:px-10 lg:px-16 py-14 md:py-20 space-y-16 flex-1">
           <header className="space-y-8">
             <div className="space-y-4">
-              <p className="chapter-label text-[#1E90FF]">
-                {project.category} · {project.subtitle}
-              </p>
               <h1
                 id="case-study-title"
                 className={`editorial-headline ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}
@@ -130,19 +123,15 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                 isDark ? 'bg-[#111419]' : 'bg-slate-200'
               }`}
             >
-              {!imageFailed ? (
-                <img
-                  src={project.image}
-                  alt={project.imageAlt}
-                  referrerPolicy="no-referrer"
-                  onError={() => setImageFailed(true)}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center p-8 text-[#9297A1]">
-                  {project.title}
-                </div>
-              )}
+              <LazyImage
+                key={project.id}
+                src={project.image}
+                alt={project.imageAlt}
+                fallbackLabel={project.title}
+                isDark={isDark}
+                priority
+                className="w-full h-full object-cover"
+              />
             </div>
 
             <div

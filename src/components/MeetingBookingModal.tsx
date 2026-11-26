@@ -205,7 +205,6 @@ export const MeetingBookingModal: React.FC<MeetingBookingModalProps> = ({ onClos
               className="w-10 h-10 rounded-xl object-cover object-top border border-black/10 shrink-0"
             />
             <div className="min-w-0">
-              <p className="chapter-label text-[#6B7280]">Schedule</p>
               <h2
                 id="booking-modal-title"
                 className="text-lg font-medium tracking-[-0.015em] text-[#0B0D10] truncate"
