@@ -91,7 +91,7 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8"
         >
           <div className="max-w-3xl space-y-3">
-            <p className="chapter-label text-[#1E90FF]">10 · Opportunities &amp; Alignment</p>
+            <p className="chapter-label text-[#1E90FF]">Opportunities &amp; Alignment</p>
             <h2
               id="career-heading"
               className={`editorial-headline ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}
