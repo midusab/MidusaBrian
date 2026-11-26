@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowRight, Calendar, CalendarPlus, Check, Download, Mail, X } from 'lucide-react';
+import { ArrowRight, CalendarPlus, Check, Download, Mail, X } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import { PROFILE } from '../data/portfolioData';
 
@@ -294,16 +294,11 @@ export const MeetingBookingModal: React.FC<MeetingBookingModalProps> = ({ onClos
                 </p>
               )}
 
-              {/* Footer Summary + Submit */}
-              <div className="pt-4 border-t border-black/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-2 tech-meta text-[#525866]">
-                  <Calendar className="w-3.5 h-3.5 text-[#1E90FF] shrink-0" />
-                  <span>{formattedDateLong || 'Select a date'}</span>
-                </div>
-
+              {/* Submit */}
+              <div className="pt-4 border-t border-black/[0.08] flex justify-end">
                 <button
                   type="submit"
-                  className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] active:scale-[0.99] transition-all duration-150 whitespace-nowrap"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] active:scale-[0.99] transition-all duration-150 whitespace-nowrap"
                 >
                   <span>Book meeting</span>
                   <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
