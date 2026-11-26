@@ -47,11 +47,11 @@ export const ScrollProgress: React.FC = () => {
 
       <aside
         aria-label="Chapter reading progress"
-        className={`hidden lg:flex fixed bottom-7 right-10 z-30 items-center gap-3 text-[11px] tracking-[0.14em] uppercase transition-colors duration-300 pointer-events-none ${
-          isLightChapter ? 'text-[#525866]' : 'text-[#9297A1]'
+        className={`hidden lg:flex fixed bottom-7 right-10 z-30 items-center gap-2 chapter-label transition-colors duration-300 pointer-events-none ${
+          isLightChapter ? 'text-[#6B7280]' : 'text-[#9297A1]'
         }`}
       >
-        <span className="text-[#1E90FF]">{activeChapter.label}</span>
+        <span>{activeChapter.label}</span>
       </aside>
     </>
   );

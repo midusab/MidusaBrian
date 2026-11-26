@@ -4,6 +4,7 @@ import { CHAPTERS } from '../data/portfolioData';
 
 interface NavigationProps {
   onJumpToChapter: (id: string) => void;
+  onOpenBooking: () => void;
 }
 
 const TOP_LINKS = [
@@ -14,7 +15,10 @@ const TOP_LINKS = [
   { id: 'chapter-tools', label: 'Tools' },
 ];
 
-export const Navigation: React.FC<NavigationProps> = ({ onJumpToChapter }) => {
+export const Navigation: React.FC<NavigationProps> = ({
+  onJumpToChapter,
+  onOpenBooking,
+}) => {
   const [scrolled, setScrolled] = useState(false);
   const [inLightZone, setInLightZone] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -54,7 +58,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onJumpToChapter }) => {
         <a
           href="#chapter-opening"
           onClick={(e) => handleLinkClick(e, 'chapter-opening')}
-          className="text-base font-semibold tracking-tight whitespace-nowrap shrink-0 hover:text-[#1E90FF] transition-colors"
+          className="text-base font-medium tracking-[-0.015em] whitespace-nowrap shrink-0 hover:text-[#1E90FF] transition-colors"
         >
           Midusa
         </a>
@@ -75,8 +79,20 @@ export const Navigation: React.FC<NavigationProps> = ({ onJumpToChapter }) => {
           ))}
         </nav>
 
-        {/* Zone 3: Single subtle primary action */}
-        <div className="flex items-center gap-4 shrink-0">
+        {/* Zone 3: Subtle contact & booking actions */}
+        <div className="flex items-center gap-5 shrink-0">
+          <button
+            type="button"
+            onClick={onOpenBooking}
+            className={`hidden sm:inline-flex items-center px-3.5 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap shrink-0 border transition-colors duration-150 ${
+              inLightZone
+                ? 'border-[#0B0D10]/20 text-[#0B0D10] hover:border-[#1E90FF] hover:text-[#1E90FF]'
+                : 'border-white/20 text-[#F5F5F5] hover:border-[#1E90FF] hover:text-[#1E90FF]'
+            }`}
+          >
+            Book a meeting
+          </button>
+
           <a
             href="#chapter-future"
             onClick={(e) => handleLinkClick(e, 'chapter-future')}
@@ -120,6 +136,16 @@ export const Navigation: React.FC<NavigationProps> = ({ onJumpToChapter }) => {
                 <span>{chapter.label}</span>
               </a>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                setMobileOpen(false);
+                onOpenBooking();
+              }}
+              className="mt-2 w-full py-2.5 px-4 rounded-lg bg-[#1E90FF] text-white text-sm font-medium text-center hover:bg-[#1677D9] transition-colors"
+            >
+              Book a meeting
+            </button>
           </nav>
         </div>
       )}

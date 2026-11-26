@@ -17,29 +17,29 @@ export const SkillsEcosystem: React.FC = () => {
       <div className="mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-4 space-y-5">
-            <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#1E90FF]">
+            <p className="chapter-label text-[#6B7280]">
               The Tools
             </p>
             <h2
               id="tools-heading"
-              className="editorial-headline text-2xl sm:text-4xl text-[#0B0D10]"
+              className="editorial-subheadline text-[#0B0D10]"
             >
               My technical foundation.
             </h2>
 
             {/* Dynamic Context Readout */}
-            <div className="pt-4 border-t border-black/[0.08] space-y-1.5">
-              <div className="flex items-center justify-between gap-2 text-xs">
-                <span className="font-semibold text-[#0B0D10]">{activeTool.name}</span>
+            <div className="pt-4 border-t border-black/[0.08] space-y-2">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-medium text-[#0B0D10]">{activeTool.name}</span>
                 <span
-                  className={
+                  className={`tech-meta ${
                     activeTool.status === 'learning' ? 'text-[#525866] italic' : 'text-[#1E90FF]'
-                  }
+                  }`}
                 >
                   {activeTool.status === 'learning' ? 'Currently exploring' : 'Used in projects'}
                 </span>
               </div>
-              <p className="text-sm leading-relaxed text-[#525866]">{activeTool.note}</p>
+              <p className="text-sm leading-relaxed text-[#525866] max-w-[42ch]">{activeTool.note}</p>
             </div>
           </div>
 
@@ -49,7 +49,7 @@ export const SkillsEcosystem: React.FC = () => {
                 key={group.label}
                 className="py-7 first:pt-0 last:pb-0 grid grid-cols-1 sm:grid-cols-12 gap-4 items-baseline"
               >
-                <p className="sm:col-span-4 text-xs font-medium uppercase tracking-[0.16em] text-[#6B7280]">
+                <p className="sm:col-span-4 chapter-label text-[#6B7280]">
                   {group.label}
                 </p>
                 <div className="sm:col-span-8 flex flex-wrap items-baseline gap-x-2 gap-y-2 text-lg md:text-xl font-normal leading-relaxed text-[#0B0D10]">
@@ -65,12 +65,14 @@ export const SkillsEcosystem: React.FC = () => {
                             isSelected
                               ? 'border-[#1E90FF] text-[#1E90FF]'
                               : item.status === 'learning'
-                              ? 'border-transparent text-[#525866] italic hover:text-[#1E90FF]'
+                              ? 'border-transparent text-[#525866] hover:text-[#1E90FF]'
                               : 'border-transparent text-[#0B0D10] hover:text-[#1E90FF]'
                           }`}
                         >
                           {item.name}
-                          {item.status === 'learning' ? ' (exploring)' : ''}
+                          {item.status === 'learning' && (
+                            <span className="tech-meta text-[#6B7280] ml-1.5">(exploring)</span>
+                          )}
                         </button>
                         {idx < group.items.length - 1 && (
                           <span className="text-[#9297A1]">,</span>

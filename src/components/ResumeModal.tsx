@@ -114,13 +114,13 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
                 className="w-14 h-14 rounded-xl object-cover object-top border border-slate-200 shrink-0"
               />
               <div>
-                <h1 className="text-3xl font-display font-bold tracking-tight text-slate-950">
+                <h1 className="text-3xl font-display font-medium tracking-[-0.02em] text-slate-950">
                   {PROFILE.name}
                 </h1>
-                <p className="mt-1 text-base font-medium text-[#1E90FF]">{PROFILE.role}</p>
+                <p className="mt-1 text-base font-normal text-[#1E90FF]">{PROFILE.role}</p>
               </div>
             </div>
-            <div className="text-xs text-slate-600 space-y-1 sm:text-right">
+            <div className="font-mono text-xs text-slate-600 space-y-1 sm:text-right">
               <p>{PROFILE.location}</p>
               <p>{PROFILE.email}</p>
               <p>github.com/midusab · linkedin.com/in/midusab</p>
@@ -144,10 +144,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
             <div className="space-y-4">
               <div>
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h4 className="font-semibold text-slate-950">
+                  <h4 className="font-medium text-slate-950">
                     MidusaElibrary — Digital Ebook Bookstore (www.midusaelibary.co.ke)
                   </h4>
-                  <span className="text-xs text-slate-500">
+                  <span className="font-mono text-xs text-slate-500">
                     React · Node.js · Express · PostgreSQL · Prisma · Supabase · M-Pesa Daraja
                   </span>
                 </div>
@@ -159,10 +159,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
               </div>
               <div>
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h4 className="font-semibold text-slate-950">
+                  <h4 className="font-medium text-slate-950">
                     Midusa Digital Solutions — Web Development Practice
                   </h4>
-                  <span className="text-xs text-slate-500">
+                  <span className="font-mono text-xs text-slate-500">
                     React · Tailwind CSS · Responsive UX
                   </span>
                 </div>

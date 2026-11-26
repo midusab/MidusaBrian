@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Check, Copy, FileText, Mail } from 'lucide-react';
+import { ArrowUpRight, Calendar, Check, Copy, FileText, Mail } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import { PROFILE } from '../data/portfolioData';
 
 interface ContactSectionProps {
   onOpenResume: () => void;
+  onOpenBooking: () => void;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) => {
+export const ContactSection: React.FC<ContactSectionProps> = ({
+  onOpenResume,
+  onOpenBooking,
+}) => {
   const [copied, setCopied] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
@@ -38,31 +42,40 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 space-y-8"
           >
-            <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#1E90FF]">
+            <p className="chapter-label text-[#6B7280]">
               The Future — The Story Continues
             </p>
 
             <h2
               id="future-heading"
-              className="editorial-headline text-4xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#0B0D10]"
+              className="editorial-headline text-[#0B0D10] max-w-[14ch]"
             >
               The story is still being written.
             </h2>
 
-            <p className="text-lg sm:text-xl md:text-2xl leading-[1.6] text-[#525866] max-w-2xl">
+            <p className="editorial-body text-[#525866]">
               I&apos;m looking for opportunities to build meaningful software, collaborate with
               ambitious people, and continue growing as an engineer.
             </p>
 
             {/* Primary Dynamic Actions */}
             <div className="pt-2 flex flex-wrap items-center gap-3">
-              <a
-                href={`mailto:${PROFILE.email}`}
+              <button
+                type="button"
+                onClick={onOpenBooking}
                 className="group inline-flex items-center gap-2.5 px-5 py-3 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] active:scale-[0.98] transition-all duration-150 whitespace-nowrap"
               >
-                <Mail className="w-4 h-4" />
-                <span>Email Midusa</span>
+                <Calendar className="w-4 h-4" />
+                <span>Book a meeting</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </button>
+
+              <a
+                href={`mailto:${PROFILE.email}`}
+                className="group inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-black/15 bg-white text-[#0B0D10] text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] active:scale-[0.98] transition-all duration-150 whitespace-nowrap"
+              >
+                <Mail className="w-4 h-4 text-[#1E90FF]" />
+                <span>Email Midusa</span>
               </a>
 
               <button
@@ -118,7 +131,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
                 <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
 
-              <span className="text-xs text-[#6B7280] font-normal">
+              <span className="tech-meta text-[#6B7280]">
                 Open to software engineering internships, junior roles &amp; product collaborations
               </span>
             </nav>
@@ -135,7 +148,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
                   className="w-full h-full object-cover object-[50%_14%] scale-[1.09] transition-transform duration-700 ease-out hover:scale-[1.12]"
                 />
               </div>
-              <figcaption className="text-xs text-[#6B7280] flex items-center justify-between px-1">
+              <figcaption className="tech-meta text-[#6B7280] flex items-center justify-between px-1">
                 <span>Midusa</span>
                 <span>Kenya</span>
               </figcaption>
@@ -146,7 +159,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenResume }) 
 
       {/* Subtle horizontal blue line continuing beyond the visible screen */}
       <div className="mx-auto w-full max-w-[1440px] pt-10 pb-10">
-        <div className="w-full flex items-center justify-between text-xs text-[#6B7280] pb-6">
+        <div className="w-full flex flex-wrap items-center justify-between gap-4 tech-meta text-[#6B7280] pb-6">
           <span>Midusa · Junior Software Engineer &amp; Computer Science Student</span>
           <span>Kenya</span>
         </div>

@@ -17,18 +17,18 @@ export const JourneyTimeline: React.FC = () => {
       <div className="relative z-10 mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-16 md:mb-24">
           <div className="lg:col-span-8">
-            <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#1E90FF] mb-5">
+            <p className="chapter-label text-[#9297A1] mb-5">
               Learning — The Evolution
             </p>
             <h2
               id="learning-heading"
-              className="editorial-headline text-3xl sm:text-5xl lg:text-6xl leading-[1.08]"
+              className="editorial-headline text-[#F5F5F5]"
             >
               From writing single lines to designing complete systems.
             </h2>
           </div>
           <div className="lg:col-span-4">
-            <p className="text-sm md:text-base leading-relaxed text-[#9297A1]">
+            <p className="editorial-body text-[#9297A1]">
               Each stage expanded what I could reason about—moving from syntax in a terminal to
               databases, payment callbacks, and live production deployments.
             </p>
@@ -57,13 +57,13 @@ export const JourneyTimeline: React.FC = () => {
                 }`}
               >
                 <div className="lg:col-span-6">
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[#F5F5F5] leading-[1.15]">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-medium tracking-[-0.018em] text-[#F5F5F5] leading-[1.15]">
                     {stage.title}
                   </h3>
                 </div>
 
                 <div className="lg:col-span-6 lg:pl-6">
-                  <p className="text-base md:text-lg leading-[1.7] text-[#9297A1] max-w-2xl">
+                  <p className="editorial-body text-[#9297A1]">
                     {stage.reflection}
                   </p>
                 </div>

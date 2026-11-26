@@ -18,12 +18,12 @@ export const MindsetSection: React.FC = () => {
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-5xl mb-14 md:mb-20"
         >
-          <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#1E90FF] mb-6">
+          <p className="chapter-label text-[#6B7280] mb-6">
             The Mind Behind the Code
           </p>
           <h2
             id="mind-heading"
-            className="editorial-headline text-3xl sm:text-5xl lg:text-6xl leading-[1.1] text-[#0B0D10]"
+            className="editorial-headline text-[#0B0D10]"
           >
             I don&apos;t want to write code just to make things work. I want to understand why they
             work.
@@ -32,8 +32,8 @@ export const MindsetSection: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
           {/* Editorial Paragraphs — Balanced Vertically */}
-          <div className="lg:col-span-7 flex flex-col justify-between gap-8 text-lg md:text-xl leading-[1.75] text-[#3B4049] py-2">
-            <div className="space-y-7">
+          <div className="lg:col-span-7 flex flex-col justify-between gap-8 text-[#3B4049] py-2">
+            <div className="space-y-7 editorial-body">
               <p>
                 Curiosity starts the work, but discipline finishes it. When a payment callback times
                 out or a layout shifts on a small screen, the real engineering happens in tracing the
@@ -47,7 +47,7 @@ export const MindsetSection: React.FC = () => {
               </p>
             </div>
 
-            <p className="pt-6 border-t border-black/[0.08] text-[#0B0D10] font-medium">
+            <p className="pt-6 border-t border-black/[0.08] editorial-body text-[#0B0D10] font-medium">
               I am still early in my engineering career, and I treat that honestly: learning with
               intention, paying attention to details, and building software meant to be useful.
             </p>
@@ -64,7 +64,7 @@ export const MindsetSection: React.FC = () => {
                   className="w-full h-full object-cover object-top transition-transform duration-700 ease-out hover:scale-[1.03]"
                 />
               </div>
-              <figcaption className="text-xs text-[#6B7280] flex items-center justify-between px-1">
+              <figcaption className="tech-meta text-[#6B7280] flex items-center justify-between px-1">
                 <span>Midusa</span>
                 <span>Curious by habit, deliberate by craft</span>
               </figcaption>

@@ -8,6 +8,7 @@ import { AnimatePresence } from 'motion/react';
 import { ContactSection } from './components/ContactSection';
 import { HeroExperience } from './components/HeroExperience';
 import { JourneyTimeline } from './components/JourneyTimeline';
+import { MeetingBookingModal } from './components/MeetingBookingModal';
 import { MindsetSection } from './components/MindsetSection';
 import { Navigation } from './components/Navigation';
 import { ProjectCaseStudy } from './components/ProjectCaseStudy';
@@ -21,6 +22,7 @@ import { Project } from './data/portfolioData';
 export default function App() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   const jumpToChapter = (id: string) => {
     const target = document.getElementById(id);
@@ -31,7 +33,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#0B0D10] text-[#F5F5F5]">
-      <Navigation onJumpToChapter={jumpToChapter} />
+      <Navigation
+        onJumpToChapter={jumpToChapter}
+        onOpenBooking={() => setBookingOpen(true)}
+      />
       <ScrollProgress />
 
       <main>
@@ -56,8 +61,11 @@ export default function App() {
         {/* 06. The Tools — My Technical Foundation */}
         <SkillsEcosystem />
 
-        {/* 07. The Future — The Story Continues */}
-        <ContactSection onOpenResume={() => setResumeOpen(true)} />
+        {/* The Future — The Story Continues */}
+        <ContactSection
+          onOpenResume={() => setResumeOpen(true)}
+          onOpenBooking={() => setBookingOpen(true)}
+        />
       </main>
 
       <AnimatePresence>
@@ -68,6 +76,12 @@ export default function App() {
             onClose={() => setActiveProject(null)}
             onSelectProject={setActiveProject}
           />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {bookingOpen && (
+          <MeetingBookingModal onClose={() => setBookingOpen(false)} />
         )}
       </AnimatePresence>
 

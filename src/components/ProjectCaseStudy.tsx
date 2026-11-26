@@ -62,19 +62,19 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
       >
         {/* Minimal Editorial Top Bar */}
         <div className="sticky top-0 z-20 bg-[#0B0D10]/90 backdrop-blur-md border-b border-white/[0.08] px-6 md:px-14 h-16 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 text-xs text-[#9297A1] min-w-0">
-            <span className="uppercase tracking-[0.18em] text-[#1E90FF] shrink-0">
+          <div className="flex items-center gap-3 tech-meta text-[#9297A1] min-w-0">
+            <span className="uppercase tracking-[0.14em] text-[#9297A1] shrink-0">
               Case Study
             </span>
             <span aria-hidden="true">/</span>
-            <span className="truncate text-[#F5F5F5]">{project.title}</span>
+            <span className="truncate font-sans text-xs font-medium text-[#F5F5F5]">{project.title}</span>
           </div>
 
           <button
             type="button"
             onClick={onClose}
             aria-label="Close case study"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-white/15 text-xs uppercase tracking-[0.14em] text-[#9297A1] hover:border-[#1E90FF] hover:text-[#F5F5F5] transition-colors whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-white/15 tech-meta uppercase tracking-[0.12em] text-[#9297A1] hover:border-[#1E90FF] hover:text-[#F5F5F5] transition-colors whitespace-nowrap shrink-0"
           >
             <span>Close</span>
             <X className="w-4 h-4" />
@@ -85,16 +85,16 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
         <div className="mx-auto w-full max-w-[1200px] px-6 sm:px-10 lg:px-16 py-14 md:py-20 space-y-16 flex-1">
           <header className="space-y-8">
             <div className="space-y-4">
-              <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#1E90FF]">
+              <p className="chapter-label text-[#9297A1]">
                 {project.category} · {project.subtitle}
               </p>
               <h1
                 id="case-study-title"
-                className="editorial-headline text-4xl sm:text-5xl md:text-6xl text-[#F5F5F5] leading-[1.06]"
+                className="editorial-headline text-[#F5F5F5]"
               >
                 {project.title}
               </h1>
-              <p className="text-lg md:text-xl text-[#9297A1] leading-relaxed max-w-3xl">
+              <p className="editorial-body text-[#9297A1]">
                 {project.summary}
               </p>
             </div>
@@ -116,7 +116,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-4 py-5 border-y border-white/[0.08]">
-              <p className="text-xs text-[#9297A1]">{project.stack.join(' · ')}</p>
+              <p className="tech-meta text-[#9297A1]">{project.stack.join(' · ')}</p>
 
               <div className="flex flex-wrap items-center gap-6 shrink-0">
                 {project.liveUrl && (
@@ -149,26 +149,26 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
           {/* Problem / Idea / Approach */}
           <section aria-label="Project narrative" className="grid grid-cols-1 md:grid-cols-3 gap-10">
             <div className="space-y-3">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1E90FF]">
+              <p className="chapter-label text-[#9297A1]">
                 The Problem
               </p>
-              <p className="text-sm md:text-base leading-[1.75] text-[#D1D5DB]">
+              <p className="text-base leading-[1.7] text-[#D1D5DB]">
                 {project.problem}
               </p>
             </div>
             <div className="space-y-3">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1E90FF]">
+              <p className="chapter-label text-[#9297A1]">
                 The Idea
               </p>
-              <p className="text-sm md:text-base leading-[1.75] text-[#D1D5DB]">
+              <p className="text-base leading-[1.7] text-[#D1D5DB]">
                 {project.idea}
               </p>
             </div>
             <div className="space-y-3">
-              <p className="text-[11px] uppercase tracking-[0.18em] text-[#1E90FF]">
+              <p className="chapter-label text-[#9297A1]">
                 My Approach
               </p>
-              <p className="text-sm md:text-base leading-[1.75] text-[#D1D5DB]">
+              <p className="text-base leading-[1.7] text-[#D1D5DB]">
                 {project.approach}
               </p>
             </div>
@@ -180,14 +180,14 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
               aria-label="System architecture"
               className="pt-12 border-t border-white/[0.08] space-y-8"
             >
-              <h2 className="text-xl font-medium tracking-tight text-[#F5F5F5]">
+              <h2 className="text-xl font-medium tracking-[-0.015em] text-[#F5F5F5]">
                 Architecture &amp; Data Flow
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {project.architecture.map((step) => (
                   <div key={step.layer} className="space-y-2 pt-4 border-t border-white/[0.12]">
-                    <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-[#1E90FF]">
+                    <p className="chapter-label text-[#1E90FF]">
                       {step.layer}
                     </p>
                     <p className="text-sm font-medium text-[#F5F5F5]">{step.component}</p>
@@ -219,19 +219,19 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
 
             <div className="space-y-8">
               <div className="space-y-3">
-                <h2 className="text-lg font-medium tracking-tight text-[#F5F5F5]">
+                <h2 className="text-lg font-medium tracking-[-0.015em] text-[#F5F5F5]">
                   What I Learned
                 </h2>
-                <p className="text-sm md:text-base leading-[1.75] text-[#D1D5DB]">
+                <p className="editorial-body text-[#D1D5DB]">
                   {project.learned}
                 </p>
               </div>
 
               <div className="pt-6 border-t border-white/[0.08] space-y-2">
-                <p className="text-[11px] uppercase tracking-[0.18em] text-[#1E90FF]">
+                <p className="chapter-label text-[#9297A1]">
                   Verified Outcome
                 </p>
-                <p className="text-sm md:text-base leading-relaxed text-[#F5F5F5]">
+                <p className="editorial-body text-[#F5F5F5]">
                   {project.outcome}
                 </p>
               </div>
@@ -250,7 +250,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             >
               <ArrowLeft className="w-4 h-4 text-[#9297A1] group-hover:text-[#1E90FF] transition-colors" />
               <div>
-                <p className="text-[11px] uppercase tracking-[0.16em] text-[#9297A1]">Previous</p>
+                <p className="chapter-label text-[#9297A1]">Previous</p>
                 <p className="text-base font-medium text-[#F5F5F5] group-hover:text-[#1E90FF] transition-colors">
                   {prevProject.title}
                 </p>
@@ -263,7 +263,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
               className="inline-flex items-center gap-3 px-4 py-3 rounded-xl border border-white/10 hover:border-[#1E90FF]/60 text-right sm:ml-auto group transition-colors"
             >
               <div>
-                <p className="text-[11px] uppercase tracking-[0.16em] text-[#9297A1]">Next</p>
+                <p className="chapter-label text-[#9297A1]">Next</p>
                 <p className="text-base font-medium text-[#F5F5F5] group-hover:text-[#1E90FF] transition-colors">
                   {nextProject.title}
                 </p>

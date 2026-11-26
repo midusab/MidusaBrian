@@ -1,21 +1,51 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Geist";
+  src: url("./assets/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("./assets/fonts/Geist-Italic-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("./assets/fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("./assets/fonts/GeistMono-Italic-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
-  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --color-dodger: #1E90FF;
   --color-charcoal: #0B0D10;
   --color-softwhite: #F5F5F5;
   --color-muted: #9297A1;
-  --tracking-editorial-sm: -0.016em;
-  --tracking-editorial-md: -0.022em;
-  --tracking-editorial-lg: -0.028em;
 }
 
 @layer base {
   html {
     font-family: var(--font-sans);
+    font-weight: 400;
     background-color: #0B0D10;
     color: #F5F5F5;
     scroll-behavior: smooth;
@@ -26,39 +56,10 @@
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
+    font-weight: 500;
     font-kerning: normal;
     font-feature-settings: "kern" 1, "liga" 1;
     text-wrap: balance;
-  }
-
-  h1 {
-    font-weight: 600;
-    letter-spacing: var(--tracking-editorial-sm);
-  }
-
-  h2 {
-    font-weight: 600;
-    letter-spacing: -0.014em;
-  }
-
-  @media (min-width: 640px) {
-    h1 {
-      letter-spacing: var(--tracking-editorial-md);
-    }
-
-    h2 {
-      letter-spacing: -0.02em;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h1 {
-      letter-spacing: var(--tracking-editorial-lg);
-    }
-
-    h2 {
-      letter-spacing: -0.025em;
-    }
   }
 
   :focus-visible {
@@ -68,10 +69,33 @@
 }
 
 @layer components {
+  .editorial-hero-headline {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.5rem, 5.4vw + 0.8rem, 5.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    font-kerning: normal;
+    text-wrap: balance;
+    max-width: 15ch;
+  }
+
   .editorial-headline {
     font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: var(--tracking-editorial-sm);
+    font-weight: 500;
+    font-size: clamp(2rem, 3.8vw + 0.75rem, 4.25rem);
+    line-height: 1.07;
+    letter-spacing: -0.022em;
+    font-kerning: normal;
+    text-wrap: balance;
+  }
+
+  .editorial-subheadline {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.625rem, 2.5vw + 0.7rem, 3.125rem);
+    line-height: 1.1;
+    letter-spacing: -0.018em;
     font-kerning: normal;
     text-wrap: balance;
   }
@@ -79,24 +103,49 @@
   .editorial-statement {
     font-family: var(--font-display);
     font-weight: 500;
-    letter-spacing: -0.012em;
+    font-size: clamp(1.625rem, 2.4vw + 0.7rem, 2.85rem);
+    line-height: 1.14;
+    letter-spacing: -0.018em;
     font-kerning: normal;
     text-wrap: balance;
   }
 
-  @media (min-width: 640px) {
-    .editorial-headline {
-      letter-spacing: var(--tracking-editorial-md);
-    }
+  .editorial-body {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(1rem, 0.28vw + 0.94rem, 1.1875rem);
+    line-height: 1.7;
+    max-width: 65ch;
+  }
 
-    .editorial-statement {
-      letter-spacing: -0.018em;
-    }
+  .chapter-label {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: clamp(0.6875rem, 0.12vw + 0.66rem, 0.78125rem);
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .tech-meta {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
   }
 
   @media (min-width: 1024px) {
+    .editorial-hero-headline {
+      letter-spacing: -0.036em;
+    }
+
     .editorial-headline {
-      letter-spacing: var(--tracking-editorial-lg);
+      letter-spacing: -0.028em;
+    }
+
+    .editorial-subheadline {
+      letter-spacing: -0.024em;
     }
 
     .editorial-statement {

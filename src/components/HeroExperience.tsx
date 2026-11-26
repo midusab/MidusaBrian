@@ -91,7 +91,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
               initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#1E90FF] mb-7"
+              className="chapter-label text-[#9297A1] mb-7"
             >
               The Journey
             </motion.p>
@@ -101,7 +101,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
               initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="editorial-headline text-4xl sm:text-6xl lg:text-[4.75rem] xl:text-[5.25rem] leading-[1.04] text-[#F5F5F5]"
+              className="editorial-hero-headline text-[#F5F5F5]"
             >
               Every great thing begins with a question.
             </motion.h1>
@@ -113,7 +113,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             transition={{ duration: 0.8, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-4 space-y-6 lg:pb-2"
           >
-            <p className="text-lg sm:text-xl font-normal leading-relaxed text-[#9297A1]">
+            <p className="editorial-body text-[#9297A1]">
               I&apos;m Midusa. A Computer Science student exploring how ideas become software.
             </p>
             <div className="flex flex-wrap items-center gap-3">
@@ -139,7 +139,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       </motion.div>
 
       {/* Bottom editorial coordinate anchor */}
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4 text-xs text-[#9297A1]">
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4 tech-meta text-[#9297A1]">
         <span>Midusa · Junior Software Engineer &amp; CS Student</span>
         <span>Kenya · Full-Stack Web &amp; Practical Systems</span>
       </div>

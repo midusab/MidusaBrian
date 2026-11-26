@@ -46,12 +46,12 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ onSelectProjec
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20 md:mb-28"
         >
           <div className="max-w-4xl">
-            <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#1E90FF] mb-6">
+            <p className="chapter-label text-[#9297A1] mb-6">
               Building — Ideas Become Real
             </p>
             <h2
               id="building-heading"
-              className="editorial-headline text-4xl sm:text-6xl lg:text-7xl leading-[1.05]"
+              className="editorial-headline text-[#F5F5F5]"
             >
               Eventually, learning became building.
             </h2>
@@ -111,19 +111,19 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ onSelectProjec
               {/* Balanced Editorial Title & Narrative Below Full-Width Stage */}
               <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                 <div className="lg:col-span-5 space-y-3">
-                  <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#1E90FF]">
+                  <p className="chapter-label text-[#9297A1]">
                     Featured Product · {flagship.subtitle}
                   </p>
-                  <h3 className="editorial-headline text-4xl sm:text-5xl lg:text-6xl text-[#F5F5F5] leading-[1.05]">
+                  <h3 className="editorial-subheadline text-[#F5F5F5]">
                     {flagship.title}
                   </h3>
-                  <p className="pt-2 text-xs leading-relaxed text-[#9297A1]">
+                  <p className="pt-2 tech-meta text-[#9297A1]">
                     {flagship.stack.join(' · ')}
                   </p>
                 </div>
 
                 <div className="lg:col-span-7 space-y-6">
-                  <p className="text-lg md:text-xl leading-[1.7] text-[#D1D5DB]">
+                  <p className="editorial-body text-[#D1D5DB]">
                     {flagship.narrative}
                   </p>
                   <div className="flex flex-wrap items-center gap-4">
@@ -160,19 +160,19 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ onSelectProjec
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
               <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-between gap-8 py-2">
                 <div className="space-y-5">
-                  <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#1E90FF]">
+                  <p className="chapter-label text-[#9297A1]">
                     Web Practice · {studio.subtitle}
                   </p>
-                  <h3 className="editorial-headline text-3xl sm:text-5xl text-[#F5F5F5] leading-[1.08]">
+                  <h3 className="editorial-subheadline text-[#F5F5F5]">
                     {studio.title}
                   </h3>
-                  <p className="text-base md:text-lg leading-[1.7] text-[#9297A1]">
+                  <p className="editorial-body text-[#9297A1]">
                     {studio.narrative}
                   </p>
                 </div>
 
                 <div className="space-y-5 pt-6 border-t border-white/[0.08]">
-                  <p className="text-xs text-[#9297A1]">{studio.stack.join(' · ')}</p>
+                  <p className="tech-meta text-[#9297A1]">{studio.stack.join(' · ')}</p>
                   <div>
                     <button
                       type="button"
@@ -214,7 +214,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ onSelectProjec
         {/* Chapter 04C — Additional Prototypes & Technical Patterns */}
         {visibleSecondary.length > 0 && (
           <div className="pt-16 border-t border-white/[0.08]">
-            <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#9297A1] mb-12">
+            <p className="chapter-label text-[#9297A1] mb-12">
               Selected Prototypes &amp; Architecture Studies
             </p>
 
@@ -242,19 +242,19 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ onSelectProjec
 
                   <div className="lg:col-span-7 flex flex-col justify-between gap-6 py-1">
                     <div className="space-y-4">
-                      <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#1E90FF]">
+                      <p className="chapter-label text-[#9297A1]">
                         {project.subtitle}
                       </p>
-                      <h3 className="text-2xl sm:text-4xl font-medium tracking-[-0.02em] text-[#F5F5F5]">
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-[-0.018em] leading-[1.12] text-[#F5F5F5]">
                         {project.title}
                       </h3>
-                      <p className="text-base md:text-lg leading-[1.7] text-[#9297A1] max-w-2xl">
+                      <p className="editorial-body text-[#9297A1]">
                         {project.narrative}
                       </p>
                     </div>
 
                     <div className="pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-4">
-                      <span className="text-xs text-[#9297A1]">{project.stack.join(' · ')}</span>
+                      <span className="tech-meta text-[#9297A1]">{project.stack.join(' · ')}</span>
                       <button
                         type="button"
                         onClick={() => onSelectProject(project)}

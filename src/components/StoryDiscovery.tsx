@@ -37,19 +37,19 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({ onExploreEvoluti
             className="lg:col-span-7 flex flex-col justify-between gap-10 py-2"
           >
             <div className="space-y-8">
-              <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#1E90FF]">
+              <p className="chapter-label text-[#9297A1]">
                 The Beginning
               </p>
 
               <h2
                 id="beginning-heading"
-                className="editorial-statement text-3xl sm:text-4xl lg:text-5xl leading-[1.18] text-[#F5F5F5]"
+                className="editorial-statement text-[#F5F5F5]"
               >
                 I started with curiosity. The desire to understand how websites worked, how
                 applications were built, and how technology could solve problems.
               </h2>
 
-              <p className="text-base md:text-lg leading-[1.75] text-[#9297A1] max-w-2xl">
+              <p className="editorial-body text-[#9297A1]">
                 From Kenya, studying Computer Science turned that curiosity into daily craft—asking
                 what happens beneath every button click, database write, and network request until
                 software stops feeling like magic and starts feeling buildable.
@@ -57,7 +57,7 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({ onExploreEvoluti
             </div>
 
             <div className="pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-6">
-              <p className="text-sm text-[#9297A1] max-w-md">
+              <p className="text-sm leading-relaxed text-[#9297A1] max-w-[48ch]">
                 Every system I build today traces back to wanting to know why things work—and
                 building tools people can actually rely on.
               </p>
@@ -94,7 +94,7 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({ onExploreEvoluti
                   className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B0D10]/75 via-transparent to-transparent"
                 />
               </div>
-              <figcaption className="flex items-center justify-between text-xs text-[#9297A1] px-1">
+              <figcaption className="flex items-center justify-between tech-meta text-[#9297A1] px-1">
                 <span>Midusa</span>
                 <span>Computer Science · Kenya</span>
               </figcaption>
