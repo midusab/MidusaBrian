@@ -54,7 +54,7 @@ export const FadedCodeBackground: React.FC<FadedCodeBackgroundProps> = ({ theme 
             <p className="pl-8">PhoneNumber: payload.phone,</p>
             <p className="pl-8">CallBackURL: process.env.DARAJA_CALLBACK_URL,</p>
             <p className="pl-8">AccountReference: payload.reference,</p>
-            <p className="pl-8">TransactionDesc: `Ebook_${&#123;payload.ebookId&#125;}`</p>
+            <p className="pl-8">TransactionDesc: &apos;Ebook_&apos; + payload.ebookId</p>
             <p className="pl-4">&#125;);</p>
             <p className="pl-4">return response.data;</p>
             <p>&#125;</p>
@@ -105,7 +105,7 @@ export const FadedCodeBackground: React.FC<FadedCodeBackgroundProps> = ({ theme 
             <p className="pl-4">&#125;;</p>
             <p className="pt-2 pl-4">const pollOrderStatus = (requestId: string) =&gt; &#123;</p>
             <p className="pl-8">const interval = setInterval(async () =&gt; &#123;</p>
-            <p className="pl-12">const status = await api.get(`/orders/status/$&#123;requestId&#125;`);</p>
+            <p className="pl-12">const status = await api.get(&apos;/orders/status/&apos; + requestId);</p>
             <p className="pl-12">if (status.verified) &#123;</p>
             <p className="pl-16">clearInterval(interval);</p>
             <p className="pl-16">setState(&apos;completed&apos;);</p>
