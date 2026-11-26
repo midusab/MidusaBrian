@@ -1,0 +1,148 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowDown, ArrowRight } from 'lucide-react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { GrainOverlay } from './GrainOverlay';
+
+interface HeroExperienceProps {
+  onScrollNext: () => void;
+  onJumpToProjects: () => void;
+}
+
+export const HeroExperience: React.FC<HeroExperienceProps> = ({
+  onScrollNext,
+  onJumpToProjects,
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const [pointer, setPointer] = useState({ x: 58, y: 44 });
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const headlineY = useTransform(scrollYProgress, [0, 0.85], [0, -44]);
+  const headlineOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.12]);
+  const orbScale = useTransform(scrollYProgress, [0, 0.7], [1, 1.35]);
+
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    const handlePointerMove = (e: PointerEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      if (e.clientY > rect.bottom) return;
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      setPointer({
+        x: Math.max(18, Math.min(84, x)),
+        y: Math.max(18, Math.min(82, y)),
+      });
+    };
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    return () => window.removeEventListener('pointermove', handlePointerMove);
+  }, [shouldReduceMotion]);
+
+  return (
+    <section
+      id="chapter-opening"
+      ref={containerRef}
+      aria-labelledby="hero-headline"
+      className="relative min-h-[100svh] flex flex-col justify-between overflow-hidden bg-[#0B0D10] text-[#F5F5F5] pt-28 pb-12 px-6 sm:px-10 lg:px-16"
+    >
+      <GrainOverlay />
+
+      {/* Quiet cursor-reactive DodgerBlue point of light */}
+      <motion.div
+        aria-hidden="true"
+        style={shouldReduceMotion ? undefined : { scale: orbScale }}
+        className="pointer-events-none absolute inset-0 origin-center"
+      >
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] rounded-full transition-[left,top] duration-500 ease-out"
+          style={{
+            left: `${pointer.x}%`,
+            top: `${pointer.y}%`,
+            background:
+              'radial-gradient(circle, rgba(30,144,255,0.18) 0%, rgba(30,144,255,0.04) 44%, rgba(11,13,16,0) 74%)',
+          }}
+        />
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#1E90FF] transition-[left,top] duration-300 ease-out"
+          style={{
+            left: `${pointer.x}%`,
+            top: `${pointer.y}%`,
+            boxShadow: '0 0 28px 8px rgba(30, 144, 255, 0.38)',
+          }}
+        />
+      </motion.div>
+
+      {/* Top breathing space */}
+      <div className="relative z-10 mx-auto w-full max-w-[1440px]" />
+
+      {/* Centerpiece Opening — Balanced Full-Width Editorial Scale */}
+      <motion.div
+        style={shouldReduceMotion ? undefined : { y: headlineY, opacity: headlineOpacity }}
+        className="relative z-10 mx-auto w-full max-w-[1440px] my-auto py-12"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+          <div className="lg:col-span-8">
+            <motion.p
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[11px] font-medium uppercase tracking-[0.22em] text-[#1E90FF] mb-7"
+            >
+              The Journey
+            </motion.p>
+
+            <motion.h1
+              id="hero-headline"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="editorial-headline text-4xl sm:text-6xl lg:text-[4.75rem] xl:text-[5.25rem] leading-[1.04] text-[#F5F5F5]"
+            >
+              Every great thing begins with a question.
+            </motion.h1>
+          </div>
+
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 space-y-6 lg:pb-2"
+          >
+            <p className="text-lg sm:text-xl font-normal leading-relaxed text-[#9297A1]">
+              I&apos;m Midusa. A Computer Science student exploring how ideas become software.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={onScrollNext}
+                className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] active:scale-[0.98] transition-all duration-150 whitespace-nowrap"
+              >
+                <span>Begin the story</span>
+                <ArrowDown className="w-4 h-4 transition-transform duration-200 group-hover:translate-y-0.5" />
+              </button>
+              <button
+                type="button"
+                onClick={onJumpToProjects}
+                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-white/15 text-[#F5F5F5] text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] active:scale-[0.98] transition-all duration-150 whitespace-nowrap"
+              >
+                <span>See what I&apos;ve built</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Bottom editorial coordinate anchor */}
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4 text-xs text-[#9297A1]">
+        <span>Midusa · Junior Software Engineer &amp; CS Student</span>
+        <span>Kenya · Full-Stack Web &amp; Practical Systems</span>
+      </div>
+    </section>
+  );
+};
