@@ -48,13 +48,13 @@ export const PROFILE = {
 };
 
 export const CHAPTERS = [
-  { id: 'chapter-opening', index: '01', label: 'Curiosity' },
-  { id: 'chapter-beginning', index: '02', label: 'The Beginning' },
-  { id: 'chapter-learning', index: '03', label: 'Learning' },
-  { id: 'chapter-building', index: '04', label: 'Building' },
-  { id: 'chapter-mind', index: '05', label: 'The Mind' },
-  { id: 'chapter-tools', index: '06', label: 'The Tools' },
-  { id: 'chapter-future', index: '07', label: 'The Future' },
+  { id: 'chapter-opening', index: '01', label: 'Home' },
+  { id: 'chapter-beginning', index: '02', label: 'About' },
+  { id: 'chapter-learning', index: '03', label: 'Journey' },
+  { id: 'chapter-building', index: '04', label: 'Projects' },
+  { id: 'chapter-mind', index: '05', label: 'Mindset' },
+  { id: 'chapter-tools', index: '06', label: 'Skills' },
+  { id: 'chapter-future', index: '07', label: 'Contact' },
 ];
 
 export const EVOLUTION_STAGES: TimelineMilestone[] = [

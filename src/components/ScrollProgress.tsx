@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { CHAPTERS } from '../data/portfolioData';
+import { ThemeMode } from './Navigation';
 
-export const ScrollProgress: React.FC = () => {
+interface ScrollProgressProps {
+  theme: ThemeMode;
+}
+
+export const ScrollProgress: React.FC<ScrollProgressProps> = ({ theme }) => {
   const [progress, setProgress] = useState(0);
   const [activeChapter, setActiveChapter] = useState(CHAPTERS[0]);
 
@@ -28,10 +33,7 @@ export const ScrollProgress: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isLightChapter =
-    activeChapter.id === 'chapter-mind' ||
-    activeChapter.id === 'chapter-tools' ||
-    activeChapter.id === 'chapter-future';
+  const isDark = theme === 'dark';
 
   return (
     <>
@@ -46,11 +48,12 @@ export const ScrollProgress: React.FC = () => {
       </div>
 
       <aside
-        aria-label="Chapter reading progress"
+        aria-label="Reading progress section"
         className={`hidden lg:flex fixed bottom-7 right-10 z-30 items-center gap-2 chapter-label transition-colors duration-300 pointer-events-none ${
-          isLightChapter ? 'text-[#6B7280]' : 'text-[#9297A1]'
+          isDark ? 'text-[#9297A1]' : 'text-[#525866]'
         }`}
       >
+        <span className="w-1.5 h-1.5 rounded-full bg-[#1E90FF]" aria-hidden="true" />
         <span>{activeChapter.label}</span>
       </aside>
     </>

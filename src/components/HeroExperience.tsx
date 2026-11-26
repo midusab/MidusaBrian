@@ -2,19 +2,23 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { GrainOverlay } from './GrainOverlay';
+import { ThemeMode } from './Navigation';
 
 interface HeroExperienceProps {
+  theme: ThemeMode;
   onScrollNext: () => void;
   onJumpToProjects: () => void;
 }
 
 export const HeroExperience: React.FC<HeroExperienceProps> = ({
+  theme,
   onScrollNext,
   onJumpToProjects,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const [pointer, setPointer] = useState({ x: 58, y: 44 });
+  const isDark = theme === 'dark';
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -48,9 +52,11 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       id="chapter-opening"
       ref={containerRef}
       aria-labelledby="hero-headline"
-      className="relative min-h-[100svh] flex flex-col justify-between overflow-hidden bg-[#0B0D10] text-[#F5F5F5] pt-28 pb-12 px-6 sm:px-10 lg:px-16"
+      className={`relative min-h-[100svh] flex flex-col justify-between overflow-hidden pt-28 pb-12 px-6 sm:px-10 lg:px-16 transition-colors duration-300 ${
+        isDark ? 'bg-[#0B0D10] text-[#F5F5F5]' : 'bg-white text-[#0B0D10]'
+      }`}
     >
-      <GrainOverlay />
+      {isDark && <GrainOverlay />}
 
       {/* Quiet cursor-reactive DodgerBlue point of light */}
       <motion.div
@@ -63,8 +69,9 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           style={{
             left: `${pointer.x}%`,
             top: `${pointer.y}%`,
-            background:
-              'radial-gradient(circle, rgba(30,144,255,0.18) 0%, rgba(30,144,255,0.04) 44%, rgba(11,13,16,0) 74%)',
+            background: isDark
+              ? 'radial-gradient(circle, rgba(30,144,255,0.2) 0%, rgba(30,144,255,0.05) 44%, rgba(11,13,16,0) 74%)'
+              : 'radial-gradient(circle, rgba(30,144,255,0.14) 0%, rgba(30,144,255,0.03) 44%, rgba(255,255,255,0) 74%)',
           }}
         />
         <div
@@ -72,7 +79,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           style={{
             left: `${pointer.x}%`,
             top: `${pointer.y}%`,
-            boxShadow: '0 0 28px 8px rgba(30, 144, 255, 0.38)',
+            boxShadow: '0 0 28px 8px rgba(30, 144, 255, 0.35)',
           }}
         />
       </motion.div>
@@ -91,7 +98,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
               initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="chapter-label text-[#9297A1] mb-7"
+              className="chapter-label text-[#1E90FF] mb-7"
             >
               The Journey
             </motion.p>
@@ -101,7 +108,9 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
               initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="editorial-hero-headline text-[#F5F5F5]"
+              className={`editorial-hero-headline ${
+                isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
+              }`}
             >
               Every great thing begins with a question.
             </motion.h1>
@@ -113,7 +122,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             transition={{ duration: 0.8, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-4 space-y-6 lg:pb-2"
           >
-            <p className="editorial-body text-[#9297A1]">
+            <p className={`editorial-body ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`}>
               I&apos;m Midusa. A Computer Science student exploring how ideas become software.
             </p>
             <div className="flex flex-wrap items-center gap-3">
@@ -128,7 +137,11 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
               <button
                 type="button"
                 onClick={onJumpToProjects}
-                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-white/15 text-[#F5F5F5] text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] active:scale-[0.98] transition-all duration-150 whitespace-nowrap"
+                className={`group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] active:scale-[0.98] transition-all duration-150 whitespace-nowrap ${
+                  isDark
+                    ? 'border-white/15 text-[#F5F5F5]'
+                    : 'border-black/15 text-[#0B0D10]'
+                }`}
               >
                 <span>See what I&apos;ve built</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -139,7 +152,13 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       </motion.div>
 
       {/* Bottom editorial coordinate anchor */}
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4 tech-meta text-[#9297A1]">
+      <div
+        className={`relative z-10 mx-auto w-full max-w-[1440px] pt-6 border-t flex flex-wrap items-center justify-between gap-4 tech-meta ${
+          isDark
+            ? 'border-white/[0.08] text-[#9297A1]'
+            : 'border-black/[0.08] text-[#6B7280]'
+        }`}
+      >
         <span>Midusa · Junior Software Engineer &amp; CS Student</span>
         <span>Kenya · Full-Stack Web &amp; Practical Systems</span>
       </div>
