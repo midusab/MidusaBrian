@@ -32,7 +32,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8"
         >
           <div className="max-w-3xl space-y-3">
-            <p className="chapter-label text-[#1E90FF]">05 · System Engineering</p>
+            <p className="chapter-label text-[#1E90FF]">System Engineering</p>
             <h2 className={`editorial-headline ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
               How the pieces communicate.
             </h2>
@@ -154,17 +154,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
                       >
                         <div className="flex items-start justify-between gap-2 mb-2">
                           <span
-                            className={`text-[0.6875rem] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                              node.category === 'Frontend'
-                                ? 'bg-[#1E90FF]/15 text-[#1E90FF]'
-                                : node.category === 'Backend'
-                                ? 'bg-emerald-500/15 text-emerald-400'
-                                : node.category === 'Database'
-                                ? 'bg-amber-500/15 text-amber-400'
-                                : node.category === 'Payments'
-                                ? 'bg-[#25D366]/15 text-[#25D366]'
-                                : 'bg-purple-500/15 text-purple-400'
-                            }`}
+                            className="text-[0.6875rem] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#1E90FF]/15 text-[#1E90FF]"
                           >
                             {node.category}
                           </span>
@@ -258,14 +248,14 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <p className="tech-meta text-[#25D366]">M-Pesa Daraja STK Push State Machine</p>
+                  <p className="tech-meta text-[#1E90FF]">M-Pesa Daraja STK Push State Machine</p>
                   <h3 className={`text-xl sm:text-2xl font-medium tracking-tight mt-1 ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
                     End-to-End Payment Lifecycle
                   </h3>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="inline-block w-2 h-2 rounded-full bg-[#25D366] animate-ping" />
-                  <span className="tech-meta text-[#25D366]">Asynchronous Webhook Protocol</span>
+                  <span className="inline-block w-2 h-2 rounded-full bg-[#1E90FF] animate-pulse" />
+                  <span className="tech-meta text-[#1E90FF]">Asynchronous Webhook Protocol</span>
                 </div>
               </div>
 
@@ -282,24 +272,19 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
                       className={`text-left p-3.5 rounded-xl border transition-all duration-200 ${
                         isSelected
                           ? isDark
-                            ? 'bg-[#25D366]/10 border-[#25D366] shadow-[0_0_20px_-4px_rgba(37,211,102,0.25)]'
-                            : 'bg-[#25D366]/10 border-[#25D366]'
+                            ? 'bg-[#1E90FF]/10 border-[#1E90FF] shadow-[0_0_20px_-4px_rgba(30,144,255,0.25)]'
+                            : 'bg-[#1E90FF]/10 border-[#1E90FF]'
                           : isDark
                           ? 'bg-white/[0.02] border-white/[0.06] hover:border-white/20'
                           : 'bg-slate-50 border-black/[0.06] hover:border-black/20'
                       }`}
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <span className="font-mono text-xs font-bold text-[#25D366]">
-                          {step.step}
-                        </span>
-                        <span className={`text-[0.625rem] font-mono px-1.5 py-0.5 rounded ${
-                          isDark ? 'bg-white/10 text-white/70' : 'bg-black/10 text-black/70'
-                        }`}>
+                        <span className="text-[0.625rem] font-mono px-1.5 py-0.5 rounded bg-[#1E90FF]/15 text-[#1E90FF]">
                           {step.actor}
                         </span>
                       </div>
-                      <p className={`text-xs font-medium line-clamp-2 ${isSelected ? 'text-[#25D366]' : isDark ? 'text-white' : 'text-black'}`}>
+                      <p className={`text-xs font-medium line-clamp-2 ${isSelected ? 'text-[#1E90FF]' : isDark ? 'text-white' : 'text-black'}`}>
                         {step.title}
                       </p>
                     </button>

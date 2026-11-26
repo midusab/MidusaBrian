@@ -55,40 +55,17 @@ const MeetingBookingModal = lazy(() =>
 const ResumeModal = lazy(() =>
   import('./components/ResumeModal').then((m) => ({ default: m.ResumeModal }))
 );
-const CommandPalette = lazy(() =>
-  import('./components/CommandPalette').then((m) => ({ default: m.CommandPalette }))
-);
 
 export default function App() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
-  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const { theme, isDark, toggleTheme } = useTheme();
-
-  // Global keyboard shortcut for Command Palette (⌘K / Ctrl+K)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        setCommandPaletteOpen((prev) => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
 
   const jumpToChapter = (id: string) => {
     const target = document.getElementById(id);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  const handleOpenMidusaCaseStudy = () => {
-    const midusa = PROJECTS.find((p) => p.id === 'midusa-elibrary');
-    if (midusa) {
-      setActiveProject(midusa);
     }
   };
 
@@ -106,7 +83,6 @@ export default function App() {
           onToggleTheme={toggleTheme}
           onJumpToChapter={jumpToChapter}
           onOpenBooking={() => setBookingOpen(true)}
-          onOpenCommandPalette={() => setCommandPaletteOpen(true)}
         />
         <ScrollProgress theme={theme} />
         <GlobalPointerLight theme={theme} />
@@ -193,16 +169,6 @@ export default function App() {
           </AnimatePresence>
 
           {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
-
-          <CommandPalette
-            isOpen={commandPaletteOpen}
-            onClose={() => setCommandPaletteOpen(false)}
-            theme={theme}
-            onToggleTheme={toggleTheme}
-            onJumpToChapter={jumpToChapter}
-            onOpenBooking={() => setBookingOpen(true)}
-            onOpenMidusaCaseStudy={handleOpenMidusaCaseStudy}
-          />
         </Suspense>
       </div>
     </MotionConfig>

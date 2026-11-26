@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Command, Menu, Moon, Search, Sun, X } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { CHAPTERS } from '../data/portfolioData';
 import { ThemeMode } from '../types/portfolio';
 
@@ -10,7 +10,6 @@ interface NavigationProps {
   onToggleTheme: () => void;
   onJumpToChapter: (id: string) => void;
   onOpenBooking: () => void;
-  onOpenCommandPalette?: () => void;
 }
 
 const TOP_LINKS = [
@@ -28,7 +27,6 @@ export const Navigation: React.FC<NavigationProps> = ({
   onToggleTheme,
   onJumpToChapter,
   onOpenBooking,
-  onOpenCommandPalette,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -90,28 +88,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         </nav>
 
         {/* Right Action Cluster */}
-        <div className="flex items-center gap-2 sm:gap-3.5 shrink-0">
-          {/* Quick Search / Command Palette Trigger */}
-          {onOpenCommandPalette && (
-            <button
-              type="button"
-              onClick={onOpenCommandPalette}
-              data-cursor="SEARCH"
-              aria-label="Open command palette"
-              className={`inline-flex items-center gap-2 px-2.5 sm:px-3 py-1.5 rounded-lg border text-xs transition-colors duration-150 ${
-                isDark
-                  ? 'border-white/12 bg-white/[0.03] text-[#9297A1] hover:border-[#1E90FF] hover:text-[#F5F5F5]'
-                  : 'border-black/10 bg-slate-50 text-[#525866] hover:border-[#1E90FF] hover:text-[#0B0D10]'
-              }`}
-            >
-              <Search className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline font-sans text-xs">Search</span>
-              <kbd className="hidden sm:inline-flex items-center text-[10px] font-mono px-1.5 py-0.5 rounded border border-white/10 dark:border-white/10 bg-white/5 opacity-80">
-                ⌘K
-              </kbd>
-            </button>
-          )}
-
+        <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
           {/* Theme Toggle */}
           <button
             type="button"
@@ -165,7 +142,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu without numbering */}
       {mobileOpen && (
         <div
           className={`lg:hidden border-t px-4 sm:px-8 py-5 max-h-[calc(100svh-4rem)] overflow-y-auto no-scrollbar shadow-2xl ${
@@ -183,7 +160,6 @@ export const Navigation: React.FC<NavigationProps> = ({
                 className="flex items-center justify-between py-2.5 px-2 text-sm font-medium hover:text-[#1E90FF] hover:bg-white/[0.03] rounded-lg transition-colors"
               >
                 <span>{chapter.label}</span>
-                <span className="text-[10px] font-mono text-[#1E90FF]">{chapter.index}</span>
               </a>
             ))}
 
@@ -198,23 +174,6 @@ export const Navigation: React.FC<NavigationProps> = ({
               >
                 Book a meeting
               </button>
-
-              {onOpenCommandPalette && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileOpen(false);
-                    onOpenCommandPalette();
-                  }}
-                  className={`w-full py-2.5 px-4 rounded-lg border text-sm font-medium text-center transition-colors ${
-                    isDark
-                      ? 'border-white/15 bg-white/[0.04] text-[#F5F5F5]'
-                      : 'border-black/15 bg-slate-50 text-[#0B0D10]'
-                  }`}
-                >
-                  Search &amp; Commands (⌘K)
-                </button>
-              )}
             </div>
           </nav>
         </div>

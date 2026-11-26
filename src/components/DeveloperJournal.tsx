@@ -44,7 +44,7 @@ export const DeveloperJournal: React.FC<DeveloperJournalProps> = ({ theme }) => 
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8"
         >
           <div className="max-w-3xl space-y-3">
-            <p className="chapter-label text-[#1E90FF]">06 · Engineering Reflections</p>
+            <p className="chapter-label text-[#1E90FF]">Engineering Reflections</p>
             <h2 id="journal-heading" className={`editorial-headline ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
               Things I learned along the way.
             </h2>
@@ -53,41 +53,29 @@ export const DeveloperJournal: React.FC<DeveloperJournalProps> = ({ theme }) => 
             </p>
           </div>
 
-          {/* Tag Filter Pills */}
-          <div
-            role="group"
-            aria-label="Filter journal entries"
-            className={`inline-flex flex-wrap items-center gap-1 p-1 rounded-xl border self-start lg:self-end ${
-              isDark ? 'bg-white/[0.04] border-white/10' : 'bg-white border-black/10'
-            }`}
-          >
-            {tags.map((tag) => {
-              const active = selectedTag === tag;
-              return (
-                <button
-                  key={tag}
-                  type="button"
-                  onClick={() => setSelectedTag(tag)}
-                  data-cursor="READ"
-                  className={`relative px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors whitespace-nowrap ${
-                    active
-                      ? 'text-white'
-                      : isDark
-                      ? 'text-[#9297A1] hover:text-[#F5F5F5]'
-                      : 'text-[#525866] hover:text-[#0B0D10]'
-                  }`}
-                >
-                  {active && (
-                    <motion.span
-                      layoutId="journal-tag-indicator"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                      className="absolute inset-0 rounded-lg bg-[#1E90FF]"
-                    />
-                  )}
-                  <span className="relative z-10">{tag}</span>
-                </button>
-              );
-            })}
+          {/* Compact Topic Dropdown Filter */}
+          <div className="self-start lg:self-end">
+            <div className="relative inline-flex items-center">
+              <label htmlFor="journal-tag-select" className="sr-only">Filter by topic</label>
+              <select
+                id="journal-tag-select"
+                value={selectedTag}
+                onChange={(e) => setSelectedTag(e.target.value)}
+                data-cursor="SELECT"
+                className={`appearance-none pl-3.5 pr-8 py-2 rounded-lg border text-xs font-mono font-medium transition-all cursor-pointer focus:outline-none focus:border-[#1E90FF] ${
+                  isDark
+                    ? 'bg-[#0E1217] border-white/15 text-[#F5F5F5] hover:border-white/30'
+                    : 'bg-white border-black/15 text-[#0B0D10] hover:border-black/30 shadow-sm'
+                }`}
+              >
+                {tags.map((tag) => (
+                  <option key={tag} value={tag} className={isDark ? 'bg-[#0B0D10] text-[#F5F5F5]' : 'bg-white text-[#0B0D10]'}>
+                    {tag === 'All' ? 'All Topics' : tag}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className={`w-3.5 h-3.5 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`} />
+            </div>
           </div>
         </motion.div>
 
