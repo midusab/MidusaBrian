@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -41,12 +41,21 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
   onClose,
   onSelectProject,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const isDark = theme === 'dark';
 
   const currentIdx = PROJECTS.findIndex((p) => p.id === project.id);
   const prevProject = PROJECTS[(currentIdx - 1 + PROJECTS.length) % PROJECTS.length];
   const nextProject = PROJECTS[(currentIdx + 1) % PROJECTS.length];
+  const relatedProjects = PROJECTS.filter((p) => p.id !== project.id);
+
+  // Scroll to top when switching case studies
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [project.id]);
 
   const handleKeyDownExtra = useCallback(
     (e: KeyboardEvent) => {
@@ -65,6 +74,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
 
   return (
     <div
+      ref={containerRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="case-study-title"
@@ -82,7 +92,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
         animate={{ opacity: 1, y: 0 }}
         exit={shouldReduceMotion ? undefined : { opacity: 0, y: 12 }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 min-h-screen flex flex-col"
+        className="relative z-10 min-h-screen flex flex-col font-sans"
       >
         {/* Sticky Header Bar */}
         <div
@@ -93,12 +103,12 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
           }`}
         >
           <div className="flex items-center gap-2.5 sm:gap-3 tech-meta min-w-0">
-            <span className="text-[#1E90FF] shrink-0">Engineering Case Study</span>
+            <span className="text-[#1E90FF] shrink-0 font-mono">Case study</span>
             <span aria-hidden="true" className={isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}>
               /
             </span>
             <span
-              className={`truncate font-sans text-xs font-medium ${
+              className={`truncate text-xs font-medium ${
                 isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
               }`}
             >
@@ -250,9 +260,9 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                   isDark ? 'bg-white/[0.02] border-white/[0.08]' : 'bg-slate-50 border-black/[0.08]'
                 } space-y-3`}
               >
-                <div className="flex items-center gap-2.5 text-[#EF4444]">
+                <div className="flex items-center gap-2.5 text-[#1E90FF]">
                   <Lightbulb className="w-4 h-4 shrink-0" />
-                  <p className="chapter-label text-xs uppercase tracking-wider text-[#EF4444]">The friction</p>
+                  <p className="chapter-label text-xs uppercase tracking-wider text-[#1E90FF]">The friction</p>
                 </div>
                 <h3 className={`text-lg font-medium ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
                   What was broken?
@@ -359,7 +369,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
               </div>
             )}
 
-            {/* Embedded Live Interactive Architecture & Payment Flow for MidusaElibrary */}
+            {/* Embedded Live Interactive Architecture for MidusaElibrary */}
             {isMidusaElibrary && (
               <div className="pt-6">
                 <div className="mb-4">
@@ -396,7 +406,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
               >
                 <div className="flex items-center gap-2 text-[#1E90FF]">
                   <Database className="w-4 h-4" />
-                  <span className="text-xs font-mono font-semibold uppercase">PostgreSQL + Prisma ORM + Supabase</span>
+                  <span className="text-xs font-mono font-semibold uppercase">Persistence &amp; Data Model</span>
                 </div>
                 <p className={`text-base leading-relaxed ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                   {project.databaseDesign}
@@ -405,7 +415,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </section>
           )}
 
-          {/* Chapter 5: API Integration & M-Pesa Daraja */}
+          {/* Chapter 5: API Integration & Payment Routing */}
           {(project.apiIntegration || project.paymentIntegration) && (
             <section aria-label="Payments and APIs" className="space-y-6 pt-8 border-t border-white/10 dark:border-white/10">
               <div className="flex items-center gap-2 text-[#1E90FF]">
@@ -413,7 +423,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                 <span className="w-8 h-[1px] bg-[#1E90FF]" />
               </div>
               <h2 className={`text-2xl sm:text-3xl font-medium tracking-tight ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
-                API Contracts &amp; M-Pesa Daraja Payments
+                API Contracts &amp; Integration Architecture
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -439,9 +449,9 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                       isDark ? 'bg-[#0E1217] border-white/[0.08]' : 'bg-white border-black/[0.08]'
                     } space-y-4`}
                   >
-                    <div className="flex items-center gap-2 text-[#10B981]">
+                    <div className="flex items-center gap-2 text-[#1E90FF]">
                       <ShieldCheck className="w-4 h-4" />
-                      <span className="text-xs font-mono font-semibold uppercase text-[#10B981]">Safaricom M-Pesa Integration</span>
+                      <span className="text-xs font-mono font-semibold uppercase">Mobile Money Payment Routing</span>
                     </div>
                     <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                       {project.paymentIntegration}
@@ -538,10 +548,74 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </div>
           </section>
 
+          {/* Related Case Studies & Projects */}
+          <section
+            aria-label="Related case studies"
+            className={`pt-12 sm:pt-16 border-t space-y-8 ${
+              isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
+            }`}
+          >
+            <div className="space-y-2">
+              <p className="chapter-label text-[#1E90FF]">Related Case Studies</p>
+              <h2 className={`text-xl sm:text-2xl font-medium tracking-tight ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
+                Continue exploring engineering stories
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedProjects.map((rel) => (
+                <article
+                  key={rel.id}
+                  className={`flex flex-col justify-between rounded-xl border p-5 transition-all duration-300 group ${
+                    isDark
+                      ? 'bg-[#0E1217]/70 border-white/[0.08] hover:border-[#1E90FF]/50'
+                      : 'bg-white border-black/[0.08] hover:border-[#1E90FF]/50 hover:shadow-sm'
+                  }`}
+                >
+                  <div className="space-y-3">
+                    <div className="overflow-hidden rounded-lg aspect-[16/10] bg-slate-200 dark:bg-[#111419]">
+                      <LazyImage
+                        src={rel.image}
+                        alt={rel.imageAlt}
+                        fallbackLabel={rel.title}
+                        isDark={isDark}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <span className="text-[10px] font-mono tracking-wider uppercase text-[#1E90FF]">
+                      {rel.category}
+                    </span>
+                    <h3 className={`text-base font-medium ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
+                      {rel.title}
+                    </h3>
+                    <p className={`text-xs line-clamp-2 leading-relaxed ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`}>
+                      {rel.summary}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 mt-4 border-t border-white/10 dark:border-white/10 flex items-center justify-between">
+                    <span className="text-[10px] font-mono opacity-70">
+                      {rel.stack.slice(0, 2).join(' · ')}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => onSelectProject(rel)}
+                      data-cursor="EXPLORE"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[#1E90FF] hover:underline"
+                    >
+                      <span>Explore</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
           {/* Project Story Switcher */}
           <nav
             aria-label="Navigate between project stories"
-            className={`pt-10 border-t flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6 ${
+            className={`pt-8 border-t flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6 ${
               isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
             }`}
           >

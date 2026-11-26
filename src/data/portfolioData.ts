@@ -170,6 +170,22 @@ export const PROJECTS: Project[] = [
       'Establish a focused web engineering brand centered on clarity, mobile usability, and business utility—treating every website as an operational tool rather than digital decoration.',
     approach:
       'I structure engagements around clear information hierarchy: understanding what a visitor needs within five seconds, designing mobile-first responsive layouts with Tailwind CSS, and keeping performance fast with lightweight frontend code.',
+    designProcess:
+      'Conducted interviews with small business owners to identify high-dropoff points on their existing sites. Wireframed mobile-first viewports emphasizing 48px+ touch targets, instant service overviews, and direct one-tap WhatsApp contact buttons instead of lengthy contact forms.',
+    frontendArchitecture:
+      'Built with React and Tailwind CSS v4 design tokens. Optimized critical rendering path with zero layout-shift font loading, responsive WebP image delivery with blurred SVG placeholders, and strict component modularity across hero, service cards, proof points, and action triggers.',
+    backendArchitecture:
+      'Lightweight serverless inquiry API built with Node.js. Enforces rate-limiting to prevent spam, validates contact payloads with strict regex, and dispatches instant SMS and email notifications to the business owner.',
+    databaseDesign:
+      'PostgreSQL schema storing client inquiry logs (InquiryId, ClientName, Phone, ServiceRequested, CreatedAt, Status: NEW | CONTACTED | CONVERTED) enabling conversion analytics over time.',
+    apiIntegration:
+      'Deep integration with WhatsApp Click-to-Chat API pre-filling customized service inquiries, transactional email routing via Resend API, and lightweight privacy-respecting client analytics.',
+    futureImprovements: [
+      'Implement an automated quote generator allowing prospective clients to estimate web project costs in real time',
+      'Add client portal dashboard for tracking website maintenance requests and hosting uptime',
+      'Integrate multi-currency pricing toggles (KES / USD) for international clientele',
+      'Automate WhatsApp notification webhooks for instant team lead dispatch',
+    ],
     challenges: [
       'Translating unstructured business descriptions into concise, trustworthy web copy and clear user journeys.',
       'Balancing visual distinction with fast page loads on mobile data connections.',
@@ -206,6 +222,21 @@ export const PROJECTS: Project[] = [
       'Prototype a clean, fast-loading web architecture with structured service breakdowns and low-friction inquiry workflows.',
     approach:
       'Built with semantic HTML landmarks, responsive grid patterns, and validated inquiry state management so visitors can inspect services and reach out cleanly from any viewport.',
+    designProcess:
+      'Analyzed customer friction points across consulting, contracting, and studio websites. Replaced bulky 10-field contact forms with a progressive three-step inquiry flow that lets visitors pick a service tier, choose a timeline, and input contact details in under 30 seconds.',
+    frontendArchitecture:
+      'Engineered with React 19, TypeScript, and Tailwind CSS. Implemented composable UI blocks (ServiceMatrix, PricingCalculator, InquiryModal) with accessible ARIA tabs, keyboard navigation support, and zero third-party UI library bloat.',
+    backendArchitecture:
+      'Express REST API routing inquiry submissions through Zod schema validation middleware. Enforces rate-limiting via IP hashing and dispatches structured JSON payloads to webhook endpoints.',
+    databaseDesign:
+      'PostgreSQL schema tracking service packages (PackageId, TierName, Deliverables, BasePriceKES) linked to customer inquiry submissions and project status tracking.',
+    apiIntegration:
+      'REST endpoints for retrieving live service availability (/api/services), calculating estimated delivery timelines (/api/estimates), and submitting verified inquiry intents.',
+    futureImprovements: [
+      'Add live interactive pricing calculator based on deliverable selections',
+      'Integrate automated booking slots synced with Google Calendar and Cal.com API',
+      'Support dynamic proposal generation exporting branded client PDF scopes of work',
+    ],
     challenges: [
       'Keeping the layout disciplined and scannable without overwhelming first-time visitors.',
       'Ensuring form validation and feedback feel immediate and accessible without heavy libraries.',
@@ -235,6 +266,24 @@ export const PROJECTS: Project[] = [
       'Isolate the payment lifecycle into a clean backend service layer that separates payment initiation from callback verification and order fulfillment.',
     approach:
       'Implemented middleware for Daraja bearer tokens, structured database transaction logging via Prisma, and explicit pending/completed/failed status transitions.',
+    designProcess:
+      'Mapped the complete Safaricom mobile-money payment state machine onto an asynchronous state transition diagram. Designed fallback flows for user PIN timeouts, cancelled prompts, and network drops before writing production code.',
+    frontendArchitecture:
+      'Lightweight React checkout client modal providing real-time visual feedback: animated phone illustration, active 60-second polling countdown, and instant resolution states (Check your phone, Enter PIN, Payment Verified).',
+    backendArchitecture:
+      'Modular Node.js and Express architecture with separate DarajaAuthService (handling OAuth consumer key/secret with caching buffer), StkService (building base64 password from ShortCode + PassKey + Timestamp), and CallbackService (webhook processing).',
+    databaseDesign:
+      'PostgreSQL relational schema managed with Prisma ORM: Transaction model with CheckoutRequestID (unique index), MerchantRequestID, ResultCode, ResultDesc, MpesaReceiptNumber, Amount, PhoneNumber, and status enum (PENDING, SUCCESS, FAILED, TIMEOUT).',
+    apiIntegration:
+      'Endpoints: POST /api/mpesa/stkpush (initiates SIM prompt), POST /api/mpesa/callback (handles Safaricom webhook confirmation), and GET /api/mpesa/query/:id (active status check for client recovery).',
+    paymentIntegration:
+      'Native Safaricom Daraja 2.0 API integration with cryptographically secure base64 password hashing, Bearer token auto-refresh with 300-second pre-expiry buffer, and idempotent callback handling to prevent duplicate fulfillment.',
+    futureImprovements: [
+      'Implement BullMQ Redis queue for high-volume webhook ingestion and retry resilience',
+      'Add automated SMS receipt delivery via Africa’s Talking API',
+      'Support C2B (Customer to Business) Paybill validation and confirmation URLs',
+      'Implement automated B2C payout integration for merchant withdrawals',
+    ],
     challenges: [
       'Testing webhook payloads cleanly during local development before production deployment.',
       'Preventing inconsistent database state when users cancel or time out on the STK prompt.',

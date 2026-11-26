@@ -16,10 +16,10 @@ type AccentColor = {
 
 const ACCENTS: AccentColor[] = [
   { name: 'DodgerBlue', hex: '#1E90FF', twClass: 'bg-[#1E90FF]' },
-  { name: 'Emerald', hex: '#10B981', twClass: 'bg-[#10B981]' },
-  { name: 'Ruby', hex: '#EF4444', twClass: 'bg-[#EF4444]' },
-  { name: 'Violet', hex: '#8B5CF6', twClass: 'bg-[#8B5CF6]' },
-  { name: 'Amber', hex: '#F59E0B', twClass: 'bg-[#F59E0B]' },
+  { name: 'Deep Azure', hex: '#0066CC', twClass: 'bg-[#0066CC]' },
+  { name: 'Sky Focus', hex: '#38BDF8', twClass: 'bg-[#38BDF8]' },
+  { name: 'Slate Mono', hex: '#94A3B8', twClass: 'bg-[#94A3B8]' },
+  { name: 'Pure White', hex: '#FFFFFF', twClass: 'bg-white' },
 ];
 
 type SpeedOption = {

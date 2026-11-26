@@ -5,6 +5,7 @@
 
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { AnimatePresence, MotionConfig } from 'motion/react';
+import { FadedCodeBackground } from './components/FadedCodeBackground';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { GlobalPointerLight } from './components/GlobalPointerLight';
 import { HeroExperience } from './components/HeroExperience';
@@ -95,10 +96,11 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <SeoHead theme={theme} activeProject={activeProject} />
       <div
-        className={`min-h-screen transition-colors duration-300 ${
+        className={`min-h-screen transition-colors duration-300 relative ${
           isDark ? 'bg-[#0B0D10] text-[#F5F5F5]' : 'bg-white text-[#0B0D10]'
         }`}
       >
+        <FadedCodeBackground theme={theme} />
         <Navigation
           theme={theme}
           onToggleTheme={toggleTheme}

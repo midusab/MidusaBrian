@@ -252,7 +252,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true, amount: 0.8 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative h-[2px] w-[120%] origin-left bg-gradient-to-r from-[#1E90FF] via-[#EF4444]/80 via-[#10B981]/80 to-transparent"
+          className="relative h-[2px] w-[120%] origin-left bg-gradient-to-r from-[#1E90FF] via-[#1E90FF]/60 to-transparent"
         />
       </div>
     </section>
