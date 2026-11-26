@@ -242,14 +242,8 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </div>
           </header>
 
-          {/* Continuous Narrative Chapters */}
-          
-          {/* Chapter 1: The Problem & The Product Idea */}
+          {/* The Problem & The Product Idea */}
           <section aria-label="Problem and Vision" className="space-y-6">
-            <div className="flex items-center gap-2 text-[#1E90FF]">
-              <span className="text-xs font-mono uppercase tracking-widest font-semibold">Chapter 01</span>
-              <span className="w-8 h-[1px] bg-[#1E90FF]" />
-            </div>
             <h2 className={`text-2xl sm:text-3xl font-medium tracking-tight ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
               The Problem &amp; The Concept
             </h2>
@@ -291,13 +285,9 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </div>
           </section>
 
-          {/* Chapter 2: Design Process */}
+          {/* Design Process */}
           {project.designProcess && (
             <section aria-label="Design Process" className="space-y-6 pt-8 border-t border-white/10 dark:border-white/10">
-              <div className="flex items-center gap-2 text-[#1E90FF]">
-                <span className="text-xs font-mono uppercase tracking-widest font-semibold">Chapter 02</span>
-                <span className="w-8 h-[1px] bg-[#1E90FF]" />
-              </div>
               <h2 className={`text-2xl sm:text-3xl font-medium tracking-tight ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
                 Human-Centered Design Process
               </h2>
@@ -317,12 +307,8 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </section>
           )}
 
-          {/* Chapter 3: Frontend & Backend Architecture */}
+          {/* Frontend & Backend Architecture */}
           <section aria-label="System Architecture" className="space-y-6 pt-8 border-t border-white/10 dark:border-white/10">
-            <div className="flex items-center gap-2 text-[#1E90FF]">
-              <span className="text-xs font-mono uppercase tracking-widest font-semibold">Chapter 03</span>
-              <span className="w-8 h-[1px] bg-[#1E90FF]" />
-            </div>
             <h2 className={`text-2xl sm:text-3xl font-medium tracking-tight ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
               Software Architecture &amp; Data Pipeline
             </h2>
@@ -389,13 +375,9 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             )}
           </section>
 
-          {/* Chapter 4: Database Design & Relational Schema */}
+          {/* Database Design & Relational Schema */}
           {project.databaseDesign && (
             <section aria-label="Database Design" className="space-y-6 pt-8 border-t border-white/10 dark:border-white/10">
-              <div className="flex items-center gap-2 text-[#1E90FF]">
-                <span className="text-xs font-mono uppercase tracking-widest font-semibold">Chapter 04</span>
-                <span className="w-8 h-[1px] bg-[#1E90FF]" />
-              </div>
               <h2 className={`text-2xl sm:text-3xl font-medium tracking-tight ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
                 Database Schema &amp; Storage Strategy
               </h2>
@@ -415,13 +397,9 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </section>
           )}
 
-          {/* Chapter 5: API Integration & Payment Routing */}
+          {/* API Integration & Payment Routing */}
           {(project.apiIntegration || project.paymentIntegration) && (
             <section aria-label="Payments and APIs" className="space-y-6 pt-8 border-t border-white/10 dark:border-white/10">
-              <div className="flex items-center gap-2 text-[#1E90FF]">
-                <span className="text-xs font-mono uppercase tracking-widest font-semibold">Chapter 05</span>
-                <span className="w-8 h-[1px] bg-[#1E90FF]" />
-              </div>
               <h2 className={`text-2xl sm:text-3xl font-medium tracking-tight ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
                 API Contracts &amp; Integration Architecture
               </h2>
@@ -462,12 +440,8 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </section>
           )}
 
-          {/* Chapter 6: Challenges & Solutions */}
+          {/* Challenges & Solutions */}
           <section aria-label="Challenges and Solutions" className="space-y-6 pt-8 border-t border-white/10 dark:border-white/10">
-            <div className="flex items-center gap-2 text-[#1E90FF]">
-              <span className="text-xs font-mono uppercase tracking-widest font-semibold">Chapter 06</span>
-              <span className="w-8 h-[1px] bg-[#1E90FF]" />
-            </div>
             <h2 className={`text-2xl sm:text-3xl font-medium tracking-tight ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
               Challenges Faced &amp; Engineering Solutions
             </h2>
@@ -479,10 +453,8 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             >
               <div className="space-y-4">
                 {project.challenges.map((challenge, idx) => (
-                  <div key={idx} className="flex items-start gap-3.5">
-                    <span className="w-6 h-6 rounded-md bg-[#1E90FF]/10 text-[#1E90FF] flex items-center justify-center shrink-0 text-xs font-mono font-medium">
-                      0{idx + 1}
-                    </span>
+                  <div key={idx} className="flex items-start gap-3">
+                    <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#1E90FF] shrink-0" />
                     <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                       {challenge}
                     </p>
@@ -492,12 +464,8 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
             </div>
           </section>
 
-          {/* Chapter 7: Lessons Learned & Future Roadmap */}
+          {/* Lessons Learned & Future Roadmap */}
           <section aria-label="Lessons and Future Roadmap" className="space-y-6 pt-8 border-t border-white/10 dark:border-white/10">
-            <div className="flex items-center gap-2 text-[#1E90FF]">
-              <span className="text-xs font-mono uppercase tracking-widest font-semibold">Chapter 07</span>
-              <span className="w-8 h-[1px] bg-[#1E90FF]" />
-            </div>
             <h2 className={`text-2xl sm:text-3xl font-medium tracking-tight ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
               Lessons Learned &amp; Future Improvements
             </h2>
