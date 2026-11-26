@@ -63,6 +63,7 @@ export const StudioProjectCard = forwardRef<HTMLElement, StudioProjectCardProps>
               <div>
                 <motion.button
                   type="button"
+                  data-cursor="CASE STUDY"
                   whileHover={shouldReduceMotion ? undefined : { x: 2 }}
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                   onClick={() => onSelect(project)}

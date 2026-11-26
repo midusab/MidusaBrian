@@ -80,6 +80,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
               <motion.button
                 type="button"
+                data-cursor="MEET"
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onOpenBooking}
@@ -93,6 +94,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <motion.a
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 href={`mailto:${PROFILE.email}`}
+                data-cursor="EMAIL"
                 className={`group inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
                   isDark
                     ? 'border-white/15 bg-white/[0.03] text-[#F5F5F5]'
@@ -105,6 +107,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               <motion.button
                 type="button"
+                data-cursor="RESUME"
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onOpenResume}
@@ -120,6 +123,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               <button
                 type="button"
+                data-cursor="COPY"
                 onClick={handleCopyEmail}
                 className={`inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg border text-xs font-medium transition-colors whitespace-nowrap ${
                   isDark

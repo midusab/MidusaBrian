@@ -39,6 +39,7 @@ export const FlagshipProjectCard = forwardRef<HTMLElement, FlagshipProjectCardPr
           <div
             role="button"
             tabIndex={0}
+            data-cursor="CASE STUDY"
             onClick={() => onSelect(project)}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -88,6 +89,7 @@ export const FlagshipProjectCard = forwardRef<HTMLElement, FlagshipProjectCardPr
               <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
                 <motion.button
                   type="button"
+                  data-cursor="CASE STUDY"
                   whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                   whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                   onClick={() => onSelect(project)}

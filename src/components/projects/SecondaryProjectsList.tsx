@@ -48,6 +48,7 @@ export const SecondaryProjectsList = forwardRef<HTMLDivElement, SecondaryProject
               <div
                 role="button"
                 tabIndex={0}
+                data-cursor="STUDY"
                 onClick={() => onSelect(project)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {

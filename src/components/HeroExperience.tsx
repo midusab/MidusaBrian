@@ -113,6 +113,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
               <motion.button
                 type="button"
+                data-cursor="DISCOVER"
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onScrollNext}
@@ -123,6 +124,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
               </motion.button>
               <motion.button
                 type="button"
+                data-cursor="PROJECTS"
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onJumpToProjects}

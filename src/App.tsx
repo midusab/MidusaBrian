@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { AnimatePresence, MotionConfig } from 'motion/react';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { GlobalPointerLight } from './components/GlobalPointerLight';
@@ -11,6 +11,7 @@ import { HeroExperience } from './components/HeroExperience';
 import { Navigation } from './components/Navigation';
 import { ScrollProgress } from './components/ScrollProgress';
 import { SeoHead } from './components/SeoHead';
+import { PROJECTS } from './data/portfolioData';
 import { useTheme } from './hooks/useTheme';
 import { Project } from './types/portfolio';
 
@@ -23,11 +24,23 @@ const JourneyTimeline = lazy(() =>
 const ProjectShowcase = lazy(() =>
   import('./components/ProjectShowcase').then((m) => ({ default: m.ProjectShowcase }))
 );
+const SystemArchitecture = lazy(() =>
+  import('./components/SystemArchitecture').then((m) => ({ default: m.SystemArchitecture }))
+);
+const DeveloperJournal = lazy(() =>
+  import('./components/DeveloperJournal').then((m) => ({ default: m.DeveloperJournal }))
+);
+const InteractivePlayground = lazy(() =>
+  import('./components/InteractivePlayground').then((m) => ({ default: m.InteractivePlayground }))
+);
 const MindsetSection = lazy(() =>
   import('./components/MindsetSection').then((m) => ({ default: m.MindsetSection }))
 );
 const SkillsEcosystem = lazy(() =>
   import('./components/SkillsEcosystem').then((m) => ({ default: m.SkillsEcosystem }))
+);
+const CareerSection = lazy(() =>
+  import('./components/CareerSection').then((m) => ({ default: m.CareerSection }))
 );
 const ContactSection = lazy(() =>
   import('./components/ContactSection').then((m) => ({ default: m.ContactSection }))
@@ -41,17 +54,40 @@ const MeetingBookingModal = lazy(() =>
 const ResumeModal = lazy(() =>
   import('./components/ResumeModal').then((m) => ({ default: m.ResumeModal }))
 );
+const CommandPalette = lazy(() =>
+  import('./components/CommandPalette').then((m) => ({ default: m.CommandPalette }))
+);
 
 export default function App() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const { theme, isDark, toggleTheme } = useTheme();
+
+  // Global keyboard shortcut for Command Palette (⌘K / Ctrl+K)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const jumpToChapter = (id: string) => {
     const target = document.getElementById(id);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleOpenMidusaCaseStudy = () => {
+    const midusa = PROJECTS.find((p) => p.id === 'midusa-elibrary');
+    if (midusa) {
+      setActiveProject(midusa);
     }
   };
 
@@ -68,6 +104,7 @@ export default function App() {
           onToggleTheme={toggleTheme}
           onJumpToChapter={jumpToChapter}
           onOpenBooking={() => setBookingOpen(true)}
+          onOpenCommandPalette={() => setCommandPaletteOpen(true)}
         />
         <ScrollProgress theme={theme} />
         <GlobalPointerLight theme={theme} />
@@ -88,19 +125,41 @@ export default function App() {
               />
             }
           >
+            {/* Chapter 02: About */}
             <StoryDiscovery
               theme={theme}
               onExploreEvolution={() => jumpToChapter('chapter-learning')}
             />
 
+            {/* Chapter 03: Journey Timeline */}
             <JourneyTimeline theme={theme} />
 
+            {/* Chapter 04: Project Showcase */}
             <ProjectShowcase theme={theme} onSelectProject={setActiveProject} />
 
+            {/* Chapter 05: System Architecture & M-Pesa Flow */}
+            <SystemArchitecture theme={theme} />
+
+            {/* Chapter 06: Developer Journal (Things I Learned Along the Way) */}
+            <DeveloperJournal theme={theme} />
+
+            {/* Chapter 07: Interactive Coding Playground */}
+            <InteractivePlayground theme={theme} />
+
+            {/* Chapter 08: Engineering Mindset */}
             <MindsetSection theme={theme} />
 
+            {/* Chapter 09: Skills & Technical Foundation */}
             <SkillsEcosystem theme={theme} />
 
+            {/* Chapter 10: Career & Collaboration Opportunities */}
+            <CareerSection
+              theme={theme}
+              onOpenResume={() => setResumeOpen(true)}
+              onOpenBooking={() => setBookingOpen(true)}
+            />
+
+            {/* Chapter 11: Contact */}
             <ContactSection
               theme={theme}
               onOpenResume={() => setResumeOpen(true)}
@@ -132,6 +191,16 @@ export default function App() {
           </AnimatePresence>
 
           {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
+
+          <CommandPalette
+            isOpen={commandPaletteOpen}
+            onClose={() => setCommandPaletteOpen(false)}
+            theme={theme}
+            onToggleTheme={toggleTheme}
+            onJumpToChapter={jumpToChapter}
+            onOpenBooking={() => setBookingOpen(true)}
+            onOpenMidusaCaseStudy={handleOpenMidusaCaseStudy}
+          />
         </Suspense>
       </div>
     </MotionConfig>
