@@ -58,9 +58,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   const isDark = theme === 'dark';
 
   useModalEscapeAndScrollLock({
-    isOpen,
     onClose,
-    restoreFocusRef: undefined,
   });
 
   const commands: CommandItem[] = useMemo(() => [

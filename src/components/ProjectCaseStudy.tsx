@@ -58,7 +58,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
 
   useModalEscapeAndScrollLock({
     onClose,
-    onKeyDownExtra,
+    onKeyDownExtra: handleKeyDownExtra,
   });
 
   const isMidusaElibrary = project.id === 'midusa-elibrary';
