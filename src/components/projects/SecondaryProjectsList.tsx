@@ -46,8 +46,18 @@ export const SecondaryProjectsList = forwardRef<HTMLDivElement, SecondaryProject
               className="py-10 sm:py-12 md:py-16 first:pt-0 last:pb-0 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-stretch"
             >
               <div
-                className={`lg:col-span-5 overflow-hidden rounded-2xl aspect-[4/3] sm:aspect-[16/10] ${
-                  isDark ? 'bg-[#111419]' : 'bg-slate-200'
+                role="button"
+                tabIndex={0}
+                onClick={() => onSelect(project)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onSelect(project);
+                  }
+                }}
+                aria-label={`Explore case study for ${project.title}`}
+                className={`lg:col-span-5 overflow-hidden rounded-2xl aspect-[4/3] sm:aspect-[16/10] border transition-all duration-500 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#1E90FF] ${
+                  isDark ? 'bg-[#0E1217] border-white/[0.06] hover:border-white/20' : 'bg-slate-200 border-black/[0.08] hover:border-black/20'
                 }`}
               >
                 <LazyImage
@@ -55,7 +65,7 @@ export const SecondaryProjectsList = forwardRef<HTMLDivElement, SecondaryProject
                   alt={project.imageAlt}
                   fallbackLabel={project.title}
                   isDark={isDark}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
+                  className="w-full h-full object-cover picture-camouflage-project transition-transform duration-700 ease-out hover:scale-[1.05]"
                 />
               </div>
 

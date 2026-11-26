@@ -100,22 +100,35 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({
         >
           <figure className="h-full flex flex-col justify-between gap-3">
             <div
-              className={`relative flex-1 aspect-[4/5] sm:aspect-[16/11] lg:aspect-auto lg:min-h-[460px] overflow-hidden rounded-2xl ${
-                isDark ? 'bg-[#111419]' : 'bg-slate-200'
+              className={`relative flex-1 aspect-[4/5] sm:aspect-[16/11] lg:aspect-auto lg:min-h-[460px] overflow-hidden rounded-2xl border transition-all duration-500 group ${
+                isDark ? 'bg-[#0E1217] border-white/[0.04]' : 'bg-slate-200 border-black/10'
               }`}
             >
               <LazyImage
-                src="/assets/aistudio/25122_bbef501b.jpg"
+                src="/images/developer/story-portrait.jpg"
                 alt="Monochrome studio portrait of Midusa"
                 isDark={isDark}
                 motionStyle={{ scale: imageScale, y: imageY }}
-                className="w-full h-full object-cover object-[50%_14%]"
+                className="w-full h-full object-cover object-[50%_14%] picture-camouflage-portrait transition-transform duration-700 ease-out hover:scale-[1.05]"
               />
               {isDark && (
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B0D10]/75 via-transparent to-transparent"
-                />
+                <>
+                  {/* Camouflage radial edge feathering matching #0E1217 */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,transparent_38%,rgba(14,18,23,0.5)_72%,rgba(14,18,23,0.96)_100%)] z-10 transition-opacity duration-700 group-hover:opacity-85"
+                  />
+                  {/* Bottom dissolution gradient */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0E1217] via-[#0E1217]/75 to-transparent z-10"
+                  />
+                  {/* Top subtle fade */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#0E1217]/50 to-transparent z-10"
+                  />
+                </>
               )}
             </div>
           </figure>

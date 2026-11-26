@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowDown, ArrowRight, Sparkles } from 'lucide-react';
 import {
   motion,
   useReducedMotion,
@@ -31,8 +31,10 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
   });
 
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 26 });
-  const headlineY = useTransform(smoothProgress, [0, 0.85], [0, -48]);
-  const headlineOpacity = useTransform(smoothProgress, [0, 0.72], [1, 0.14]);
+  const headlineY = useTransform(smoothProgress, [0, 0.85], [0, -52]);
+  const headlineOpacity = useTransform(smoothProgress, [0, 0.72], [1, 0.12]);
+  const ambientBgY = useTransform(smoothProgress, [0, 1], [0, 80]);
+  const floatingAccentY = useTransform(smoothProgress, [0, 1], [0, -70]);
 
   return (
     <section
@@ -44,6 +46,38 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
       }`}
     >
       {isDark && <GrainOverlay />}
+
+      {/* Subtle chromatic ambient background glow with parallax depth */}
+      <motion.div
+        style={shouldReduceMotion ? undefined : { y: ambientBgY }}
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 right-0 lg:right-1/4 w-[420px] sm:w-[600px] h-[420px] sm:h-[600px] rounded-full filter blur-[100px] opacity-30 will-change-transform"
+      >
+        <div
+          className="w-full h-full rounded-full"
+          style={{
+            background: isDark
+              ? 'radial-gradient(circle, rgba(30,144,255,0.25) 0%, rgba(239,68,68,0.14) 40%, rgba(16,185,129,0.12) 70%, transparent 85%)'
+              : 'radial-gradient(circle, rgba(30,144,255,0.18) 0%, rgba(239,68,68,0.08) 40%, rgba(16,185,129,0.08) 70%, transparent 85%)',
+          }}
+        />
+      </motion.div>
+
+      {/* Floating dynamic accent geometry */}
+      <motion.div
+        style={shouldReduceMotion ? undefined : { y: floatingAccentY }}
+        aria-hidden="true"
+        className="pointer-events-none absolute top-1/3 left-6 lg:left-20 w-48 h-48 rounded-full filter blur-[60px] opacity-20 will-change-transform"
+      >
+        <div
+          className="w-full h-full rounded-full"
+          style={{
+            background: isDark
+              ? 'radial-gradient(circle, rgba(16,185,129,0.3) 0%, rgba(30,144,255,0.2) 60%, transparent 80%)'
+              : 'radial-gradient(circle, rgba(16,185,129,0.18) 0%, rgba(30,144,255,0.12) 60%, transparent 80%)',
+          }}
+        />
+      </motion.div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px]" />
 
@@ -82,7 +116,7 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
                 whileHover={shouldReduceMotion ? undefined : { y: -1 }}
                 whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
                 onClick={onScrollNext}
-                className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] transition-colors duration-150 whitespace-nowrap"
+                className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-lg bg-[#1E90FF] text-white text-sm font-medium hover:bg-[#1677D9] transition-colors duration-150 whitespace-nowrap shadow-[0_4px_20px_-4px_rgba(30,144,255,0.36)]"
               >
                 <span>Begin the story</span>
                 <ArrowDown className="w-4 h-4 transition-transform duration-200 group-hover:translate-y-0.5" />
@@ -106,7 +140,13 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
         </div>
       </motion.div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1440px]" />
+      {/* Bottom chapter demarcation line with subtle chromatic gradient */}
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-4">
+        <div
+          aria-hidden="true"
+          className="h-px w-full bg-gradient-to-r from-transparent via-[#1E90FF]/35 to-transparent"
+        />
+      </div>
     </section>
   );
 };

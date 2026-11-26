@@ -15,6 +15,17 @@ export interface ProjectArchitectureStep {
 
 export type ProjectCategory = 'Platform' | 'Brand & Studio' | 'Client & Demo';
 
+export interface ProjectCaseStudyChapter {
+  title: string;
+  subtitle?: string;
+  content: string;
+  codeSnippet?: {
+    language: string;
+    code: string;
+    caption?: string;
+  };
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -33,6 +44,13 @@ export interface Project {
   learned: string;
   outcome: string;
   architecture?: ProjectArchitectureStep[];
+  designProcess?: string;
+  frontendArchitecture?: string;
+  backendArchitecture?: string;
+  databaseDesign?: string;
+  apiIntegration?: string;
+  paymentIntegration?: string;
+  futureImprovements?: string[];
   liveUrl?: string;
   repoUrl?: string;
 }
@@ -52,4 +70,35 @@ export interface ChapterLink {
   id: string;
   index: string;
   label: string;
+}
+
+export interface JournalEntry {
+  id: string;
+  date: string;
+  title: string;
+  tag: string;
+  problem: string;
+  discovery: string;
+  solution: string;
+  improvement: string;
+}
+
+export interface ArchitectureNode {
+  id: string;
+  name: string;
+  category: 'Frontend' | 'Backend' | 'Database' | 'Storage' | 'Payments' | 'Deployment';
+  role: string;
+  tech: string;
+  details: string;
+  connections: string[];
+}
+
+export interface PaymentFlowStep {
+  id: string;
+  step: string;
+  actor: string;
+  title: string;
+  action: string;
+  technicalDetails: string;
+  status: 'client' | 'network' | 'webhook' | 'db' | 'cloud';
 }

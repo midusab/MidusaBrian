@@ -89,17 +89,36 @@ export const MindsetSection: React.FC<MindsetSectionProps> = ({ theme }) => {
         >
           <figure className="h-full flex flex-col justify-between gap-3">
             <div
-              className={`flex-1 aspect-[4/5] sm:aspect-[16/11] lg:aspect-auto lg:min-h-[420px] overflow-hidden rounded-2xl ${
-                isDark ? 'bg-[#111419]' : 'bg-[#E5E7EB]'
+              className={`relative flex-1 aspect-[4/5] sm:aspect-[16/11] lg:aspect-auto lg:min-h-[420px] overflow-hidden rounded-2xl border transition-all duration-500 group ${
+                isDark ? 'bg-[#0B0D10] border-white/[0.04]' : 'bg-[#E5E7EB] border-black/10'
               }`}
             >
               <LazyImage
-                src="/assets/aistudio/37321_2c38d586.jpg"
+                src="/images/developer/mindset-portrait.jpg"
                 alt="Portrait of Midusa outdoors"
                 isDark={isDark}
                 motionStyle={{ y: portraitY, scale: 1.04 }}
-                className="w-full h-full object-cover object-top transition-transform duration-700 ease-out hover:scale-[1.06]"
+                className="w-full h-full object-cover object-top picture-camouflage-portrait transition-transform duration-700 ease-out hover:scale-[1.06]"
               />
+              {isDark && (
+                <>
+                  {/* Camouflage radial edge feathering matching #0B0D10 */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,transparent_38%,rgba(11,13,16,0.48)_72%,rgba(11,13,16,0.96)_100%)] z-10 transition-opacity duration-700 group-hover:opacity-85"
+                  />
+                  {/* Bottom dissolution gradient */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0B0D10] via-[#0B0D10]/75 to-transparent z-10"
+                  />
+                  {/* Top subtle fade */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#0B0D10]/50 to-transparent z-10"
+                  />
+                </>
+              )}
             </div>
           </figure>
         </motion.div>

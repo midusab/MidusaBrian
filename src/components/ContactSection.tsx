@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ArrowUpRight, Calendar, Check, Copy, FileText, Mail } from 'lucide-react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { PROFILE } from '../data/portfolioData';
 import { ThemeMode } from '../types/portfolio';
 import { GrainOverlay } from './GrainOverlay';
@@ -18,8 +18,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   onOpenBooking,
 }) => {
   const [copied, setCopied] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const isDark = theme === 'dark';
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 26 });
+  const portraitY = useTransform(smoothProgress, [0, 1], [-20, 20]);
+  const portraitScale = useTransform(smoothProgress, [0, 0.5, 1], [1.03, 1.07, 1.03]);
 
   const handleCopyEmail = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -34,6 +44,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
   return (
     <section
+      ref={sectionRef}
       id="chapter-future"
       aria-labelledby="future-heading"
       className={`relative scroll-mt-16 min-h-[100svh] flex flex-col justify-between pt-16 sm:pt-24 pb-0 px-4 sm:px-8 md:px-12 lg:px-16 border-t overflow-hidden transition-colors duration-300 ${
@@ -160,6 +171,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 <ArrowUpRight className="w-4 h-4 text-[#1E90FF] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
 
+              <a
+                href={PROFILE.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group inline-flex items-center gap-1.5 hover:text-[#25D366] transition-colors ${
+                  isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'
+                }`}
+              >
+                <span>WhatsApp ({PROFILE.phone})</span>
+                <ArrowUpRight className="w-4 h-4 text-[#25D366] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+
               <span className={`tech-meta ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
                 Open to software engineering internships, junior roles &amp; product collaborations
               </span>
@@ -175,16 +198,43 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           >
             <figure className="space-y-3 max-w-sm sm:max-w-md mx-auto lg:ml-auto lg:mr-0">
               <div
-                className={`overflow-hidden rounded-2xl aspect-[4/5] ${
-                  isDark ? 'bg-[#111419]' : 'bg-slate-100'
+                className={`relative overflow-hidden rounded-2xl aspect-[4/5] border transition-all duration-500 group ${
+                  isDark
+                    ? 'bg-[#0B0D10] border-white/[0.05]'
+                    : 'bg-slate-100 border-black/10'
                 }`}
               >
                 <LazyImage
                   src="/assets/aistudio/23474_cc099930.jpg"
                   alt="Studio portrait of Midusa"
                   isDark={isDark}
-                  className="w-full h-full object-cover object-[50%_14%] scale-[1.09] transition-transform duration-700 ease-out hover:scale-[1.12]"
+                  motionStyle={{ y: portraitY, scale: portraitScale }}
+                  className="w-full h-full object-cover object-[50%_14%] picture-camouflage-portrait transition-transform duration-700 ease-out hover:scale-[1.07]"
                 />
+                {isDark ? (
+                  <>
+                    {/* Feathered radial edge camouflage melting portrait into #0B0D10 */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,transparent_36%,rgba(11,13,16,0.52)_70%,rgba(11,13,16,0.96)_100%)] z-10 transition-opacity duration-700 group-hover:opacity-85"
+                    />
+                    {/* Deep bottom dissolution gradient */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#0B0D10] via-[#0B0D10]/75 to-transparent z-10"
+                    />
+                    {/* Subtle top edge atmosphere */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#0B0D10]/55 to-transparent z-10"
+                    />
+                  </>
+                ) : (
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-100/70 via-transparent to-transparent z-10"
+                  />
+                )}
               </div>
             </figure>
           </motion.div>
@@ -198,7 +248,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true, amount: 0.8 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative h-px w-[120%] origin-left bg-gradient-to-r from-[#1E90FF] via-[#1E90FF]/60 to-transparent"
+          className="relative h-[2px] w-[120%] origin-left bg-gradient-to-r from-[#1E90FF] via-[#EF4444]/80 via-[#10B981]/80 to-transparent"
         />
       </div>
     </section>

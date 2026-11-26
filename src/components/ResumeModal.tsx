@@ -102,7 +102,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
           <header className="border-b border-slate-200 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="flex items-center gap-3.5 sm:gap-4">
               <img
-                src="/assets/aistudio/37321_2c38d586.jpg"
+                src="/images/developer/mindset-portrait.jpg"
                 alt="Portrait of Midusa"
                 loading="lazy"
                 decoding="async"

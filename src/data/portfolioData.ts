@@ -21,6 +21,8 @@ export const PROFILE = {
   role: 'Junior software engineer & computer science student',
   location: 'Kenya',
   email: 'midusab@gmail.com',
+  phone: '0112478220',
+  whatsapp: 'https://wa.me/254112478220',
   github: 'https://github.com/midusab',
   linkedin: 'https://www.linkedin.com/in/midusab',
 };
@@ -94,7 +96,7 @@ export const PROJECTS: Project[] = [
     subtitle: 'Digital Ebook Bookstore',
     category: 'Platform',
     featured: true,
-    image: '/src/assets/images/midusa_elibrary_scene_1795718114217.jpg',
+    image: '/images/projects/elibrary-platform.jpg',
     imageAlt:
       'MidusaElibrary digital bookstore interface displayed on a laptop and e-reader tablet',
     summary:
@@ -133,7 +135,7 @@ export const PROJECTS: Project[] = [
     subtitle: 'Web Development Practice',
     category: 'Brand & Studio',
     featured: true,
-    image: '/src/assets/images/midusa_digital_scene_1795718114752.jpg',
+    image: '/images/projects/digital-solutions.jpg',
     imageAlt:
       'Responsive business website displayed across a desktop monitor and mobile phone by Midusa Digital Solutions',
     summary:
@@ -169,7 +171,7 @@ export const PROJECTS: Project[] = [
     subtitle: 'Client & demo architecture',
     category: 'Client & Demo',
     featured: false,
-    image: '/src/assets/images/client_architecture_scene_1795718115376.jpg',
+    image: '/images/projects/service-architecture.jpg',
     imageAlt:
       'Clean editorial business web prototype displayed on a minimalist studio monitor',
     summary:
@@ -199,7 +201,7 @@ export const PROJECTS: Project[] = [
     subtitle: 'Backend payment architecture',
     category: 'Client & Demo',
     featured: false,
-    image: '/src/assets/images/engineering_craft_scene_1795718115538.jpg',
+    image: '/images/projects/daraja-integration.jpg',
     imageAlt: 'Optical glass prism refracting a beam of DodgerBlue light across dark stone',
     summary:
       'A focused Node.js, Express, and PostgreSQL integration pattern for handling OAuth tokens, STK Push initiation, and callback reconciliation.',

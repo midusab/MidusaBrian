@@ -91,6 +91,16 @@
     outline: 2px solid #1E90FF;
     outline-offset: 4px;
   }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href],
+  select:not(:disabled),
+  input[type="button"]:not(:disabled),
+  input[type="submit"]:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
 }
 
 @layer components {
@@ -207,6 +217,38 @@
 
 .animate-blue-line {
   animation: blue-line-flow 4.5s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Picture camouflage to site feel */
+.picture-camouflage-portrait {
+  filter: brightness(0.92) contrast(1.05) saturate(0.90);
+  transition: filter 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.picture-camouflage-portrait:hover {
+  filter: brightness(1) contrast(1.02) saturate(1);
+}
+
+.picture-camouflage-project {
+  filter: brightness(0.94) contrast(1.04) saturate(0.92);
+  transition: filter 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.picture-camouflage-project:hover {
+  filter: brightness(1) contrast(1.01) saturate(1);
 }
 
 @media (prefers-reduced-motion: reduce) {

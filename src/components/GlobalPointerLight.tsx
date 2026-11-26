@@ -25,20 +25,21 @@ export const GlobalPointerLight: React.FC<GlobalPointerLightProps> = ({ theme })
   const targetX = useMotionValue(initialX);
   const targetY = useMotionValue(initialY);
 
-  const smoothX = useSpring(targetX, { stiffness: 105, damping: 24, mass: 0.65 });
-  const smoothY = useSpring(targetY, { stiffness: 105, damping: 24, mass: 0.65 });
+  // Pure DodgerBlue smooth spring tracking
+  const smoothX = useSpring(targetX, { stiffness: 110, damping: 24, mass: 0.65 });
+  const smoothY = useSpring(targetY, { stiffness: 110, damping: 24, mass: 0.65 });
 
   const { scrollY, scrollYProgress } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
   const smoothVelocity = useSpring(scrollVelocity, { stiffness: 140, damping: 28 });
 
-  // Subtle inertial lag and organic orbital drift driven by scroll across the entire document
-  const scrollLagY = useTransform(smoothVelocity, [-2400, 0, 2400], [44, 0, -44]);
-  const scrollWaveX = useTransform(scrollYProgress, (p) => Math.sin(p * Math.PI * 3) * 28);
+  // Subtle inertial lag and organic wave driven by document scroll
+  const scrollLagY = useTransform(smoothVelocity, [-2400, 0, 2400], [36, 0, -36]);
+  const scrollWaveX = useTransform(scrollYProgress, (p) => Math.sin(p * Math.PI * 3) * 22);
   const scrollScale = useTransform(
     smoothVelocity,
     [-2000, 0, 2000],
-    [1.14, 1, 1.14]
+    [1.1, 1, 1.1]
   );
 
   const combinedX = useTransform([smoothX, scrollWaveX], ([x, wave]: number[]) => x + wave);
@@ -103,18 +104,21 @@ export const GlobalPointerLight: React.FC<GlobalPointerLightProps> = ({ theme })
           scale: scrollScale,
         }}
       >
+        {/* Restrained DodgerBlue ambient glow disc */}
         <div
-          className="-translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[440px] sm:h-[440px] lg:w-[560px] lg:h-[560px] rounded-full"
+          className="-translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[480px] lg:h-[480px] rounded-full"
           style={{
             background: isDark
-              ? 'radial-gradient(circle, rgba(30,144,255,0.16) 0%, rgba(30,144,255,0.045) 44%, rgba(11,13,16,0) 74%)'
-              : 'radial-gradient(circle, rgba(30,144,255,0.11) 0%, rgba(30,144,255,0.025) 44%, rgba(255,255,255,0) 74%)',
+              ? 'radial-gradient(circle, rgba(30,144,255,0.13) 0%, rgba(30,144,255,0.035) 45%, rgba(11,13,16,0) 72%)'
+              : 'radial-gradient(circle, rgba(30,144,255,0.09) 0%, rgba(30,144,255,0.02) 45%, rgba(255,255,255,0) 72%)',
           }}
         />
+
+        {/* Refined DodgerBlue focal bead with modest, non-distracting shadow */}
         <div
-          className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#1E90FF]/90"
+          className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#1E90FF]/90"
           style={{
-            boxShadow: '0 0 28px 8px rgba(30, 144, 255, 0.32)',
+            boxShadow: '0 0 16px 3px rgba(30, 144, 255, 0.35)',
           }}
         />
       </motion.div>

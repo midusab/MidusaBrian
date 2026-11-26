@@ -5,6 +5,7 @@
 
 import { Suspense, lazy, useState } from 'react';
 import { AnimatePresence, MotionConfig } from 'motion/react';
+import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { GlobalPointerLight } from './components/GlobalPointerLight';
 import { HeroExperience } from './components/HeroExperience';
 import { Navigation } from './components/Navigation';
@@ -70,6 +71,7 @@ export default function App() {
         />
         <ScrollProgress theme={theme} />
         <GlobalPointerLight theme={theme} />
+        <FloatingWhatsApp theme={theme} phoneNumber="0112478220" />
 
         <main>
           <HeroExperience
