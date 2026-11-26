@@ -85,7 +85,7 @@ export const Navigation: React.FC<NavigationProps> = ({
           ))}
         </nav>
 
-        {/* Zone 3: Theme Toggle + Booking + Contact */}
+        {/* Zone 3: Theme Toggle + Contact + Booking CTA (last) */}
         <div className="flex items-center gap-3 sm:gap-4 shrink-0">
           <button
             type="button"
@@ -102,14 +102,6 @@ export const Navigation: React.FC<NavigationProps> = ({
             {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
 
-          <button
-            type="button"
-            onClick={onOpenBooking}
-            className="hidden sm:inline-flex items-center px-3.5 py-1.5 rounded-lg bg-[#1E90FF] text-white text-xs font-medium whitespace-nowrap shrink-0 hover:bg-[#1677D9] active:scale-[0.98] transition-all duration-150"
-          >
-            Book a meeting
-          </button>
-
           <a
             href="#chapter-future"
             onClick={(e) => handleLinkClick(e, 'chapter-future')}
@@ -121,6 +113,14 @@ export const Navigation: React.FC<NavigationProps> = ({
           >
             Contact
           </a>
+
+          <button
+            type="button"
+            onClick={onOpenBooking}
+            className="hidden sm:inline-flex items-center px-3.5 py-1.5 rounded-lg bg-[#1E90FF] text-white text-xs font-medium whitespace-nowrap shrink-0 hover:bg-[#1677D9] active:scale-[0.98] transition-all duration-150"
+          >
+            Book a meeting
+          </button>
 
           <button
             type="button"
