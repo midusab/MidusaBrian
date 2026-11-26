@@ -94,6 +94,7 @@ export const SecondaryProjectsList = forwardRef<HTMLDivElement, SecondaryProject
                   </span>
                   <motion.button
                     type="button"
+                    data-cursor="CASE STUDY"
                     whileHover={shouldReduceMotion ? undefined : { x: 2 }}
                     onClick={() => onSelect(project)}
                     className={`group inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg border text-xs font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
@@ -102,7 +103,7 @@ export const SecondaryProjectsList = forwardRef<HTMLDivElement, SecondaryProject
                         : 'border-black/15 text-[#0B0D10] bg-white'
                     }`}
                   >
-                    <span>Read case study</span>
+                    <span>Explore complete case study</span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#1E90FF] transition-transform duration-200 group-hover:translate-x-1" />
                   </motion.button>
                 </div>
