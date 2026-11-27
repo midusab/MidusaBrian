@@ -118,21 +118,21 @@ export const GlobalPointerLight: React.FC<GlobalPointerLightProps> = ({ theme })
           scale: scrollScale,
         }}
       >
-        {/* Restrained DodgerBlue ambient glow disc */}
+        {/* Restrained Red ambient glow disc */}
         <div
           className="-translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[480px] lg:h-[480px] rounded-full pointer-events-none"
           style={{
             background: isDark
-              ? 'radial-gradient(circle, rgba(30,144,255,0.13) 0%, rgba(30,144,255,0.035) 45%, rgba(11,13,16,0) 72%)'
-              : 'radial-gradient(circle, rgba(30,144,255,0.09) 0%, rgba(30,144,255,0.02) 45%, rgba(255,255,255,0) 72%)',
+              ? 'radial-gradient(circle, rgba(239,68,68,0.13) 0%, rgba(239,68,68,0.035) 45%, rgba(11,13,16,0) 72%)'
+              : 'radial-gradient(circle, rgba(239,68,68,0.09) 0%, rgba(239,68,68,0.02) 45%, rgba(255,255,255,0) 72%)',
           }}
         />
 
-        {/* Refined DodgerBlue focal bead with modest shadow */}
+        {/* Refined Red focal bead with modest shadow */}
         <div
-          className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#1E90FF] pointer-events-none transition-transform duration-200"
+          className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#EF4444] pointer-events-none transition-transform duration-200"
           style={{
-            boxShadow: '0 0 16px 3px rgba(30, 144, 255, 0.45)',
+            boxShadow: '0 0 16px 3px rgba(239, 68, 68, 0.45)',
           }}
         />
 
@@ -150,12 +150,12 @@ export const GlobalPointerLight: React.FC<GlobalPointerLightProps> = ({ theme })
               <div
                 className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-sans font-semibold tracking-wider uppercase border shadow-lg backdrop-blur-md whitespace-nowrap ${
                   isDark
-                    ? 'bg-[#0B0D10]/95 border-[#1E90FF]/60 text-white shadow-black/80'
-                    : 'bg-white/95 border-[#1E90FF]/60 text-[#0B0D10] shadow-black/10'
+                    ? 'bg-[#0B0D10]/95 border-[#EF4444]/60 text-white shadow-black/80'
+                    : 'bg-white/95 border-[#EF4444]/60 text-[#0B0D10] shadow-black/10'
                 }`}
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#1E90FF] animate-pulse" />
-                <span className="text-[#1E90FF]">{cursorBadge}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444] animate-pulse" />
+                <span className="text-[#EF4444]">{cursorBadge}</span>
               </div>
             </motion.div>
           )}

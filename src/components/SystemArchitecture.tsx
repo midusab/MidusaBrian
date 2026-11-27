@@ -226,15 +226,6 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
                     </p>
                   </div>
                 </div>
-
-                <div
-                  className={`p-3.5 rounded-xl border text-xs ${
-                    isDark ? 'bg-white/[0.02] border-white/[0.06] text-[#9297A1]' : 'bg-slate-50 border-black/[0.06] text-[#525866]'
-                  }`}
-                >
-                  <span className="text-[#1E90FF]">Direct Linkages: </span>
-                  {selectedNode.connections.join(' · ')}
-                </div>
               </div>
             </motion.div>
           ) : (

@@ -152,10 +152,12 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
           {/* Header Story */}
           <header className="space-y-6 sm:space-y-8">
             <div className="space-y-4 max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-medium border border-[#1E90FF]/30 bg-[#1E90FF]/10 text-[#1E90FF]">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>{project.subtitle}</span>
-              </div>
+              {project.subtitle && (
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-medium border border-[#1E90FF]/30 bg-[#1E90FF]/10 text-[#1E90FF]">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>{project.subtitle}</span>
+                </div>
+              )}
               <h1
                 id="case-study-title"
                 className={`editorial-headline text-3xl sm:text-5xl lg:text-6xl ${

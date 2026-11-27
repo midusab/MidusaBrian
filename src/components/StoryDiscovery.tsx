@@ -62,18 +62,10 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({
           </div>
 
           <div
-            className={`pt-6 border-t flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-5 sm:gap-6 ${
+            className={`pt-6 border-t flex items-center justify-end ${
               isDark ? 'border-white/[0.08]' : 'border-black/[0.08]'
             }`}
           >
-            <p
-              className={`text-sm leading-relaxed max-w-[48ch] ${
-                isDark ? 'text-[#9297A1]' : 'text-[#525866]'
-              }`}
-            >
-              Every system I build today traces back to wanting to know why things work—and
-              building tools people can actually rely on.
-            </p>
             <motion.button
               type="button"
               whileHover={shouldReduceMotion ? undefined : { x: 2 }}

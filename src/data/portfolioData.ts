@@ -96,21 +96,21 @@ export const PROJECTS: Project[] = [
   {
     id: 'midusa-elibrary',
     title: 'MidusaElibrary',
-    subtitle: 'Digital Ebook Bookstore',
+    subtitle: '',
     category: 'Platform',
     featured: true,
     image: '/images/projects/elibrary-platform.jpg',
     imageAlt:
-      'MidusaElibrary digital bookstore interface displayed on a laptop and e-reader tablet',
+      'MidusaElibrary interface displayed on a laptop and e-reader tablet',
     summary:
-      'A digital bookstore built to make ebooks accessible online through local mobile-money checkout and automated delivery.',
+      'A web platform built to make ebooks accessible online through local mobile-money checkout and automated delivery.',
     narrative:
       'I built MidusaElibrary to solve a practical gap: readers wanted an effortless way to buy digital books online without international card barriers. Connecting a React storefront to a Node.js and Express backend, I modeled the catalog and orders in PostgreSQL with Prisma, integrated M-Pesa Daraja STK Push payments, and wired Supabase storage for protected digital delivery.',
     stack: ['React', 'Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'Supabase', 'M-Pesa Daraja'],
     problem:
       'Accessing and paying for digital books locally often breaks down at checkout. Readers frequently face international card requirements, manual file transfers, and fragmented storefronts that lack instant delivery.',
     idea:
-      'Build a dedicated online digital ebook bookstore tailored for accessible local purchasing—where a reader can browse titles, pay directly with M-Pesa, and receive verified digital access immediately.',
+      'Build a dedicated online platform tailored for accessible local purchasing—where a reader can browse titles, pay directly with M-Pesa, and receive verified digital access immediately.',
     approach:
       'I separated a responsive React storefront from an Express REST API backed by PostgreSQL and Prisma. Supabase handled structured cloud storage and asset delivery, while M-Pesa Daraja powered STK Push checkout and asynchronous payment confirmation.',
     designProcess:

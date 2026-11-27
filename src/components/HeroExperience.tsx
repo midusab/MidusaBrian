@@ -173,16 +173,6 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
           </motion.div>
         </div>
       </motion.div>
-
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] flex items-center justify-between gap-4 text-xs">
-        <p className={`tech-meta ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
-          Junior Software Engineer · Nairobi, Kenya
-        </p>
-
-        <span className={`tech-meta ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
-          Scroll to explore ↓
-        </span>
-      </div>
     </section>
   );
 };

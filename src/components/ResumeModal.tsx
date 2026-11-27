@@ -18,7 +18,7 @@ Summary
 Computer science student and junior software engineer building practical full-stack web applications and digital business platforms. Focused on clean interfaces, relational data design, API architecture, and local payment integration.
 
 Selected work
-1. MidusaElibrary — Digital ebook bookstore (www.midusaelibary.co.ke)
+1. MidusaElibrary — Ebook platform (www.midusaelibary.co.ke)
    - Built an online ebook platform to make digital books accessible with M-Pesa Daraja payment integration.
    - Stack: React, Node.js, Express.js, PostgreSQL, Prisma, Supabase, M-Pesa Daraja.
    - Engineered relational schemas, STK Push checkout initiation, asynchronous payment verification, and protected digital delivery.
@@ -143,14 +143,14 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
               <div>
                 <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-baseline justify-between gap-1 sm:gap-2">
                   <h4 className="font-medium text-slate-950">
-                    MidusaElibrary — Digital ebook bookstore (www.midusaelibary.co.ke)
+                    MidusaElibrary — Ebook platform (www.midusaelibary.co.ke)
                   </h4>
                   <span className="text-xs text-slate-500">
                     React · Node.js · Express · PostgreSQL · Prisma · Supabase · M-Pesa Daraja
                   </span>
                 </div>
                 <p className="mt-1 text-slate-700">
-                  Designed and built an online bookstore platform enabling accessible digital book
+                  Designed and built an online platform enabling accessible digital book
                   purchases via M-Pesa Daraja STK Push, relational order tracking in PostgreSQL,
                   and controlled digital file delivery.
                 </p>
