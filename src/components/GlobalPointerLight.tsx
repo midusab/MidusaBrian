@@ -148,7 +148,7 @@ export const GlobalPointerLight: React.FC<GlobalPointerLightProps> = ({ theme })
               className="absolute top-0 left-0 -translate-y-1/2 pointer-events-none select-none z-30"
             >
               <div
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold tracking-wider uppercase border shadow-lg backdrop-blur-md whitespace-nowrap ${
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-sans font-semibold tracking-wider uppercase border shadow-lg backdrop-blur-md whitespace-nowrap ${
                   isDark
                     ? 'bg-[#0B0D10]/95 border-[#1E90FF]/60 text-white shadow-black/80'
                     : 'bg-white/95 border-[#1E90FF]/60 text-[#0B0D10] shadow-black/10'

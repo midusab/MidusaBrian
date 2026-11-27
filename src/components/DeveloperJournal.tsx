@@ -62,7 +62,7 @@ export const DeveloperJournal: React.FC<DeveloperJournalProps> = ({ theme }) => 
                 value={selectedTag}
                 onChange={(e) => setSelectedTag(e.target.value)}
                 data-cursor="SELECT"
-                className={`appearance-none pl-3.5 pr-8 py-2 rounded-lg border text-xs font-mono font-medium transition-all cursor-pointer focus:outline-none focus:border-[#1E90FF] ${
+                className={`appearance-none pl-3.5 pr-8 py-2 rounded-lg border text-xs font-sans font-medium transition-all cursor-pointer focus:outline-none focus:border-[#1E90FF] ${
                   isDark
                     ? 'bg-[#0E1217] border-white/15 text-[#F5F5F5] hover:border-white/30'
                     : 'bg-white border-black/15 text-[#0B0D10] hover:border-black/30 shadow-sm'

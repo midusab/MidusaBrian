@@ -43,7 +43,7 @@ export const CHAPTERS: ChapterLink[] = [
   { id: 'chapter-playground', index: '07', label: 'Playground' },
   { id: 'chapter-mind', index: '08', label: 'Mindset' },
   { id: 'chapter-tools', index: '09', label: 'Skills' },
-  { id: 'chapter-career', index: '10', label: 'Opportunities' },
+  { id: 'chapter-career', index: '10', label: 'Career' },
   { id: 'chapter-future', index: '11', label: 'Contact' },
 ];
 

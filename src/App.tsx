@@ -131,7 +131,7 @@ export default function App() {
             {/* Chapter 09: Skills & Technical Foundation */}
             <SkillsEcosystem theme={theme} />
 
-            {/* Opportunities */}
+            {/* Career */}
             <CareerSection
               theme={theme}
               onOpenResume={() => setResumeOpen(true)}

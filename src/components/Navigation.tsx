@@ -19,7 +19,7 @@ const TOP_LINKS = [
   { id: 'chapter-architecture', label: 'Architecture' },
   { id: 'chapter-journal', label: 'Journal' },
   { id: 'chapter-playground', label: 'Playground' },
-  { id: 'chapter-career', label: 'Opportunities' },
+  { id: 'chapter-career', label: 'Career' },
 ];
 
 export const Navigation: React.FC<NavigationProps> = ({

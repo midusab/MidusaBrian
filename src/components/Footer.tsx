@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ theme, onJumpToChapter }) => {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6 text-xs font-mono">
+          <div className="flex flex-wrap items-center gap-6 text-xs font-medium">
             <a
               href={PROFILE.github}
               target="_blank"
@@ -99,7 +99,7 @@ export const Footer: React.FC<FooterProps> = ({ theme, onJumpToChapter }) => {
         </nav>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 text-xs font-mono">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 text-xs font-sans">
           <p className={isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}>
             &copy; {currentYear} Midusa Brian. Designed &amp; built in Nairobi, Kenya.
           </p>
