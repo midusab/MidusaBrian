@@ -103,7 +103,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
           }`}
         >
           <div className="flex items-center gap-2.5 sm:gap-3 tech-meta min-w-0">
-            <span className="text-[#1E90FF] shrink-0 font-mono">Case study</span>
+            <span className="text-[#1E90FF] shrink-0 font-medium">Case study</span>
             <span aria-hidden="true" className={isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}>
               /
             </span>
@@ -152,7 +152,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
           {/* Header Story */}
           <header className="space-y-6 sm:space-y-8">
             <div className="space-y-4 max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-mono border border-[#1E90FF]/30 bg-[#1E90FF]/10 text-[#1E90FF]">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-medium border border-[#1E90FF]/30 bg-[#1E90FF]/10 text-[#1E90FF]">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>{project.subtitle}</span>
               </div>
@@ -193,13 +193,13 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
               }`}
             >
               <div className="flex flex-wrap items-center gap-2">
-                <span className={`text-xs font-mono mr-2 ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
+                <span className={`text-xs font-medium mr-2 ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
                   Tech Stack:
                 </span>
                 {project.stack.map((tech) => (
                   <span
                     key={tech}
-                    className={`text-xs font-mono px-2.5 py-1 rounded-md border ${
+                    className={`text-xs font-medium px-2.5 py-1 rounded-md border ${
                       isDark
                         ? 'bg-white/[0.04] border-white/10 text-[#E5E7EB]'
                         : 'bg-slate-100 border-black/10 text-[#374151]'
@@ -298,7 +298,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
               >
                 <div className="flex items-center gap-2 text-[#1E90FF]">
                   <Compass className="w-4 h-4" />
-                  <span className="text-xs font-mono font-medium">UX Research &amp; Ergonomics</span>
+                  <span className="text-xs font-medium uppercase tracking-wider">UX Research &amp; Ergonomics</span>
                 </div>
                 <p className={`text-base leading-relaxed ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                   {project.designProcess}
@@ -322,7 +322,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                 >
                   <div className="flex items-center gap-2 text-[#1E90FF]">
                     <Layers className="w-4 h-4" />
-                    <span className="text-xs font-mono font-semibold uppercase">Frontend Architecture</span>
+                    <span className="text-xs font-semibold uppercase tracking-wider">Frontend Architecture</span>
                   </div>
                   <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                     {project.frontendArchitecture}
@@ -336,7 +336,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                 >
                   <div className="flex items-center gap-2 text-[#1E90FF]">
                     <Server className="w-4 h-4" />
-                    <span className="text-xs font-mono font-semibold uppercase">Backend Architecture</span>
+                    <span className="text-xs font-semibold uppercase tracking-wider">Backend Architecture</span>
                   </div>
                   <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                     {project.backendArchitecture}
@@ -388,7 +388,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
               >
                 <div className="flex items-center gap-2 text-[#1E90FF]">
                   <Database className="w-4 h-4" />
-                  <span className="text-xs font-mono font-semibold uppercase">Persistence &amp; Data Model</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider">Persistence &amp; Data Model</span>
                 </div>
                 <p className={`text-base leading-relaxed ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                   {project.databaseDesign}
@@ -413,7 +413,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                   >
                     <div className="flex items-center gap-2 text-[#1E90FF]">
                       <Workflow className="w-4 h-4" />
-                      <span className="text-xs font-mono font-semibold uppercase">API Integration</span>
+                      <span className="text-xs font-semibold uppercase tracking-wider">API Integration</span>
                     </div>
                     <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                       {project.apiIntegration}
@@ -429,7 +429,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                   >
                     <div className="flex items-center gap-2 text-[#1E90FF]">
                       <ShieldCheck className="w-4 h-4" />
-                      <span className="text-xs font-mono font-semibold uppercase">Mobile Money Payment Routing</span>
+                      <span className="text-xs font-semibold uppercase tracking-wider">Mobile Money Payment Routing</span>
                     </div>
                     <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                       {project.paymentIntegration}
@@ -478,14 +478,14 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
               >
                 <div className="flex items-center gap-2 text-[#1E90FF]">
                   <BookOpen className="w-4 h-4" />
-                  <span className="text-xs font-mono font-semibold uppercase">Key Takeaways</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider">Key Takeaways</span>
                 </div>
                 <p className={`text-sm sm:text-base leading-relaxed ${isDark ? 'text-[#D1D5DB]' : 'text-[#374151]'}`}>
                   {project.learned}
                 </p>
                 <div className="pt-4 border-t border-dashed border-white/10">
                   <p className="chapter-label text-xs text-[#1E90FF]">Production Outcome</p>
-                  <p className={`text-xs mt-1 font-mono ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`}>
+                  <p className={`text-xs mt-1 ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`}>
                     {project.outcome}
                   </p>
                 </div>
@@ -499,7 +499,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                 >
                   <div className="flex items-center gap-2 text-[#1E90FF]">
                     <Zap className="w-4 h-4" />
-                    <span className="text-xs font-mono font-semibold uppercase">Roadmap &amp; Next Steps</span>
+                    <span className="text-xs font-semibold uppercase tracking-wider">Roadmap &amp; Next Steps</span>
                   </div>
                   <ul className="space-y-3">
                     {project.futureImprovements.map((imp, idx) => (
@@ -550,7 +550,7 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <span className="text-[10px] font-mono tracking-wider uppercase text-[#1E90FF]">
+                    <span className="text-[10px] font-medium tracking-wider uppercase text-[#1E90FF]">
                       {rel.category}
                     </span>
                     <h3 className={`text-base font-medium ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
@@ -562,14 +562,14 @@ export const ProjectCaseStudy: React.FC<ProjectCaseStudyProps> = ({
                   </div>
 
                   <div className="pt-4 mt-4 border-t border-white/10 dark:border-white/10 flex items-center justify-between">
-                    <span className="text-[10px] font-mono opacity-70">
+                    <span className="text-[10px] opacity-70">
                       {rel.stack.slice(0, 2).join(' · ')}
                     </span>
                     <button
                       type="button"
                       onClick={() => onSelectProject(rel)}
                       data-cursor="EXPLORE"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[#1E90FF] hover:underline"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-[#1E90FF] hover:underline"
                     >
                       <span>Explore</span>
                       <ArrowRight className="w-3.5 h-3.5" />
