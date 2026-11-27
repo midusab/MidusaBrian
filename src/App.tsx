@@ -7,6 +7,7 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 import { AnimatePresence, MotionConfig } from 'motion/react';
 import { FadedCodeBackground } from './components/FadedCodeBackground';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { Footer } from './components/Footer';
 import { GlobalPointerLight } from './components/GlobalPointerLight';
 import { HeroExperience } from './components/HeroExperience';
 import { Navigation } from './components/Navigation';
@@ -130,14 +131,14 @@ export default function App() {
             {/* Chapter 09: Skills & Technical Foundation */}
             <SkillsEcosystem theme={theme} />
 
-            {/* Chapter 10: Career & Collaboration Opportunities */}
+            {/* Opportunities */}
             <CareerSection
               theme={theme}
               onOpenResume={() => setResumeOpen(true)}
               onOpenBooking={() => setBookingOpen(true)}
             />
 
-            {/* Chapter 11: Contact */}
+            {/* Contact */}
             <ContactSection
               theme={theme}
               onOpenResume={() => setResumeOpen(true)}
@@ -145,6 +146,8 @@ export default function App() {
             />
           </Suspense>
         </main>
+
+        <Footer theme={theme} onJumpToChapter={jumpToChapter} />
 
         <Suspense fallback={null}>
           <AnimatePresence>

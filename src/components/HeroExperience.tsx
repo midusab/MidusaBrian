@@ -33,8 +33,8 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 26 });
   const headlineY = useTransform(smoothProgress, [0, 0.85], [0, -52]);
   const headlineOpacity = useTransform(smoothProgress, [0, 0.72], [1, 0.12]);
-  const ambientBgY = useTransform(smoothProgress, [0, 1], [0, 80]);
-  const floatingAccentY = useTransform(smoothProgress, [0, 1], [0, -70]);
+  const bgParallaxY = useTransform(smoothProgress, [0, 1], [0, 60]);
+  const bgParallaxScale = useTransform(smoothProgress, [0, 1], [1.03, 1.1]);
 
   return (
     <section
@@ -47,37 +47,69 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
     >
       {isDark && <GrainOverlay />}
 
-      {/* Subtle chromatic ambient background glow with parallax depth */}
+      {/* Full-width dynamic flow background image */}
       <motion.div
-        style={shouldReduceMotion ? undefined : { y: ambientBgY }}
         aria-hidden="true"
-        className="pointer-events-none absolute -top-24 right-0 lg:right-1/4 w-[420px] sm:w-[600px] h-[420px] sm:h-[600px] rounded-full filter blur-[100px] opacity-30 will-change-transform"
+        style={shouldReduceMotion ? undefined : { y: bgParallaxY, scale: bgParallaxScale }}
+        className="pointer-events-none absolute inset-0 z-0 w-full h-full overflow-hidden select-none"
       >
-        <div
-          className="w-full h-full rounded-full"
-          style={{
-            background: isDark
-              ? 'radial-gradient(circle, rgba(30,144,255,0.25) 0%, rgba(239,68,68,0.14) 40%, rgba(16,185,129,0.12) 70%, transparent 85%)'
-              : 'radial-gradient(circle, rgba(30,144,255,0.18) 0%, rgba(239,68,68,0.08) 40%, rgba(16,185,129,0.08) 70%, transparent 85%)',
+        <motion.img
+          src="/assets/portraits/background.jpg"
+          alt=""
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  scale: [1.02, 1.06, 1.02],
+                  x: [0, -10, 0],
+                  y: [0, 8, 0],
+                }
+          }
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            ease: 'easeInOut',
           }}
+          className={`w-full h-full object-cover object-center transition-opacity duration-700 will-change-transform ${
+            isDark
+              ? 'opacity-35 brightness-[0.72] contrast-[1.08] saturate-[0.85]'
+              : 'opacity-20 brightness-[1.05] contrast-[0.95]'
+          }`}
         />
+
+        {/* Camouflage overlays melting background smoothly into the page canvas */}
+        {isDark ? (
+          <>
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-[#0B0D10] via-[#0B0D10]/70 to-[#0B0D10]/50"
+            />
+            <div
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_20%,rgba(11,13,16,0.65)_65%,rgba(11,13,16,0.98)_100%)]"
+            />
+          </>
+        ) : (
+          <>
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/60"
+            />
+            <div
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_20%,rgba(255,255,255,0.75)_65%,rgba(255,255,255,0.98)_100%)]"
+            />
+          </>
+        )}
       </motion.div>
 
-      {/* Floating dynamic accent geometry */}
-      <motion.div
-        style={shouldReduceMotion ? undefined : { y: floatingAccentY }}
+      {/* Subtle DodgerBlue ambient glow disc */}
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/3 left-6 lg:left-20 w-48 h-48 rounded-full filter blur-[60px] opacity-20 will-change-transform"
-      >
-        <div
-          className="w-full h-full rounded-full"
-          style={{
-            background: isDark
-              ? 'radial-gradient(circle, rgba(16,185,129,0.3) 0%, rgba(30,144,255,0.2) 60%, transparent 80%)'
-              : 'radial-gradient(circle, rgba(16,185,129,0.18) 0%, rgba(30,144,255,0.12) 60%, transparent 80%)',
-          }}
-        />
-      </motion.div>
+        className="pointer-events-none absolute -top-24 right-0 lg:right-1/4 w-[420px] sm:w-[600px] h-[420px] sm:h-[600px] rounded-full filter blur-[110px] opacity-25 z-[1]"
+        style={{
+          background: isDark
+            ? 'radial-gradient(circle, rgba(30,144,255,0.3) 0%, rgba(30,144,255,0.06) 50%, transparent 80%)'
+            : 'radial-gradient(circle, rgba(30,144,255,0.2) 0%, rgba(30,144,255,0.04) 50%, transparent 80%)',
+        }}
+      />
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px]" />
 
@@ -130,8 +162,8 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
                 onClick={onJumpToProjects}
                 className={`group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg border text-sm font-medium hover:border-[#1E90FF] hover:text-[#1E90FF] transition-colors duration-150 whitespace-nowrap ${
                   isDark
-                    ? 'border-white/15 text-[#F5F5F5]'
-                    : 'border-black/15 text-[#0B0D10]'
+                    ? 'border-white/15 text-[#F5F5F5] bg-white/[0.02]'
+                    : 'border-black/15 text-[#0B0D10] bg-white'
                 }`}
               >
                 <span>See what I&apos;ve built</span>
@@ -142,12 +174,14 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
         </div>
       </motion.div>
 
-      {/* Bottom chapter demarcation line with subtle chromatic gradient */}
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] pt-4">
-        <div
-          aria-hidden="true"
-          className="h-px w-full bg-gradient-to-r from-transparent via-[#1E90FF]/35 to-transparent"
-        />
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] flex items-center justify-between gap-4 text-xs">
+        <p className={`tech-meta font-mono ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
+          Junior Software Engineer · Nairobi, Kenya
+        </p>
+
+        <span className={`tech-meta font-mono ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
+          Scroll to explore ↓
+        </span>
       </div>
     </section>
   );
