@@ -55,7 +55,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
               aria-selected={activeTab === 'topology'}
               onClick={() => setActiveTab('topology')}
               data-cursor="INSPECT"
-              className={`relative px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors ${
+              className={`relative px-4 py-2 rounded-lg text-xs font-medium transition-colors ${
                 activeTab === 'topology'
                   ? 'text-white'
                   : isDark
@@ -82,7 +82,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
               aria-selected={activeTab === 'payment-flow'}
               onClick={() => setActiveTab('payment-flow')}
               data-cursor="INSPECT"
-              className={`relative px-4 py-2 rounded-lg text-xs font-mono font-medium transition-colors ${
+              className={`relative px-4 py-2 rounded-lg text-xs font-medium transition-colors ${
                 activeTab === 'payment-flow'
                   ? 'text-white'
                   : isDark
@@ -154,7 +154,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
                       >
                         <div className="flex items-start justify-between gap-2 mb-2">
                           <span
-                            className="text-[0.6875rem] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#1E90FF]/15 text-[#1E90FF]"
+                            className="text-[0.6875rem] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#1E90FF]/15 text-[#1E90FF]"
                           >
                             {node.category}
                           </span>
@@ -197,7 +197,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
                   </div>
 
                   <div>
-                    <span className="text-[0.6875rem] font-mono text-[#1E90FF] uppercase tracking-wider">
+                    <span className="text-[0.6875rem] font-medium text-[#1E90FF] uppercase tracking-wider">
                       {selectedNode.category} Layer
                     </span>
                     <h3
@@ -207,7 +207,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
                     >
                       {selectedNode.name}
                     </h3>
-                    <p className={`font-mono text-xs mt-1 ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`}>
+                    <p className={`text-xs mt-1 ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`}>
                       {selectedNode.tech}
                     </p>
                   </div>
@@ -228,7 +228,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
                 </div>
 
                 <div
-                  className={`p-3.5 rounded-xl border text-xs font-mono ${
+                  className={`p-3.5 rounded-xl border text-xs ${
                     isDark ? 'bg-white/[0.02] border-white/[0.06] text-[#9297A1]' : 'bg-slate-50 border-black/[0.06] text-[#525866]'
                   }`}
                 >
@@ -280,7 +280,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
                       }`}
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[0.625rem] font-mono px-1.5 py-0.5 rounded bg-[#1E90FF]/15 text-[#1E90FF]">
+                        <span className="text-[0.625rem] font-medium px-1.5 py-0.5 rounded bg-[#1E90FF]/15 text-[#1E90FF]">
                           {step.actor}
                         </span>
                       </div>
@@ -304,7 +304,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
               >
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4 border-white/[0.08]">
                   <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 rounded-lg bg-[#25D366] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0">
+                    <span className="w-7 h-7 rounded-lg bg-[#25D366] text-white flex items-center justify-center font-bold text-xs shrink-0">
                       {selectedStep.step}
                     </span>
                     <div>
@@ -331,7 +331,7 @@ export const SystemArchitecture: React.FC<SystemArchitectureProps> = ({
 
                   <div className="space-y-1.5">
                     <p className="tech-meta text-[#25D366]">Technical &amp; Cryptographic Details</p>
-                    <p className={`text-sm leading-relaxed font-mono text-xs ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
+                    <p className={`text-xs leading-relaxed ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
                       {selectedStep.technicalDetails}
                     </p>
                   </div>

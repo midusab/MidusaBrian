@@ -118,7 +118,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
                 </p>
               </div>
             </div>
-            <div className="font-mono text-xs text-slate-600 space-y-1 sm:text-right break-words">
+            <div className="text-xs text-slate-600 space-y-1 sm:text-right break-words">
               <p>{PROFILE.location}</p>
               <p>{PROFILE.email}</p>
               <p>github.com/midusab · linkedin.com/in/midusab</p>
@@ -126,7 +126,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
           </header>
 
           <section className="space-y-2">
-            <h3 className="text-xs font-mono text-slate-500">Profile</h3>
+            <h3 className="text-xs font-medium uppercase tracking-wider text-slate-500">Profile</h3>
             <p className="text-slate-700">
               Computer Science student and Junior Software Engineer focused on building practical,
               reliable full-stack web applications. Experienced in connecting modern React interfaces
@@ -136,7 +136,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
           </section>
 
           <section className="space-y-4">
-            <h3 className="text-xs font-mono text-slate-500">
+            <h3 className="text-xs font-medium uppercase tracking-wider text-slate-500">
               Projects &amp; practical work
             </h3>
             <div className="space-y-4">
@@ -145,7 +145,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
                   <h4 className="font-medium text-slate-950">
                     MidusaElibrary — Digital ebook bookstore (www.midusaelibary.co.ke)
                   </h4>
-                  <span className="font-mono text-xs text-slate-500">
+                  <span className="text-xs text-slate-500">
                     React · Node.js · Express · PostgreSQL · Prisma · Supabase · M-Pesa Daraja
                   </span>
                 </div>
@@ -160,7 +160,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
                   <h4 className="font-medium text-slate-950">
                     Midusa Digital Solutions — Web development practice
                   </h4>
-                  <span className="font-mono text-xs text-slate-500">
+                  <span className="text-xs text-slate-500">
                     React · Tailwind CSS · Responsive UX
                   </span>
                 </div>
@@ -173,7 +173,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
           </section>
 
           <section className="space-y-2">
-            <h3 className="text-xs font-mono text-slate-500">
+            <h3 className="text-xs font-medium uppercase tracking-wider text-slate-500">
               Technical capabilities
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-700">
@@ -195,7 +195,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
           </section>
 
           <section className="space-y-1">
-            <h3 className="text-xs font-mono text-slate-500">Education</h3>
+            <h3 className="text-xs font-medium uppercase tracking-wider text-slate-500">Education</h3>
             <p className="font-medium text-slate-900">Computer science undergraduate</p>
             <p className="text-slate-600">Kenya · Ongoing degree studies</p>
           </section>

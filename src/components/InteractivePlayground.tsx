@@ -73,7 +73,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({ th
               onClick={runSimulation}
               disabled={isSimulating}
               data-cursor="RUN"
-              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#1E90FF] text-white text-xs font-mono font-medium hover:bg-[#1677D9] transition-all disabled:opacity-50 active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#1E90FF] text-white text-xs font-medium hover:bg-[#1677D9] transition-all disabled:opacity-50 active:scale-[0.98]"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
               <span>{isSimulating ? 'Simulating...' : 'Simulate Lifecycle'}</span>
@@ -113,7 +113,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({ th
                     setActiveState(s.id);
                   }}
                   data-cursor="TEST"
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     activeState === s.id
                       ? 'bg-[#1E90FF] text-white font-medium shadow-sm'
                       : isDark
@@ -126,7 +126,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({ th
               ))}
             </div>
 
-            <span className={`text-[11px] font-mono ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
+            <span className={`text-[11px] ${isDark ? 'text-[#9297A1]' : 'text-[#6B7280]'}`}>
               Latency: &lt;100ms · Optimistic UI
             </span>
           </div>
@@ -160,7 +160,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({ th
                     type="button"
                     onClick={() => setActiveState('prompt')}
                     data-cursor="PAY"
-                    className="px-4 py-2 rounded-lg bg-[#1E90FF] text-white text-xs font-mono hover:bg-[#1677D9] transition-colors whitespace-nowrap"
+                    className="px-4 py-2 rounded-lg bg-[#1E90FF] text-white text-xs font-medium hover:bg-[#1677D9] transition-colors whitespace-nowrap"
                   >
                     Pay with M-Pesa
                   </button>
@@ -193,7 +193,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({ th
                     type="button"
                     onClick={() => setActiveState('verified')}
                     data-cursor="TEST"
-                    className="px-3.5 py-2 rounded-lg border border-[#1E90FF]/50 text-xs font-mono text-[#1E90FF] hover:bg-[#1E90FF]/10 transition-colors whitespace-nowrap"
+                    className="px-3.5 py-2 rounded-lg border border-[#1E90FF]/50 text-xs font-medium text-[#1E90FF] hover:bg-[#1E90FF]/10 transition-colors whitespace-nowrap"
                   >
                     Simulate PIN entry
                   </button>
@@ -217,7 +217,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({ th
                       <p className={`text-sm font-medium ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
                         Payment Callback Verified
                       </p>
-                      <p className={`text-xs font-mono ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`}>
+                      <p className={`text-xs ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`}>
                         Receipt: QK84DX91P · PostgreSQL record committed
                       </p>
                     </div>
@@ -226,7 +226,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({ th
                     type="button"
                     onClick={() => setActiveState('delivery')}
                     data-cursor="TEST"
-                    className="px-3.5 py-2 rounded-lg bg-[#1E90FF] text-white text-xs font-mono hover:bg-[#1677D9] transition-colors whitespace-nowrap"
+                    className="px-3.5 py-2 rounded-lg bg-[#1E90FF] text-white text-xs font-medium hover:bg-[#1677D9] transition-colors whitespace-nowrap"
                   >
                     Unlock Download
                   </button>
@@ -259,7 +259,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({ th
                     type="button"
                     onClick={() => setActiveState('idle')}
                     data-cursor="DOWNLOAD"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#1E90FF] text-white text-xs font-mono hover:bg-[#1677D9] transition-colors whitespace-nowrap"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#1E90FF] text-white text-xs font-medium hover:bg-[#1677D9] transition-colors whitespace-nowrap"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>Download file</span>
