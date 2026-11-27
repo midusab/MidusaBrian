@@ -63,9 +63,14 @@ export const Navigation: React.FC<NavigationProps> = ({
         <a
           href="#chapter-opening"
           onClick={(e) => handleLinkClick(e, 'chapter-opening')}
-          className="text-base font-medium tracking-[-0.015em] whitespace-nowrap shrink-0 hover:text-[#1E90FF] transition-colors"
+          className="inline-flex items-center gap-2.5 text-base font-medium tracking-[-0.015em] whitespace-nowrap shrink-0 hover:text-[#1E90FF] transition-colors"
         >
-          Midusa<span className="text-[#1E90FF]">.</span>
+          <img
+            src="/images/developer/profile.png"
+            alt="Midusa Brian"
+            className="w-7 h-7 rounded-full object-cover border border-[#1E90FF]/40 shadow-xs"
+          />
+          <span>Midusa<span className="text-[#1E90FF]">.</span></span>
         </a>
 
         {/* Primary Desktop Nav */}

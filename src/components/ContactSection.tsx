@@ -210,7 +210,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               >
                 <LazyImage
                   src="/assets/portraits/23474_cc099930.jpg"
-                  alt="Studio portrait of Midusa"
+                  alt="Midusa Brian software engineer portrait in Nairobi, Kenya"
                   isDark={isDark}
                   motionStyle={{ y: portraitY, scale: portraitScale }}
                   className="w-full h-full object-cover object-[50%_14%] picture-camouflage-portrait transition-transform duration-700 ease-out hover:scale-[1.07]"

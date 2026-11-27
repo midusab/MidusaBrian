@@ -98,7 +98,7 @@ export const StoryDiscovery: React.FC<StoryDiscoveryProps> = ({
             >
               <LazyImage
                 src="/images/developer/story-portrait.jpg"
-                alt="Monochrome studio portrait of Midusa"
+                alt="Midusa Brian software engineer and creative developer portrait"
                 isDark={isDark}
                 motionStyle={{ scale: imageScale, y: imageY }}
                 className="w-full h-full object-cover object-[50%_14%] picture-camouflage-portrait transition-transform duration-700 ease-out hover:scale-[1.05]"

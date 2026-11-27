@@ -94,8 +94,8 @@ export const MeetingBookingModal: React.FC<MeetingBookingModalProps> = ({ onClos
         <div className="shrink-0 flex items-center justify-between gap-3 sm:gap-4 px-4 sm:px-6 py-4 border-b border-black/[0.08]">
           <div className="flex items-center gap-3 min-w-0">
             <img
-              src="/images/developer/mindset-portrait.jpg"
-              alt="Portrait of Midusa"
+              src="/images/developer/profile.png"
+              alt="Midusa Brian profile photo"
               loading="lazy"
               decoding="async"
               referrerPolicy="no-referrer"

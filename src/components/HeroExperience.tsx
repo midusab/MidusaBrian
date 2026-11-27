@@ -139,6 +139,20 @@ export const HeroExperience: React.FC<HeroExperienceProps> = ({
             transition={{ duration: 0.85, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-4 space-y-6 lg:pb-2"
           >
+            <div className="flex items-center gap-3">
+              <img
+                src="/images/developer/profile.png"
+                alt="Midusa Brian"
+                className="w-12 h-12 rounded-full object-cover border-2 border-[#1E90FF]/40 shadow-md shrink-0"
+              />
+              <div>
+                <p className={`text-sm font-semibold leading-tight ${isDark ? 'text-[#F5F5F5]' : 'text-[#0B0D10]'}`}>
+                  Midusa Brian
+                </p>
+                <p className="text-xs text-[#1E90FF] mt-0.5">Software Engineer &amp; Creative Developer</p>
+              </div>
+            </div>
+
             <p className={`editorial-body ${isDark ? 'text-[#9297A1]' : 'text-[#525866]'}`}>
               I&apos;m Midusa. A Computer Science student exploring how ideas become software.
             </p>

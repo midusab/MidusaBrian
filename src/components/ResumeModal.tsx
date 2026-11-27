@@ -102,8 +102,8 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ onClose }) => {
           <header className="border-b border-slate-200 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="flex items-center gap-3.5 sm:gap-4">
               <img
-                src="/images/developer/mindset-portrait.jpg"
-                alt="Portrait of Midusa"
+                src="/images/developer/profile.png"
+                alt="Midusa Brian profile photo"
                 loading="lazy"
                 decoding="async"
                 referrerPolicy="no-referrer"

@@ -23,7 +23,7 @@ export type {
 } from '../types/portfolio';
 
 export const PROFILE = {
-  name: 'Midusa',
+  name: 'Midusa Brian',
   role: 'Junior software engineer & computer science student',
   location: 'Kenya',
   email: 'midusab@gmail.com',
